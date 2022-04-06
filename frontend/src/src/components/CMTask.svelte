@@ -201,6 +201,7 @@
 
 
 <div class="cmresult" class:flash={task.effect === 'flash'}>
+  <!-- Task in progress -->
   {#if isTaskPending || isTaskFailed }
     <div>
       <span class="close_button" on:click="{() => deleteTask(task)}"><img src='{BASE_URL}images/clear-icon.png' alt='close'></span>
@@ -216,6 +217,7 @@
     </dl>
 
     <button on:click|once={() => cancelTask(task)} hidden={!isTaskPending}>Cancel task</button>
+  <!-- Task done -->
   {:else}
     <div class="container">
       <div class="tabs">

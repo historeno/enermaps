@@ -67,7 +67,7 @@
   {#if !availableAreas}
     Loading areas...
   {:else}
-    <label for="id">Area selection:</label>
+    <label for="id">Mode de sélection :</label>
 
     <select id="areas" class="areas" bind:value={$areaSelectionStore}>
       {#each availableAreas as area}

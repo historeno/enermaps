@@ -6,7 +6,8 @@
   import {areaSelectionLayerStore, selectedLayerStore, tasksStore, datasetsStore} from '../stores.js';
   import {getDataset} from '../datasets.js';
   import 'brutusin-json-forms';
-
+  import AreaSelection from './AreaSelection.svelte';
+  let activeMainTab = 'consultation';
 
   const BrutusinForms = brutusin['json-forms'];
 
@@ -239,22 +240,22 @@
     background-color: darkgray;
   }
 
-  .cm_info {
-    font-style: italic;
-    color: rgb(69, 69, 101);
-    margin-top: 4px;
-  }
+  /*.cm_info {*/
+  /*  font-style: italic;*/
+  /*  color: rgb(69, 69, 101);*/
+  /*  margin-top: 4px;*/
+  /*}*/
 
   .cm_info span {
     cursor: pointer;
     color: rgb(0,100,200);
   }
 
-  .cm_wiki {
-    font-style: italic;
-    color: rgb(69, 69, 101);
-    margin-top: 4px;
-  }
+  /*.cm_wiki {*/
+  /*  font-style: italic;*/
+  /*  color: rgb(69, 69, 101);*/
+  /*  margin-top: 4px;*/
+  /*}*/
 
   .cm_wiki a {
     cursor: pointer;
@@ -265,15 +266,15 @@
     margin: 0;
   }
 
-  .layers-details {
-    position: fixed;
-    background-color: lightgray;
-    border: 1px solid #333333;
-    border-radius: 4px;
-    padding: 6px;
-    margin-left: 20px;
-    z-index: 1000;
-  }
+  /*.layers-details {*/
+  /*  position: fixed;*/
+  /*  background-color: lightgray;*/
+  /*  border: 1px solid #333333;*/
+  /*  border-radius: 4px;*/
+  /*  padding: 6px;*/
+  /*  margin-left: 20px;*/
+  /*  z-index: 1000;*/
+  /*}*/
 
   .layers-details p {
     margin-top: 0;
@@ -283,6 +284,24 @@
     margin-bottom: 0;
     padding-left: 20px;
   }
+
+  span.main_tab {
+    border: 1px solid black;
+    padding: 4px;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #f7f7f7;
+    cursor: pointer;
+  }
+  span.main_tab.selected {
+    border-bottom: 1px solid white;
+    font-weight: bold;
+    background-color: white;
+  }
+
+  /*span.main_tab.last {*/
+  /*  margin-right: 24px;*/
+  /*}*/
 </style>
 
 
@@ -299,62 +318,73 @@
   </div>
 
   <div hidden="{isCollapsed}">
-    {#if layersLinkDatasetId}
-      <div class="cm_info">
-        {layersText}
-        {#if layersLinkText}
-          <span title="Add the dataset as a layer"
-                on:click={() => onDatasetClicked(layersLinkDatasetId, null)}>
-            {layersLinkText}
-          </span>
-        {/if}
-      </div>
-    {:else}
-      <div class="cm_info">
-        {layersText}
-        {#if layersLinkText}
-          <span title="Display the list of supported datasets" on:click={toggleLayersDetails}>{layersLinkText}</span>
-        {/if}
-        {#if layersDetailsDisplayed && layersDetails}
-          <div class="layers-details" on:click={toggleLayersDetails} on:mouseleave={toggleLayersDetails}>
-            <p>This CM requires one of the following datasets:</p>
-            <ul>
-              {#each layersDetails as details}
-                <li>
-                  {#if details.variables}
-                    {details.dataset_title}
-                    <ul>
-                    {#each details.variables as variable}
-                      <li>
-                        <span on:click={() => onDatasetClicked(details.dataset_id, variable)}>{variable}</span>
-                      </li>
-                    {/each}
-                    </ul>
-                  {:else}
-                    <span on:click={() => onDatasetClicked(details.dataset_id, null)}>{details.dataset_title}</span>
-                  {/if}
-                </li>
-              {/each}
-            </ul>
-          </div>
-        {/if}
+    <!--{#if layersLinkDatasetId}-->
+    <!--  <div class="cm_info">-->
+    <!--    {layersText}-->
+    <!--    {#if layersLinkText}-->
+    <!--      <span title="Add the dataset as a layer"-->
+    <!--            on:click={() => onDatasetClicked(layersLinkDatasetId, null)}>-->
+    <!--        {layersLinkText}-->
+    <!--      </span>-->
+    <!--    {/if}-->
+    <!--  </div>-->
+    <!--{:else}-->
+    <!--  <div class="cm_info">-->
+    <!--    {layersText}-->
+    <!--    {#if layersLinkText}-->
+    <!--      <span title="Display the list of supported datasets" on:click={toggleLayersDetails}>{layersLinkText}</span>-->
+    <!--    {/if}-->
+    <!--    {#if layersDetailsDisplayed && layersDetails}-->
+    <!--      <div class="layers-details" on:click={toggleLayersDetails} on:mouseleave={toggleLayersDetails}>-->
+    <!--        <p>This CM requires one of the following datasets:</p>-->
+    <!--        <ul>-->
+    <!--          {#each layersDetails as details}-->
+    <!--            <li>-->
+    <!--              {#if details.variables}-->
+    <!--                {details.dataset_title}-->
+    <!--                <ul>-->
+    <!--                {#each details.variables as variable}-->
+    <!--                  <li>-->
+    <!--                    <span on:click={() => onDatasetClicked(details.dataset_id, variable)}>{variable}</span>-->
+    <!--                  </li>-->
+    <!--                {/each}-->
+    <!--                </ul>-->
+    <!--              {:else}-->
+    <!--                <span on:click={() => onDatasetClicked(details.dataset_id, null)}>{details.dataset_title}</span>-->
+    <!--              {/if}-->
+    <!--            </li>-->
+    <!--          {/each}-->
+    <!--        </ul>-->
+    <!--      </div>-->
+    <!--    {/if}-->
+    <!--  </div>-->
+    <!--{/if}-->
+
+    <!--<div class="cm_wiki">-->
+    <!--  <i>-->
+    <!--    For more information about the CM,-->
+    <!--    see <a href="{cm.wiki}" target="_blank">the wiki page</a>.-->
+    <!--  </i>-->
+    <!--</div>-->
+
+<!--    Start Tabs-->
+    <span class="main_tab" class:selected={activeMainTab === 'consultation'} on:click={() => (activeMainTab = 'consultation')}>Consultation</span>
+    <span class="main_tab" class:selected={activeMainTab === 'analysis'} on:click={() => (activeMainTab = 'analysis')}>Analyse</span>
+    {#if activeMainTab === 'consultation'}
+      <p>Mode consultation activé</p>
+    {:else if activeMainTab === 'analysis'}
+      <AreaSelection />
+      <p>before</p>
+      <div class="cm_params" bind:this={formElement}></div>
+      <p>after</p>
+      <div class="tasks">
+        {#each [...tasks].reverse() as task (task.id)}
+          {#if (task.cm.name === cm.name) && !task.hidden}
+            <CMTask task={task} />
+          {/if}
+        {/each}
       </div>
     {/if}
-
-    <div class="cm_wiki">
-      <i>
-        For more information about the CM,
-        see <a href="{cm.wiki}" target="_blank">the wiki page</a>.
-      </i>
-    </div>
-
-    <div class="cm_params" bind:this={formElement} />
-    <div class="tasks">
-      {#each [...tasks].reverse() as task (task.id)}
-        {#if (task.cm.name === cm.name) && !task.hidden}
-          <CMTask task={task} />
-        {/if}
-      {/each}
-    </div>
+<!--    End Tabs-->
   </div>
 </div>
