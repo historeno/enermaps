@@ -19,6 +19,7 @@
 
   $: {
     areaSelected = false;
+    console.log("check");
     if ($areaSelectionLayerStore !== null) {
       const selection = $areaSelectionLayerStore.getSelection();
       areaSelected = (selection != null) && (selection.features.length > 0);
