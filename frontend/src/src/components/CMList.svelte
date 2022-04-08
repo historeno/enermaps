@@ -114,7 +114,7 @@
   <div id="calculation_modules_content">
     <div id="tabs">
       <div id="close_button_cm_list" on:click={closeCMPanel}><img src='{BASE_URL}images/clear-icon.png' alt='close'></div>
-                <div id="tab"><h2>Consultation</h2></div>
+                <div id="tab"><h2>CM</h2></div>
       {#if !areaSelected}
         <div class="warning">Selectioner batiment</div>
       {/if}

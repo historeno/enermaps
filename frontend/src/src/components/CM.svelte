@@ -22,6 +22,10 @@
   let layersLinkDatasetId = null;
   let layersDetails = null;
   let layersDetailsDisplayed = false;
+  let activeTab = 'result';
+  let legend = {};
+
+
 
 
   onMount(() => {
@@ -225,6 +229,37 @@
     margin-top: 10px;
     overflow-x: auto;
   }
+  .container {
+    background-color: #fff;
+  }
+
+
+div.tabs {
+    border-bottom: 1px solid black;
+    margin-top: 5px;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+  }
+
+span.tab {
+    border: 1px solid black;
+    padding: 4px;
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #f7f7f7;
+    cursor: pointer;
+  }
+
+  span.tab.selected {
+    border-bottom: 1px solid white;
+    font-weight: bold;
+    background-color: white;
+  }
+
+  span.tab.last {
+    margin-right: 24px;
+  }
+
 
   .cm_container {
     background-color : #6da8d7;
@@ -287,9 +322,11 @@
 
 
 <div class="cm_container" class:disabled={isDisabled}>
-  <div class="cm_header">
-    <div>
-      <h3 class="cm_run">{cm.pretty_name}</h3>
+  <div>
+    <div class="tabs">
+        <span class="tab" class:selected={activeTab === 'parameters'} on:click={() => (activeTab = 'parameters')}>Consultation</span>
+        <span class="tab" class:last={!legend} class:selected={activeTab === 'result'} on:click={() => (activeTab = 'result')}>Analyse</span>
+
       <div style="float: right;" class="cm_run">
         <div class="cm_run" style="cursor: pointer;" class:open_menu="{isCollapsed}" class:close_menu="{!isCollapsed}" on:click="{toggleCollapse}"></div>
         <span class="cm_run"></span>
