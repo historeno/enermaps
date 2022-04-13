@@ -6,6 +6,8 @@
   import {areaSelectionLayerStore, selectedLayerStore, tasksStore, datasetsStore} from '../stores.js';
   import {getDataset} from '../datasets.js';
   import 'brutusin-json-forms';
+  import Value from './Value.svelte';
+
 
 
   const BrutusinForms = brutusin['json-forms'];
@@ -24,6 +26,10 @@
   let layersDetailsDisplayed = false;
   let activeTab = 'result';
   let legend = {};
+  let parameters = [];
+  let openTab = 1;
+  let values = [];
+
 
 
 
@@ -170,6 +176,9 @@
     isCollapsed = !isCollapsed;
   }
 
+  function toggleTabs(tabNumber){
+    openTab = tabNumber
+   }
 
   function toggleLayersDetails() {
     layersDetailsDisplayed = !layersDetailsDisplayed;
@@ -325,16 +334,33 @@ span.tab {
   <div>
     <div class="tabs">
         <span class="tab" class:selected={activeTab === 'parameters'} on:click={() => (activeTab = 'parameters')}>Consultation</span>
-        <span class="tab" class:last={!legend} class:selected={activeTab === 'result'} on:click={() => (activeTab = 'result')}>Analyse</span>
+        <span class="tab" class:selected={activeTab === 'result'} on:click={() => (activeTab = 'result')}>Analyse</span>
 
       <div style="float: right;" class="cm_run">
         <div class="cm_run" style="cursor: pointer;" class:open_menu="{isCollapsed}" class:close_menu="{!isCollapsed}" on:click="{toggleCollapse}"></div>
         <span class="cm_run"></span>
         <button class="cm_run" type=submit on:click={() => createTask(cm, form.getData())} disabled={isDisabled} title={callCMTooltip}>Run CM</button>
       </div>
+      '''
     </div>
+    {#if activeTab === 'parameters'}
+        <dl>
+            <h3>Consultation</h3>
+            <p>nom féminin (latin consultatio, -onis)</p>
+            <p> Action de lire, de parcourir un ouvrage, un panneau, etc., afin d'y puiser un renseignement : La consultation d'un dictionnaire vous donnera le renseignement.</p>
+        </dl>
+
+      {:else if activeTab === 'result'}
+        <dl>
+            <h3>Analyse</h3>
+            <p>nom féminin (grec analusis, décomposition)</p>
+            <p>Étude minutieuse, précise faite pour dégager les éléments qui constituent un ensemble, pour l'expliquer, l'éclairer : Faire l'analyse de la situation.</p>
+        </dl>
+      {/if}
+        <h3>test contenu</h3>
   </div>
 
+'''
   <div hidden="{isCollapsed}">
     {#if layersLinkDatasetId}
       <div class="cm_info">
@@ -394,4 +420,5 @@ span.tab {
       {/each}
     </div>
   </div>
+'''
 </div>

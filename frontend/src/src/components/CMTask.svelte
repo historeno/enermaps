@@ -220,8 +220,8 @@
     <div class="container">
       <div class="tabs">
         <span class="tab" class:selected={activeTab === 'parameters'} on:click={() => (activeTab = 'parameters')}>Description</span>
+        <span class="tab" class:selected={activeTab === 'impact'} on:click={() => (activeTab = 'impact')}>Impact</span>
         <span class="tab" class:last={!legend} class:selected={activeTab === 'result'} on:click={() => (activeTab = 'result')}>Stratégie</span>
-        <span class="tab" class:last={!legend} class:selected={activeTab === 'impact'} on:click={() => (activeTab = 'impact')}>Impact</span>
 
         {#if legend}
           <span class="tab last" class:selected={activeTab === 'legend'} on:click={() => (activeTab = 'legend')}>Legend</span>
@@ -240,6 +240,7 @@
         <dl>
           {#each parameters as parameter}
             <Value value={parameter}/>
+            <h3>test contenu</h3>
           {/each}
         </dl>
 
@@ -247,6 +248,7 @@
         <dl>
           {#each values as value}
             <Value value={value}/>
+            <h3>hello world</h3>
           {/each}
         </dl>
 
@@ -257,6 +259,14 @@
         {#each warnings as warning, index}
           <div class="warning" class:first={index == 0}><strong>{warning.title}:</strong>&nbsp;{warning.details}</div>
         {/each}
+      {:else if activeTab === 'impact'}
+        <dl>
+          {#each values as value}
+            <Value value={value}/>
+            <h3>hello world</h3>
+            <p> Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum</p>
+          {/each}
+        </dl>
 
       {:else if activeTab === 'legend'}
         <dl>
