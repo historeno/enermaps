@@ -363,7 +363,7 @@
     <!--<div class="cm_wiki">-->
     <!--  <i>-->
     <!--    For more information about the CM,-->
-    <!--    see <a href="{cm.wiki}" target="_blank">the wiki page</a>.-->
+    <!--    see <a href="{cm.wiki}" target="_blank">the wiki pages</a>.-->
     <!--  </i>-->
     <!--</div>-->
 
