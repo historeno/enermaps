@@ -23,6 +23,7 @@
   let layersLinkDatasetId = null;
   let layersDetails = null;
   let layersDetailsDisplayed = false;
+  let testhidden = false;
 
 
   onMount(() => {
@@ -168,30 +169,30 @@
   }
 
 
-  function toggleLayersDetails() {
-    layersDetailsDisplayed = !layersDetailsDisplayed;
-  }
+  //function toggleLayersDetails() {
+  //  layersDetailsDisplayed = !layersDetailsDisplayed;
+  //}
 
 
-  async function onDatasetClicked(datasetId, variable) {
-    const dataset = getDataset(datasetId);
+  //async function onDatasetClicked(datasetId, variable) {
+  //  const dataset = getDataset(datasetId);
 
-    let timePeriod = null;
+  //  let timePeriod = null;
 
-    if (variable == null) {
-      if (dataset.info.default_parameters.variable !== undefined) {
-        variable = dataset.info.default_parameters.variable;
-      } else if (dataset.info.variables.length > 0) {
-        variable = dataset.info.variables[0];
-      }
-    }
+  //  if (variable == null) {
+  //    if (dataset.info.default_parameters.variable !== undefined) {
+  //      variable = dataset.info.default_parameters.variable;
+  //    } else if (dataset.info.variables.length > 0) {
+  //      variable = dataset.info.variables[0];
+  //    }
+  //  }
 
-    if (dataset.info.time_periods.length > 0) {
-      timePeriod = dataset.info.time_periods[0];
-    }
+  //  if (dataset.info.time_periods.length > 0) {
+  //    timePeriod = dataset.info.time_periods[0];
+  //  }
 
-    await createLayerSimple(dataset.ds_id, variable, timePeriod);
-  }
+  //  await createLayerSimple(dataset.ds_id, variable, timePeriod);
+  //}
 </script>
 
 
@@ -236,6 +237,14 @@
     width: inherit;
   }
 
+  .cm_container_test {
+    background-color : white;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding : 8px;
+    border-radius: 4px;
+    width: inherit;
+  }
   .cm_container.disabled {
     background-color: darkgray;
   }
@@ -246,10 +255,10 @@
   /*  margin-top: 4px;*/
   /*}*/
 
-  .cm_info span {
-    cursor: pointer;
-    color: rgb(0,100,200);
-  }
+  /*.cm_info span {*/
+  /*  cursor: pointer;*/
+  /*  color: rgb(0,100,200);*/
+  /*}*/
 
   /*.cm_wiki {*/
   /*  font-style: italic;*/
@@ -257,10 +266,10 @@
   /*  margin-top: 4px;*/
   /*}*/
 
-  .cm_wiki a {
-    cursor: pointer;
-    color: rgb(0,100,200);
-  }
+  /*.cm_wiki a {*/
+  /*  cursor: pointer;*/
+  /*  color: rgb(0,100,200);*/
+  /*}*/
 
   h3 {
     margin: 0;
@@ -276,14 +285,14 @@
   /*  z-index: 1000;*/
   /*}*/
 
-  .layers-details p {
-    margin-top: 0;
-  }
+  /*.layers-details p {*/
+  /*  margin-top: 0;*/
+  /*}*/
 
-  .layers-details ul {
-    margin-bottom: 0;
-    padding-left: 20px;
-  }
+  /*.layers-details ul {*/
+  /*  margin-bottom: 0;*/
+  /*  padding-left: 20px;*/
+  /*}*/
 
   span.main_tab {
     border: 1px solid black;
@@ -292,16 +301,18 @@
     margin-right: 0;
     background-color: #f7f7f7;
     cursor: pointer;
+    border-radius: 4px;
   }
   span.main_tab.selected {
-    border-bottom: 1px solid white;
+    border-bottom: 5px solid white;
     font-weight: bold;
     background-color: white;
+    border-radius: 6px;
   }
 
-  span.main_tab.last {
-    margin-right: 24px;
-  }
+  /*span.main_tab.last {*/
+  /*  margin-right: 24px;*/
+  /*}*/
 </style>
 
 
@@ -371,12 +382,16 @@
     <span class="main_tab" class:selected={activeMainTab === 'consultation'} on:click={() => (activeMainTab = 'consultation')}>Consultation</span>
     <span class="main_tab" class:selected={activeMainTab === 'analysis'} on:click={() => (activeMainTab = 'analysis')}>Analyse</span>
     {#if activeMainTab === 'consultation'}
+    <div class="cm_container_test">
       <p>Mode consultation activé</p>
-      <div class="cm_params" bind:this={formElement}></div>
+      <div hidden="{testhidden}">
+        <div class="cm_params" bind:this={formElement}></div>
+      </div>
+    </div>
     {:else if activeMainTab === 'analysis'}
-      <AreaSelection />
-      <p>before</p>
-      <p>after</p>
+      <div class="cm_container_test">
+        <AreaSelection />
+      </div>
       <div class="tasks">
         {#each [...tasks].reverse() as task (task.id)}
           {#if (task.cm.name === cm.name) && !task.hidden}
