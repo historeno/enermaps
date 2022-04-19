@@ -49,7 +49,7 @@
     }
 
     // Determine if the CM is enabled given the current area/layer selection
-    let isEnabled = false;
+    let isEnabled = true;
 
     if (areaSelected) {
       for (const entry of cm.input_layers) {
@@ -299,9 +299,9 @@
     background-color: white;
   }
 
-  /*span.main_tab.last {*/
-  /*  margin-right: 24px;*/
-  /*}*/
+  span.main_tab.last {
+    margin-right: 24px;
+  }
 </style>
 
 
@@ -372,10 +372,10 @@
     <span class="main_tab" class:selected={activeMainTab === 'analysis'} on:click={() => (activeMainTab = 'analysis')}>Analyse</span>
     {#if activeMainTab === 'consultation'}
       <p>Mode consultation activé</p>
+      <div class="cm_params" bind:this={formElement}></div>
     {:else if activeMainTab === 'analysis'}
       <AreaSelection />
       <p>before</p>
-      <div class="cm_params" bind:this={formElement}></div>
       <p>after</p>
       <div class="tasks">
         {#each [...tasks].reverse() as task (task.id)}
