@@ -1,7 +1,7 @@
 <script>
   import {onMount} from 'svelte';
   import {createTask} from '../tasks.js';
-  import {createLayerSimple, getLayer} from '../layers.js';
+  // import {createLayerSimple, getLayer} from '../layers.js';
   import CMTask from './CMTask.svelte';
   import {areaSelectionLayerStore, selectedLayerStore, tasksStore, datasetsStore} from '../stores.js';
   import {getDataset} from '../datasets.js';
@@ -22,7 +22,7 @@
   let layersLinkText = null;
   let layersLinkDatasetId = null;
   let layersDetails = null;
-  let layersDetailsDisplayed = false;
+  // let layersDetailsDisplayed = false;
   let testhidden = false;
 
 
@@ -169,12 +169,12 @@
   }
 
 
-  //function toggleLayersDetails() {
+  // function toggleLayersDetails() {
   //  layersDetailsDisplayed = !layersDetailsDisplayed;
-  //}
+  // }
 
 
-  //async function onDatasetClicked(datasetId, variable) {
+  // async function onDatasetClicked(datasetId, variable) {
   //  const dataset = getDataset(datasetId);
 
   //  let timePeriod = null;
@@ -192,7 +192,7 @@
   //  }
 
   //  await createLayerSimple(dataset.ds_id, variable, timePeriod);
-  //}
+  // }
 </script>
 
 
@@ -384,7 +384,7 @@
     {#if activeMainTab === 'consultation'}
     <div class="cm_container_test">
       <p>Mode consultation activé</p>
-      <div hidden="{testhidden}">
+      <div hidden="testhidden">
         <div class="cm_params" bind:this={formElement}></div>
       </div>
     </div>
