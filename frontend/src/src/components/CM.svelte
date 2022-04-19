@@ -23,7 +23,7 @@
   let layersLinkDatasetId = null;
   let layersDetails = null;
   // let layersDetailsDisplayed = false;
-  let testhidden = false;
+  // let testhidden = false;
 
 
   onMount(() => {
@@ -384,10 +384,10 @@
     {#if activeMainTab === 'consultation'}
     <div class="cm_container_test">
       <p>Mode consultation activé</p>
-      <div hidden="testhidden">
+<!--      <div hidden="testhidden"> -->
         <div class="cm_params" bind:this={formElement}></div>
       </div>
-    </div>
+<!--    </div> -->
     {:else if activeMainTab === 'analysis'}
       <div class="cm_container_test">
         <AreaSelection />
