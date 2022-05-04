@@ -32,136 +32,7 @@
   });
 
 
-  $: {
-    tasks = $tasksStore;
 
-    let areaSelected = false;
-    if ($areaSelectionLayerStore !== null) {
-      const selection = $areaSelectionLayerStore.getSelection();
-      areaSelected = (selection != null) && (selection.features.length > 0);
-    }
-
-    if ($selectedLayerStore === null) {
-      callCMTooltip = 'A layer needs to be selected';
-    } else if (!areaSelected) {
-      callCMTooltip = 'An area needs to be selected';
-    } else {
-      callCMTooltip = 'Call the CM ' + cm.pretty_name;
-    }
-
-    // Determine if the CM is enabled given the current area/layer selection
-    let isEnabled = true;
-
-    if (areaSelected) {
-      for (const entry of cm.input_layers) {
-        if (entry.dataset === 'none') {
-          isEnabled = true;
-          callCMTooltip = 'Call the CM ' + cm.pretty_name;
-          break;
-        }
-      }
-
-      if (!isEnabled && ($selectedLayerStore != null)) {
-        const layer = getLayer($selectedLayerStore);
-
-        if (layer.layer_infos != null) {
-          for (const entry of cm.input_layers) {
-            if (entry.dataset === 'all') {
-              isEnabled = true;
-              break;
-            }
-
-            if (((entry.dataset === 'all_rasters') && layer.is_raster) ||
-                ((entry.dataset === 'all_vectors') && !layer.is_raster)) {
-              isEnabled = true;
-              break;
-            }
-
-            if (entry.dataset === layer.layer_infos.dataset) {
-              if ((layer.layer_infos.variable === null) ||
-                  (entry.variables === undefined) ||
-                  (entry.variables.length == 0)) {
-                isEnabled = true;
-                break;
-              }
-
-              if (entry.variables.indexOf(layer.layer_infos.variable) >= 0) {
-                isEnabled = true;
-                break;
-              }
-            }
-          }
-        }
-
-        if (!isEnabled) {
-          callCMTooltip = 'The selected layer is not usable by this CM';
-        }
-      }
-    }
-
-    isDisabled = !isEnabled;
-
-    // Update the form elements
-    if (formElement != null) {
-      const inputs = formElement.getElementsByTagName('input');
-      for (let i = 0; i < inputs.length; i++) {
-        inputs[i].disabled = (isDisabled ? 'disabled' : undefined);
-      }
-
-      const selects = formElement.getElementsByTagName('select');
-      for (let i = 0; i < selects.length; i++) {
-        selects[i].disabled = (isDisabled ? 'disabled' : undefined);
-      }
-    }
-
-    // Determine the requirement text to display for the CM (only once)
-    if ((layersText === null) && ($datasetsStore.length > 0)) {
-      for (const entry of cm.input_layers) {
-        if (entry.dataset === 'none') {
-          layersText = 'Doesn\'t require any specific dataset as input';
-          break;
-        } else if (entry.dataset === 'all') {
-          layersText = 'Works on all datasets';
-          break;
-        } else if (entry.dataset === 'all_rasters') {
-          layersText = 'Works on all raster datasets';
-          break;
-        } else if (entry.dataset === 'all_vectors') {
-          layersText = 'Works on all vector datasets';
-          break;
-        }
-      }
-
-      if (layersText === null) {
-        layersDetails = [];
-
-        for (const entry of cm.input_layers) {
-          const dataset = getDataset(entry.dataset);
-          if (dataset === null) {
-            continue;
-          }
-
-          layersDetails.push({
-            dataset_id: dataset.ds_id,
-            dataset_title: dataset.title,
-            variables: entry.variables,
-          });
-        }
-
-        if (layersDetails.length > 1) {
-          layersText = 'Works on';
-          layersLinkText = layersDetails.length + ' datasets';
-        } else {
-          const dataset = getDataset(cm.input_layers[0].dataset);
-          if (dataset !== null) {
-            layersText = 'Works only on the';
-            layersLinkText = dataset.title + ' dataset';
-            layersLinkDatasetId = dataset.ds_id;
-          }
-        }
-      }
-    }
-  }
 
 
   function toggleCollapse() {
@@ -317,16 +188,7 @@
 
 
 <div class="cm_container" class:disabled={isDisabled}>
-  <div class="cm_header">
-    <div>
-      <h3 class="cm_run">{cm.pretty_name}</h3>
-      <div style="float: right;" class="cm_run">
-        <div class="cm_run" style="cursor: pointer;" class:open_menu="{isCollapsed}" class:close_menu="{!isCollapsed}" on:click="{toggleCollapse}"></div>
-        <span class="cm_run"></span>
-        <button class="cm_run" type=submit on:click={() => createTask(cm, form.getData())} disabled={isDisabled} title={callCMTooltip}>Run CM</button>
-      </div>
-    </div>
-  </div>
+
 
   <div hidden="{isCollapsed}">
     <!--{#if layersLinkDatasetId}-->
