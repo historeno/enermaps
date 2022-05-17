@@ -340,7 +340,6 @@
     return ctr;
   }
 
-
   function makeCMToggleControl() {
     const CMToggleControl = L.control({position: 'topright'});
     CMToggleControl.onAdd = (map) => {
@@ -351,6 +350,20 @@
     return CMToggleControl;
   }
 
+  function makecustompopup() {
+    const info = L.control({position: 'bottomright'});
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info');
+        this.update();
+        return this._div;
+    };
+    info.update = function (props) {
+    this._div.innerHTML = '<h4>Test Info</h4>';
+    };
+
+    return makecustompopup;
+  }
+  // with the help of custom info control https://leafletjs.com/examples/choropleth/
 
   function makeCMListControl() {
     const CMToggleControl = L.control({position: 'topright'});
