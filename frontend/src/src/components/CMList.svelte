@@ -20,7 +20,7 @@
 
 
   $: {
-    areaSelected = false;
+    areaSelected = true;
     if ($areaSelectionLayerStore !== null) {
       const selection = $areaSelectionLayerStore.getSelection();
       areaSelected = (selection != null) && (selection.features.length > 0);
@@ -134,9 +134,9 @@
       <div id="close_button_cm_list" on:click={closeCMPanel}><img src='{BASE_URL}images/clear-icon.png' alt='close'></div>
       <div id="header"><h2>Outils d'analyse : </h2></div>
 
-      {#if !areaSelected}
+      <!-- {#if !areaSelected}
         <div class="warning">No area selected</div>
-      {/if}
+      {/if} -->
 
       {#if !layerSelected}
         <div class="warning">No layer selected</div>
@@ -151,12 +151,13 @@
         </div>
       </div>
       {#if activeTabTest === 'analyse'}
-        <AreaSelection />
+        <!-- <AreaSelection /> -->
         {#each cms as cm (cm.name)}
           <CM bind:cm />
         {/each}
       {:else if activeTabTest === 'consultation'}
         <p> Information about the house. </p>
+        <showInfos />
       {/if}
     </div>
   </div>

@@ -33,7 +33,7 @@
   $: {
     tasks = $tasksStore;
 
-    let areaSelected = false;
+    let areaSelected = true;
     if ($areaSelectionLayerStore !== null) {
       const selection = $areaSelectionLayerStore.getSelection();
       areaSelected = (selection != null) && (selection.features.length > 0);
