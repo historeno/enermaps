@@ -352,15 +352,11 @@
 
   function makecustompopup() {
     const info = L.control({position: 'bottomright'});
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
+    info.onAdd = (map) => {
+        const div = L.DomUtil.create('div', 'info');
         this.update();
-        return this._div;
+        return div;
     };
-    info.update = function (props) {
-    this._div.innerHTML = '<h4>Test Info</h4>';
-    };
-
     return makecustompopup;
   }
   // with the help of custom info control https://leafletjs.com/examples/choropleth/
