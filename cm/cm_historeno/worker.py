@@ -100,7 +100,20 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
 
     res = post_parameters()
     ret = dict()
-    ret["graphs"] = []
+    ret["graphs"] = [{
+        "title":
+            {
+                "type": "bar",
+                "values": [ (f"val {i}", i) for i in range(5)]
+            },
+    },
+        {
+        "title2":
+            {
+                "type": "xy",
+                "values": [(f"val {i*2}", i*2) for i in range(5)]
+            },
+    }]
     ret["geofiles"] = {}
     values = xmltodict.parse(res.content)["project"]
     ret["values"] = {
