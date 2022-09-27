@@ -9,7 +9,7 @@ docker-compose up --build
 
 * download of the datasets
 ```bash
-docker-compose exec api /bin/bash -c 'flask update-dataset 1'
+docker-compose exec api /bin/bash -c "flask update-dataset 1"
 ```
 
 # CM Historeno

@@ -1,4 +1,4 @@
-import {popupInformation, popupInformationtitle, isCMPaneActiveStore} from '../stores.js';
+import {popupInformation, popupInformationtitle, isCMPaneActiveStore, layersStore} from '../stores.js';
 
 
 export const popupContent = '';

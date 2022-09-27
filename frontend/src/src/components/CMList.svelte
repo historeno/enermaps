@@ -228,7 +228,7 @@
         {#each cms as cm (cm.name)}
           <CM bind:cm />
         {/each}
-        <button class="btn btn-success" onclick=" window.open('https://historeno.heig-vd.ch/tool/index.php?mode=ptf','_blank')">Mode Avancé</button>
+
 
       {:else if activeTabTest === 'consultation'}
         <div class="popupInformation">
