@@ -199,7 +199,6 @@ const BaseMethods = {
           .openOn(this._map);
       popupInformation.set(popupContent);
       popupInformationtitle.set(popupContenttitle);
-      console.log(popupContent);
       isCMPaneActiveStore.set(true);
     }
     popupInformation.set(popupContent);
