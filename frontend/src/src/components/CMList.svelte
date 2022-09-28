@@ -240,6 +240,7 @@
                                 {@html $popupInformation}
                             </table>
                         </div>
+                        <!-- proposer téléchargement si pdf -->
                     </div>
             </div>
 
