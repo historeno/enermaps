@@ -9,3 +9,12 @@ git switch -c production
 git branch mshe
 gitco mshe
 
+
+    build of the plateform
+
+docker-compose up --build
+
+    download of the datasets
+
+docker-compose exec api /bin/bash -c 'flask update-dataset 1'
+docker-compose --file docker-compose-db.yml up -d data-integration
