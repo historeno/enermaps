@@ -12,7 +12,7 @@ services:
     volumes:
       - caddy-data:/data
       - caddy-config:/config
-      - ./stats/caddy-logs:/var/log
+      - /docker/enermaps/stats/caddy-logs:/var/log
     env_file:
       .env
 
@@ -84,8 +84,8 @@ services:
     stop_signal: SIGINT
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./stats/pg-logs:/var/lib/postgresql/data/pg_log
-      - ./:/db-backup
+      - /docker/enermaps/stats/pg-logs:/var/lib/postgresql/data/pg_log
+      - /docker/enermaps/:/db-backup
     env_file:
       .env-db
 

@@ -1,0 +1,11 @@
+ssh-agent bash
+ssh-add
+
+git clone git@github.com:historeno/enermaps.git
+cd enermaps/
+git fetch --all
+git checkout remotes/origin/production
+git switch -c production
+git branch mshe
+gitco mshe
+
