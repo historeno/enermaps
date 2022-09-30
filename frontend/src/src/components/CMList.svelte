@@ -2,7 +2,7 @@
   import {onMount} from 'svelte';
   import {BASE_URL} from '../settings.js';
   import {getCMs} from '../client.js';
-  import {areaSelectionLayerStore, selectedLayerStore, isCMPaneActiveStore, popupInformation, popupInformationtitle} from '../stores.js';
+  import {areaSelectionLayerStore, selectedLayerStore, isCMPaneActiveStore, popupInformation, popupInformationtitle, allFormData} from '../stores.js';
   import CM from './CM.svelte';
   // import AreaSelection from './AreaSelection.svelte';
 
@@ -236,6 +236,8 @@
                 <label for="collapsible" class="lbl-toggle">{@html $popupInformationtitle}</label>
                     <div class="collapsible-content">
                         <div class="content-inner">
+                            JSON.parse(allFormData.Pays)
+                            {JSON.stringify($allFormData)}
                             <table>
                                 {@html $popupInformation}
                             </table>

@@ -39,7 +39,7 @@ const BaseMethods = {
       return false;
     }
 
-    let popupContent = '';
+    let popupContent = allFormData;
     let popupContenttitle = '';
     const allFields = {};
 
@@ -57,12 +57,20 @@ const BaseMethods = {
 
       // recherche le 1er élément du formulaire CM
       const elem = document.querySelector('[id*="BrutusinForms#"]');
+
+      //const formjson = allFormData
+      // const formobject = JSON.parse(allFormData);
+      // data1 = formobject['Pays']
+      // console.log(data1)
+
+
       if (elem) { // s'il existe
         // enlève le dernier chr correspondant à l'indice du chmp dans le form
         const id = elem.id.substring(0, elem.id.length-1);
         // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
         document.querySelector('[id="'+id+'2"]').value = variables['SRE'];
         document.querySelector('[id="'+id+'8"]').value = variables['SRE'];
+        // document.querySelector('[id="'+id+'0"]').value = allFormData['Pays'];
       }
 
       for (const key of variableNames) {
@@ -104,7 +112,8 @@ const BaseMethods = {
 
     const fieldNames = Object.keys(allFields).sort();
     allFormData.set(allFields);
-    // console.log(allFormData);
+    // console.log($allFormData);
+
 
     for (const key of fieldNames) {
       const value = allFields[key];
