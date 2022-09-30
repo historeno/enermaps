@@ -239,8 +239,11 @@
                             <table>
                                 {@html $popupInformation}
                             </table>
+                            <!-- proposer téléchargement si pdf -->
+                            <a href="./pdf/ecole_poligny.pdf" download>telecharger le pdf</a>
+                            <a href="pdf/ecole_poligny.pdf" download>telecharger le pdf</a>
                         </div>
-                        <!-- proposer téléchargement si pdf -->
+
                     </div>
             </div>
 
