@@ -77,8 +77,6 @@ const BaseMethods = {
         // enlève le dernier chr correspondant à l'indice du chmp dans le form
         const id = elem.id.substring(0, elem.id.length-1);
         // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
-/*        document.querySelector('[id="'+id+'0"]').value = allFields['Pays'];
-        document.querySelector('[id="'+id+'1"]').value = allFields['Region'];*/
         document.querySelector('[id="'+id+'0"]').value = allFields['Pays'];
         document.querySelector('[id="'+id+'1"]').value = allFields['Region'];
         document.querySelector('[id="'+id+'2"]').value = allFields['Altitude'];
@@ -115,11 +113,12 @@ const BaseMethods = {
 
       }
 
-      for (const key of variableNames) {
-        const value = variables[key];
+      allFormData.set(allFields);
+      for (const key of fieldNames) {
+        const value = allFields[key];
 
-        if (value !== null) {
-          popupContent += '<tr id="hdata">';
+        if ((value !== null) && (key == 'Pays')) {
+          popupContent += '<tr id="pdata">';
 
           const td1 = document.createElement('td');
           td1.className = 'name';
@@ -129,13 +128,14 @@ const BaseMethods = {
           const td2 = document.createElement('td');
           td2.className = 'value';
           td2.innerText = value;
+          popupContent += td2.outerHTML;
 
-          if (key in units) {
+          /*if (key in units) {
             const unit = units[key];
             if ((unit !== undefined) && (unit !== null) && (unit !== '-')) {
               td2.innerText += ' ' + unit;
             }
-          }
+          }*/
           popupContent += td2.outerHTML;
           popupContent += '</tr>';
         }
@@ -152,9 +152,7 @@ const BaseMethods = {
       }*/
     }
 
-//    const fieldNames = Object.keys(allFields).sort();
-    allFormData.set(allFields);
-    console.log(allFields);
+/*    allFormData.set(allFields);
     console.log(allFields['Pays']);
 
     for (const key of fieldNames) {
@@ -235,7 +233,7 @@ const BaseMethods = {
 
         popupContent += '</tr>';
       }
-    }
+    }*/
 
     if (popupContent.length != 0) {
       L.popup({
