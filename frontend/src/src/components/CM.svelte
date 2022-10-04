@@ -349,7 +349,7 @@
     <div class="cm_wiki">
       <i>
         Pour plus d'information concernant le projet,
-        voir <a href="{cm.wiki}" target="_blank">la page web du projet</a> {JSON.stringify($allFormData)}.
+        voir <a href="{cm.wiki}" target="_blank">la page web du projet</a>
       </i>
     </div>
 

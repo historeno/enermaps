@@ -42,6 +42,8 @@ const BaseMethods = {
     let popupContent = '';
     let popupContenttitle = '';
     const allFields = {};
+    const fieldNames = Object.keys(allFields).sort();
+    allFormData.set(allFields);
 
     // popupContenttitle += '<h1>' + title + '</h1>';
     popupContenttitle += title;
@@ -53,7 +55,21 @@ const BaseMethods = {
       const variables = JSON.parse(properties.variables);
       const units = JSON.parse(properties.units);
 
+
       const variableNames = Object.keys(variables).sort();
+
+      if (properties.fields !== undefined) {
+        const fields = JSON.parse(properties.fields);
+
+        for (const [key, value] of Object.entries(fields)) {
+          if (allFields[key] === undefined) {
+            allFields[key] = value;
+          }
+        }
+      }
+      console.log(allFields['Pays']);
+      console.log(variables['SRE']);
+
 
       // recherche le 1er élément du formulaire CM
       const elem = document.querySelector('[id*="BrutusinForms#"]');
@@ -61,8 +77,9 @@ const BaseMethods = {
         // enlève le dernier chr correspondant à l'indice du chmp dans le form
         const id = elem.id.substring(0, elem.id.length-1);
         // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
+/*        document.querySelector('[id="'+id+'0"]').value = allFields['Pays'];
+        document.querySelector('[id="'+id+'1"]').value = allFields['Region'];*/
         document.querySelector('[id="'+id+'2"]').value = variables['SRE'];
-        document.querySelector('[id="'+id+'8"]').value = variables['SRE'];
       }
 
       for (const key of variableNames) {
@@ -73,7 +90,7 @@ const BaseMethods = {
 
           const td1 = document.createElement('td');
           td1.className = 'name';
-          td1.innerText = key + ' :';
+          td1.innerText = key + ' :/';
           popupContent += td1.outerHTML;
 
           const td2 = document.createElement('td');
@@ -91,7 +108,7 @@ const BaseMethods = {
         }
       }
 
-      if (properties.fields !== undefined) {
+      /*if (properties.fields !== undefined) {
         const fields = JSON.parse(properties.fields);
 
         for (const [key, value] of Object.entries(fields)) {
@@ -99,12 +116,13 @@ const BaseMethods = {
             allFields[key] = value;
           }
         }
-      }
+      }*/
     }
 
-    const fieldNames = Object.keys(allFields).sort();
+//    const fieldNames = Object.keys(allFields).sort();
     allFormData.set(allFields);
-    // console.log(allFormData);
+    console.log(allFields);
+    console.log(allFields['Pays']);
 
     for (const key of fieldNames) {
       const value = allFields[key];
