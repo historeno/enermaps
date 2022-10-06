@@ -109,7 +109,7 @@ const BaseMethods = {
           'Possibilité de mettre du solaire en toiture',
         ];
         let counter=0;
-        for (const key in keys){
+        for (const key of keys) {
           document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           counter += 1;
         }
