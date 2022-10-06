@@ -51,12 +51,7 @@ const BaseMethods = {
 
     for (const feature of content.features) {
       const properties = feature.properties;
-
       const variables = JSON.parse(properties.variables);
-
-
-
-
 
       if (properties.fields !== undefined) {
         const fields = JSON.parse(properties.fields);
@@ -77,6 +72,7 @@ const BaseMethods = {
         // enlève le dernier chr correspondant à l'indice du chmp dans le form
         const id = elem.id.substring(0, elem.id.length-1);
         // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
+
         const keys = [
           'Pays',
           'Region',
@@ -135,111 +131,11 @@ const BaseMethods = {
           td2.className = 'value';
           td2.innerText = value;
           popupContent += td2.outerHTML;
-
-          /*if (key in units) {
-            const unit = units[key];
-            if ((unit !== undefined) && (unit !== null) && (unit !== '-')) {
-              td2.innerText += ' ' + unit;
-            }
-          }*/
           popupContent += td2.outerHTML;
           popupContent += '</tr>';
         }
       }
-
-      /*if (properties.fields !== undefined) {
-        const fields = JSON.parse(properties.fields);
-
-        for (const [key, value] of Object.entries(fields)) {
-          if (allFields[key] === undefined) {
-            allFields[key] = value;
-          }
-        }
-      }*/
     }
-
-/*    allFormData.set(allFields);
-    console.log(allFields['Pays']);
-
-    for (const key of fieldNames) {
-      const value = allFields[key];
-
-      if ((value !== null) && (key == 'Pays')) {
-        popupContent += '<tr id="pdata">';
-
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
-      }
-      if ((value !== null) && (key == 'Region')) {
-        popupContent += '<tr id="pdata">';
-
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
-      }
-      if ((value !== null) && (key == 'Context')) {
-        popupContent += '<tr id="pdata">';
-
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
-      }
-      if ((value !== null) && (key == 'Météo')) {
-        popupContent += '<tr id="pdata">';
-
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
-      }
-      if ((value !== null) && (key == 'Empreinte au sol')) {
-        popupContent += '<tr id="pdata">';
-
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
-      }
-    }*/
 
     if (popupContent.length != 0) {
       L.popup({
