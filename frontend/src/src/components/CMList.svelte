@@ -240,10 +240,8 @@
                                 {@html $popupInformation}
                             </table>
                             <!-- proposer téléchargement si pdf -->
-                            <a href="./pdf/ecole_poligny.pdf" download>telecharger le pdf</a>
-                            <a href="pdf/ecole_poligny.pdf" download>telecharger le pdf</a>
+                            <a href="frontend/src/public/images/pdf/ecole_poligny.pdf" download>telecharger le pdf</a>
                         </div>
-
                     </div>
             </div>
 
