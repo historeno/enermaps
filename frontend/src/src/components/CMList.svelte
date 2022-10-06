@@ -239,9 +239,8 @@
                             <table>
                                 {@html $popupInformation}
                             </table>
-                            <!-- proposer téléchargement si pdf -->
-                            <a href="http://localhost:7000/images/pdf/ecole_poligny.pdf" download>telecharger le pdf</a>
-                            <a href="http://localhost:7000/images/pdf/ecole_poligny.pdf">consulter le pdf</a>
+                            <!-- modifier localhost -->
+                            <a href="http://localhost:7000/images/pdf/st_hip_watermark.pdf" target="_blank" >consulter le pdf</a>
 
                         </div>
                     </div>
