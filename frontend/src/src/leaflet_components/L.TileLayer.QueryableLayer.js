@@ -117,40 +117,6 @@ const BaseMethods = {
           document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           counter += 1;
         }
-        // document.querySelector('[id="'+id+'0"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'1"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'2"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'3"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'4"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'5"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'6"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'7"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'8"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'9"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'10"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'11"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'12"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'13"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'14"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'15"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'16"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'17"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'18"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'19"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'20"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'21"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'22"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'23"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'24"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'25"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'26"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'27"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'28"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'29"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'30"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'31"]').value = allFields[key];
-        // document.querySelector('[id="'+id+'32"]').value = allFields[key];
-
       }
 
       allFormData.set(allFields);
