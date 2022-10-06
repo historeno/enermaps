@@ -53,10 +53,10 @@ const BaseMethods = {
       const properties = feature.properties;
 
       const variables = JSON.parse(properties.variables);
-      const units = JSON.parse(properties.units);
 
 
-      const variableNames = Object.keys(variables).sort();
+
+
 
       if (properties.fields !== undefined) {
         const fields = JSON.parse(properties.fields);
@@ -77,39 +77,79 @@ const BaseMethods = {
         // enlève le dernier chr correspondant à l'indice du chmp dans le form
         const id = elem.id.substring(0, elem.id.length-1);
         // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
-        document.querySelector('[id="'+id+'0"]').value = allFields['Pays'];
-        document.querySelector('[id="'+id+'1"]').value = allFields['Region'];
-        document.querySelector('[id="'+id+'2"]').value = allFields['Altitude'];
-        document.querySelector('[id="'+id+'3"]').value = allFields['Météo'];
-        document.querySelector('[id="'+id+'4"]').value = allFields['Context'];
-        document.querySelector('[id="'+id+'5"]').value = allFields['Empreinte au sol'];
-        document.querySelector('[id="'+id+'6"]').value = allFields['Mitoyenneté'];
-        document.querySelector('[id="'+id+'7"]').value = allFields['Typologie'];
-        document.querySelector('[id="'+id+'8"]').value = allFields['Années de construction'];
-        document.querySelector('[id="'+id+'9"]').value = allFields["Catégorie d'ouvrage"];
-        document.querySelector('[id="'+id+'10"]').value = allFields['Hauteur du bâtiment:'];
-        document.querySelector('[id="'+id+'11"]').value = allFields['Type de chauffage'];
-        document.querySelector('[id="'+id+'12"]').value = allFields["Année d'installation du chauffage"];
-        document.querySelector('[id="'+id+'13"]').value = allFields["Type d'émetteurs"];
-        document.querySelector('[id="'+id+'14"]').value = allFields["Régulation du chauffage"];
-        document.querySelector('[id="'+id+'15"]').value = allFields['Isolation des conduites de chauffage'];
-        document.querySelector('[id="'+id+'16"]').value = allFields["Isolation des conduites d'ECS"];
-        document.querySelector('[id="'+id+'17"]').value = allFields["Présence d'une installation solaire thermique"];
-        document.querySelector('[id="'+id+'18"]').value = allFields['Surface de capteurs solaires thermiques automatique'];
-        document.querySelector('[id="'+id+'19"]').value = allFields['Surface de capteurs solaires thermiques'];
-        document.querySelector('[id="'+id+'20"]').value = allFields['Nombre de logements'];
-        document.querySelector('[id="'+id+'21"]').value = allFields['Efficacité des appareils électriques'];
-        document.querySelector('[id="'+id+'22"]').value = allFields["Présence d'une ventilation mécanique"];
-        document.querySelector('[id="'+id+'23"]').value = allFields["Présence d'ascenseur(s)"];
-        document.querySelector('[id="'+id+'24"]').value = allFields["Présence d'une instalaltion solaire PV"];
-        document.querySelector('[id="'+id+'25"]').value = allFields['Surface PV automatique'];
-        document.querySelector('[id="'+id+'26"]').value = allFields['Surface PV'];
-        document.querySelector('[id="'+id+'27"]').value = allFields['Orientation PV'];
-        document.querySelector('[id="'+id+'28"]').value = allFields["Présence de batteries de stockage"];
-        document.querySelector('[id="'+id+'29"]').value = allFields["Note de protection du patrimoine"];
-        document.querySelector('[id="'+id+'30"]').value = allFields["Possibilité d'utiliser un chauffage au bois"];
-        document.querySelector('[id="'+id+'31"]').value = allFields['Possibilité de mettre des sondes géothermiques'];
-        document.querySelector('[id="'+id+'32"]').value = allFields['Possibilité de mettre du solaire en toiture'];
+        const keys = [
+        'Pays',
+        'Region',
+        'Altitude',
+        'Météo',
+        'Context',
+        'Empreinte au sol',
+        'Mitoyenneté',
+        'Typologie',
+        'Années de construction',
+        'Catégorie d\'ouvrage',
+        'Hauteur du bâtiment:',
+        'Type de chauffage',
+        'Année d\'installation du chauffage',
+        'Type d\'émetteurs',
+        'Régulation du chauffage',
+        'Isolation des conduites de chauffage',
+        'Isolation des conduites d\'ECS',
+        'Présence d\'une installation solaire thermique',
+        'Surface de capteurs solaires thermiques automatique',
+        'Surface de capteurs solaires thermiques',
+        'Nombre de logements',
+        'Efficacité des appareils électriques',
+        'Présence d\'une ventilation mécanique',
+        'Présence d\'ascenseur(s)',
+        'Présence d\'une instalaltion solaire PV',
+        'Surface PV automatique',
+        'Surface PV',
+        'Orientation PV',
+        'Présence de batteries de stockage',
+        'Note de protection du patrimoine',
+        'Possibilité d\'utiliser un chauffage au bois',
+        'Possibilité de mettre des sondes géothermiques',
+        'Possibilité de mettre du solaire en toiture',
+        ];
+        let counter=0;
+        for (const key in keys){
+          document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
+          counter += 1;
+        }
+        // document.querySelector('[id="'+id+'0"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'1"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'2"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'3"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'4"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'5"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'6"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'7"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'8"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'9"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'10"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'11"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'12"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'13"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'14"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'15"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'16"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'17"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'18"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'19"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'20"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'21"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'22"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'23"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'24"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'25"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'26"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'27"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'28"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'29"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'30"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'31"]').value = allFields[key];
+        // document.querySelector('[id="'+id+'32"]').value = allFields[key];
 
       }
 
