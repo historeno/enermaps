@@ -28,49 +28,16 @@
 
 
 <p>
-  The EnerMaps Open Data Management Tool aims to improve data management and
-  accessibility in the field of energy research for the energy industry and regulators.
+  Plateforme d'aide à la rénovation énergétique des bâtiments à valeur patrimoniale des centres-bourgs et centres-villes.
 </p>
 <p>
-  EnerMaps’ tool accelerates and facilitates the energy transition offering a
-  qualitative and user-friendly digital platform to the energy professionals.
-</p>
+<strong>Idée générale du projet</strong>
+Associer la rénovation énergétique aux stratégies de planification énergétique des communes en utilisant les technologies digitales (plateforme web & données géolocalisées (couches SIG)) pour accompagner les différentes parties-prenantes (propriétaires privés et collectivités publiques notamment) dans la réduction de l’empreinte énergétique et climatique du parc bâti et notamment celui ancien et à valeur patrimoniale</p>
 
 <p>
-  More information on the project can be found here:
-  <a href="https://enermaps.eu/">https://enermaps.eu/</a>
-</p>
-<p>
-  <strong>EnerMaps Wiki:</strong> For details about tool functionalities as well as
-  the manual for using the calculation modules, please refer to the EnerMaps Wiki:
-  <a href="https://enermaps-wiki.herokuapp.com/">https://enermaps-wiki.herokuapp.com/</a>
-</p>
-
-<p>
-  <strong>Open source:</strong> The developed tool and all related modules run without
-  requiring any other commercial tool or software. Use of and access to Source Code is
-  subject to Open Source Licenses. The source code of the tool can be accessed via
-  <a href="https://www.github.com/enermaps/">https://www.github.com/enermaps</a>
-</p>
-
-<div>
-  <strong>Supported browsers:</strong>
-  <ul class="nolist">
-    <li><img class="supported-browser" src="images/firefox.png" alt="firefox"> <span class="browser-label">Firefox version 92+</span></li>
-    <li><img class="supported-browser" src="images/chrome.png" alt="chrome"> <span class="browser-label">Chrome version 96+</span></li>
-  </ul>
-</div>
-
-<p>
-  <strong>Disclaimer:</strong> The data and tools provided on this website are
-  indicative and for research purposes only. No responsibility is taken for the
-  accuracy of included data, figures and results or for using them for unintended
-  purposes. In accordance with article 5.1(e) of the General Data Protection Regulation,
-  the IP addresses are collected for statistical purposes only.
+  Le projet historeno est soutenu par le programme européen de coopération transfrontalière Interreg France-Suisse 2014-2020 et a bénéficié à ce titre d’un soutien financier du Fonds européen de développement régional (FEDER) de 246 619,60 €, ainsi que d’un soutien financier de la Confédération de CHF 199’981.-. Les cantons de Vaud, du Valais, de Genève, de Neuchâtel, du Jura et de Berne ont également cofinancé le projet à hauteur de CHF 199’981.-, ainsi que la DRAC de Bourgogne Franche-Comté à hauteur de 8000€ et la région de Bourgogne Franche-Comté à hauteur de 6000€.
 </p>
 
 <div class="europe-logo">
-  <img src="images/european_flag.png" alt="European flag">
-  <span>The EnerMaps project has received funding from the European Union’s Horizon
-  2020 research and innovation program under grant agreement N°884161.</span>
+  <img src="images/interreg.png" alt="Interreg France - Suisse">
 </div>
