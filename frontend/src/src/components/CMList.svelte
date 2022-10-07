@@ -239,6 +239,9 @@
                             <table>
                                 {@html $popupInformation}
                             </table>
+                            <!-- modifier localhost -->
+                            <a href="http://localhost:7000/images/pdf/st_hip_watermark.pdf" target="_blank" >consulter le pdf</a>
+
                         </div>
                     </div>
             </div>
