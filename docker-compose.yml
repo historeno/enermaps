@@ -5,7 +5,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "0.0.0.0:7000:80"
+      - "127.0.0.1:7000:80"
     restart: always
     depends_on:
       - "api"
@@ -99,13 +99,16 @@ services:
       - .postgrest
 
 #  should be launched apart
-#  data-integration:
-#    build:
-#      context: ./data-integration
-#    volumes:
-#      - data:/data-integration/data
-#    env_file:
-#      .env-db
+  data-integration:
+    build:
+      context: ./data-integration
+    volumes:
+      - data:/data-integration/data
+    env_file:
+      .env-db
+    depends_on:
+      - db
+      - postgrest
 
   db-nginx:
     build:
