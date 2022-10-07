@@ -239,7 +239,7 @@
                             <table>
                                 {@html $popupInformation}
                             </table>
-                            <button class="btn btn-success" onclick=" window.open('http://localhost:7000/images/pdf/st_hip_watermark.pdf','_blank')">consulter le pdf</button>
+                            <button class="btn btn-success" onclick=" window.open(src='images/pdf/st_hip_watermark.pdf','_blank')">consulter le pdf</button>
                         </div>
                     </div>
             </div>

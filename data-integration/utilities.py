@@ -1,5 +1,6 @@
 import json
 from os.path import abspath, dirname, isfile, join
+import time
 
 import geopandas as gpd
 import pandas as pd
@@ -14,6 +15,7 @@ DATA_DIR = join(CURRENT_DIR, "inputs")
 
 def get_engine() -> sqlalchemy.engine.Engine:
     # DB_URL = "postgresql://postgres:postgres@localhost:5432/dataset"
+    time.sleep(10)
     _engine = sqlalchemy.create_engine(url=DB_URL)
     print(f"DATA BASE URL : {DB_URL}")
     try:
