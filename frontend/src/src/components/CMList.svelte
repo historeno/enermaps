@@ -239,9 +239,7 @@
                             <table>
                                 {@html $popupInformation}
                             </table>
-                            <!-- modifier localhost -->
-                            <a href="http://localhost:7000/images/pdf/st_hip_watermark.pdf" target="_blank" >consulter le pdf</a>
-
+                            <button class="btn btn-success" onclick=" window.open(src='images/pdf/st_hip_watermark.pdf','_blank')">consulter le pdf</button>
                         </div>
                     </div>
             </div>
