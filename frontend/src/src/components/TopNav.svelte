@@ -152,7 +152,7 @@
 
   <slot id='slot'></slot>
 
-  <Dialog title="About EnerMaps" bind:this={aboutDialog}>
+  <Dialog title="Historeno" bind:this={aboutDialog}>
     <About />
   </Dialog>
 

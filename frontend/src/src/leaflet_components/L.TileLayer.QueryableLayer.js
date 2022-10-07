@@ -42,6 +42,8 @@ const BaseMethods = {
     let popupContent = '';
     let popupContenttitle = '';
     const allFields = {};
+    const fieldNames = Object.keys(allFields).sort();
+    allFormData.set(allFields);
 
     // popupContenttitle += '<h1>' + title + '</h1>';
     popupContenttitle += title;
@@ -49,47 +51,7 @@ const BaseMethods = {
 
     for (const feature of content.features) {
       const properties = feature.properties;
-
       const variables = JSON.parse(properties.variables);
-      const units = JSON.parse(properties.units);
-
-      const variableNames = Object.keys(variables).sort();
-
-      // recherche le 1er élément du formulaire CM
-      const elem = document.querySelector('[id*="BrutusinForms#"]');
-      if (elem) { // s'il existe
-        // enlève le dernier chr correspondant à l'indice du chmp dans le form
-        const id = elem.id.substring(0, elem.id.length-1);
-        // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
-        document.querySelector('[id="'+id+'2"]').value = variables['SRE'];
-        document.querySelector('[id="'+id+'8"]').value = variables['SRE'];
-      }
-
-      for (const key of variableNames) {
-        const value = variables[key];
-
-        if (value !== null) {
-          popupContent += '<tr id="hdata">';
-
-          const td1 = document.createElement('td');
-          td1.className = 'name';
-          td1.innerText = key + ' :';
-          popupContent += td1.outerHTML;
-
-          const td2 = document.createElement('td');
-          td2.className = 'value';
-          td2.innerText = value;
-
-          if (key in units) {
-            const unit = units[key];
-            if ((unit !== undefined) && (unit !== null) && (unit !== '-')) {
-              td2.innerText += ' ' + unit;
-            }
-          }
-          popupContent += td2.outerHTML;
-          popupContent += '</tr>';
-        }
-      }
 
       if (properties.fields !== undefined) {
         const fields = JSON.parse(properties.fields);
@@ -100,89 +62,78 @@ const BaseMethods = {
           }
         }
       }
-    }
+      console.log(allFields['Pays']);
+      console.log(variables['SRE']);
 
-    const fieldNames = Object.keys(allFields).sort();
-    allFormData.set(allFields);
-    // console.log(allFormData);
 
-    for (const key of fieldNames) {
-      const value = allFields[key];
+      // recherche le 1er élément du formulaire CM
+      const elem = document.querySelector('[id*="BrutusinForms#"]');
+      if (elem) { // s'il existe
+        // enlève le dernier chr correspondant à l'indice du chmp dans le form
+        const id = elem.id.substring(0, elem.id.length-1);
+        // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
 
-      if ((value !== null) && (key == 'Pays')) {
-        popupContent += '<tr id="pdata">';
-
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
+        const keys = [
+          'Pays',
+          'Region',
+          'Altitude',
+          'Météo',
+          'Context',
+          'Empreinte au sol',
+          'Mitoyenneté',
+          'Typologie',
+          'Années de construction',
+          'Catégorie d\'ouvrage',
+          'Hauteur du bâtiment:',
+          'Type de chauffage',
+          'Année d\'installation du chauffage',
+          'Type d\'émetteurs',
+          'Régulation du chauffage',
+          'Isolation des conduites de chauffage',
+          'Isolation des conduites d\'ECS',
+          'Présence d\'une installation solaire thermique',
+          'Surface de capteurs solaires thermiques automatique',
+          'Surface de capteurs solaires thermiques',
+          'Nombre de logements',
+          'Efficacité des appareils électriques',
+          'Présence d\'une ventilation mécanique',
+          'Présence d\'ascenseur(s)',
+          'Présence d\'une instalaltion solaire PV',
+          'Surface PV automatique',
+          'Surface PV',
+          'Orientation PV',
+          'Présence de batteries de stockage',
+          'Note de protection du patrimoine',
+          'Possibilité d\'utiliser un chauffage au bois',
+          'Possibilité de mettre des sondes géothermiques',
+          'Possibilité de mettre du solaire en toiture',
+        ];
+        let counter=0;
+        for (const key of keys) {
+          document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
+          counter += 1;
+        }
       }
-      if ((value !== null) && (key == 'Region')) {
-        popupContent += '<tr id="pdata">';
 
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
+      allFormData.set(allFields);
+      for (const key of fieldNames) {
+        const value = allFields[key];
 
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
+        if ((value !== null) && (key == 'Pays')) {
+          popupContent += '<tr id="pdata">';
 
-        popupContent += '</tr>';
-      }
-      if ((value !== null) && (key == 'Context')) {
-        popupContent += '<tr id="pdata">';
+          const td1 = document.createElement('td');
+          td1.className = 'name';
+          td1.innerText = key + ' :/';
+          popupContent += td1.outerHTML;
 
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
-      }
-      if ((value !== null) && (key == 'Météo')) {
-        popupContent += '<tr id="pdata">';
-
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
-      }
-      if ((value !== null) && (key == 'Empreinte au sol')) {
-        popupContent += '<tr id="pdata">';
-
-        const td1 = document.createElement('td');
-        td1.className = 'name';
-        td1.innerText = key + ' :';
-        popupContent += td1.outerHTML;
-
-        const td2 = document.createElement('td');
-        td2.className = 'value';
-        td2.innerText = value;
-        popupContent += td2.outerHTML;
-
-        popupContent += '</tr>';
+          const td2 = document.createElement('td');
+          td2.className = 'value';
+          td2.innerText = value;
+          popupContent += td2.outerHTML;
+          popupContent += td2.outerHTML;
+          popupContent += '</tr>';
+        }
       }
     }
 

@@ -186,7 +186,7 @@ def create_default_legend(type):
 
     min_value = 1 if type in (path.RASTER, path.CM) else 0
     max_value = 255
-    color = (1, 0, 0)  # Default red
+    color = (0, 1, 0)  # Default red
     nb_of_colors = 8
 
     color_list = sns.dark_palette(color, n_colors=nb_of_colors, input="rgb")
@@ -208,7 +208,7 @@ def create_default_legend(type):
                 "green": color[1],
                 "blue": color[2],
                 "value": min_threshold,
-                "opacity": 1.0,
+                "opacity": 0.4,
             }
         )
 
