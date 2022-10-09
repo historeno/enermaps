@@ -6,6 +6,7 @@ import requests
 import xmltodict
 from BaseCM import cm_base as cm_base
 from BaseCM.cm_output import validate
+import logging
 
 from form import decoder
 
@@ -32,7 +33,7 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             "meteoParam": decoder.get("meteoParam").get(params["Météo"]),
             "context": decoder.get("context").get(params["Context"]),
             "polygon": "[[0,0],[0,10],[10,10],[10,0]]",
-            "adjoining": "[0,0,0.5,0]",
+            # "adjoining": "[0,0,0.5,0]",
             "typo": params["Typologie"],
             "year": params["Années de construction"],
             "category": params["Catégorie d'ouvrage"],
@@ -55,7 +56,7 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             "solarThermalAreaAuto": decoder.get("solarThermalAreaAuto").get(
                 params["Surface de capteurs solaires thermiques automatique"]
             ),
-            "solarThermalArea": params["Surface de capteurs solaires thermiques"],
+            # "solarThermalArea": params["Surface de capteurs solaires thermiques"],
             "nbAppart": params["Nombre de logements"],
             "devEff": decoder.get("devEff").get(
                 params["Efficacité des appareils électriques"]
@@ -75,6 +76,7 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             "pvBattery": decoder.get("pvBattery").get(
                 params["Présence de batteries de stockage"]
             ),
+            "renoLevel": params["Niveau de rénovation souhaité pour le scénario automatique"],
             "protectionGrade": params["Note de protection du patrimoine"],
             "heatingWood": decoder.get("heatingWood").get(
                 params["Possibilité d'utiliser un chauffage au bois"]
@@ -102,7 +104,8 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     ret = dict()
     ret["graphs"] = []
     ret["geofiles"] = {}
-    values = xmltodict.parse(res.content)["project"]
+    parser = xmltodict.parse(res.content)
+    values = parser["project"]
     ret["values"] = {
         "Coût totaux [CHF]": values["bldOutput"]["Cost"],
         "Besoin de chauffage  [kWh]": values["bldOutput"]["Qh"],
