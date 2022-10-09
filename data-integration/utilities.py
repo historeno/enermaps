@@ -47,7 +47,7 @@ def post_data(
         "metadata": [
             {
                 "Group": "Bâtiment",
-                "Title": "Bâtiments protégés",
+                "Title": "Patrimoine bâti",
                 "parameters": {
                     "end_at": "2015-12-31 23:00",
                     "fields": [],
