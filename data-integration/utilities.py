@@ -106,7 +106,7 @@ def post_data(
             "Context": "Urban",
             "Empreinte au sol": "[[0,0],[0,10],[10,10],[10,0]]",
             "Mitoyenneté": "[0,0,0.5,0]",
-            "Typologie": 3,
+            "Typologie": 2,
             "Années de construction": 1950,
             "Catégorie d'ouvrage": 4,
             "Hauteur du bâtiment": 6,

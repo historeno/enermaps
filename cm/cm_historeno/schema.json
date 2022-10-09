@@ -3,7 +3,7 @@
   "properties": {
     "Pays": {
       "type": "string",
-      "default": "France",
+      "default": "Suisse",
       "enum": [
         "France",
         "Suisse"
@@ -12,6 +12,7 @@
     },
     "Region": {
       "type": "string",
+      "default": "Valais",
       "enum": [
         "Valais",
         "Vaud",
@@ -55,9 +56,6 @@
     "Empreinte au sol": {
       "type": "string",
       "default": "[[0,0],[0,10],[10,10],[10,0]]",
-      "enum": [
-        "[[0,0],[0,10],[10,10],[10,0]]"
-      ],
       "required": true
     },
     "Typologie": {
@@ -82,7 +80,7 @@
     },
     "Hauteur du bâtiment": {
       "type": "number",
-      "minimum": 5,
+      "minimum": 1,
       "default": 5,
       "required": true
     },
@@ -236,13 +234,6 @@
         "Non",
         "Oui"
       ],
-      "required": true
-    },
-    "Niveau de rénovation souhaité pour le scénario automatique": {
-      "type": "number",
-      "default": 1,
-      "minimum" : 1,
-      "maximum" : 12,
       "required": true
     },
     "Note de protection du patrimoine": {

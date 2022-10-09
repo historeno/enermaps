@@ -76,7 +76,7 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             "pvBattery": decoder.get("pvBattery").get(
                 params["Présence de batteries de stockage"]
             ),
-            "renoLevel": params["Niveau de rénovation souhaité pour le scénario automatique"],
+            # "renoLevel": params["Niveau de rénovation souhaité pour le scénario automatique"],
             "protectionGrade": params["Note de protection du patrimoine"],
             "heatingWood": decoder.get("heatingWood").get(
                 params["Possibilité d'utiliser un chauffage au bois"]
