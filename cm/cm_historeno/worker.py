@@ -6,7 +6,6 @@ import requests
 import xmltodict
 from BaseCM import cm_base as cm_base
 from BaseCM.cm_output import validate
-import logging
 
 from form import decoder
 
