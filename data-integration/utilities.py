@@ -140,7 +140,7 @@ def post_data(
         "index": [index for index in range(rows)],
         "ds_id": [ds_id for _ in range(rows)],
         "fid": [f"FR_{fid}" for fid in range(rows)],
-        "variable": ["SRE" for _ in range(rows)],
+        "variable": ["Bâtiments existants" for _ in range(rows)],
         "value": [value for value in range(rows)],
         "unit": ["m2" for _ in range(rows)],
         "start_at": ["2022-06-30 12:00:00" for _ in range(rows)],
