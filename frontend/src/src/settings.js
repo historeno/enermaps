@@ -1,6 +1,6 @@
 export const BASE_URL = '/';
-export const INITIAL_MAP_CENTER = [46.4965, 5.8502];
-export const INITIAL_ZOOM = 9;
+export const INITIAL_MAP_CENTER = [46.94794241440443, 7.447352077784083];
+export const INITIAL_ZOOM = 13;
 
 export const BASE_LAYER_URL =
   'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
