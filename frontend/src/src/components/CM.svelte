@@ -372,11 +372,9 @@
       {#each [...tasks].reverse() as task (task.id)}
         {#if (task.cm.name === cm.name) && !task.hidden}
           <CMTask task={task} />
-          <div>
-            <button type="button" on:click={advanceRequest}>
-                Calcul avancé
-            </button>
-          </div>
+          <button type="button" on:click={advanceRequest}>
+              Calcul avancé
+          </button>
         {/if}
       {/each}
     </div>
