@@ -52,22 +52,6 @@
       ],
       "required": true
     },
-    "Empreinte au sol": {
-      "type": "string",
-      "default": "[[0,0],[0,10],[10,10],[10,0]]",
-      "enum": [
-        "[[0,0],[0,10],[10,10],[10,0]]"
-      ],
-      "required": true
-    },
-    "Mitoyenneté": {
-      "type": "string",
-      "default": "[0,0,0.5,0]",
-      "enum": [
-        "[0,0,0.5,0]"
-      ],
-      "required": true
-    },
     "Typologie": {
       "type": "number",
       "minimum": 1,
@@ -212,8 +196,7 @@
       "default": "Non",
       "enum": [
         "Non",
-        "Simple flux",
-        "Double flux"
+        "Oui"
       ],
       "required": true
     },
@@ -264,31 +247,11 @@
       "maximum" : 12,
       "required": true
     },
-    "Possibilité d'utiliser un chauffage au bois": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Possibilité de mettre des sondes géothermiques": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Possibilité de mettre du solaire en toiture": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
+    "Note de protection du patrimoine": {
+      "type": "number",
+      "default": 1,
+      "minimum" : 1,
+      "maximum" : 12,
       "required": true
     }
   }
