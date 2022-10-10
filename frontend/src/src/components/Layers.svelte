@@ -389,10 +389,10 @@
 
 <div id="layers_list" bind:this={rootElement} on:click|stopPropagation
      on:dblclick|stopPropagation on:wheel|stopPropagation >
-  <h3>Layers</h3>
+  <h3>Couches affichées</h3>
 
   {#if layers.length == 0}
-    <span class="help">Add some layers from the Dataset panel</span>
+    <span class="help">Ajouter des couches ...</span>
   {:else}
     <div class="scroll" bind:this={layersContainer}>
       <div class="target" data-layername=""

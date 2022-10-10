@@ -51,7 +51,7 @@ const BaseMethods = {
 
     for (const feature of content.features) {
       const properties = feature.properties;
-      const variables = JSON.parse(properties.variables);
+      // const variables = JSON.parse(properties.variables);
 
       if (properties.fields !== undefined) {
         const fields = JSON.parse(properties.fields);
@@ -62,8 +62,6 @@ const BaseMethods = {
           }
         }
       }
-      console.log(allFields['Pays']);
-      console.log(variables['SRE']);
 
 
       // recherche le 1er élément du formulaire CM
@@ -80,7 +78,6 @@ const BaseMethods = {
           'Météo',
           'Context',
           'Empreinte au sol',
-          'Mitoyenneté',
           'Typologie',
           'Années de construction',
           'Catégorie d\'ouvrage',
@@ -93,7 +90,6 @@ const BaseMethods = {
           'Isolation des conduites d\'ECS',
           'Présence d\'une installation solaire thermique',
           'Surface de capteurs solaires thermiques automatique',
-          'Surface de capteurs solaires thermiques',
           'Nombre de logements',
           'Efficacité des appareils électriques',
           'Présence d\'une ventilation mécanique',
@@ -110,6 +106,8 @@ const BaseMethods = {
         ];
         let counter=0;
         for (const key of keys) {
+          console.log(key);
+          console.log(allFields[key]);
           document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           counter += 1;
         }

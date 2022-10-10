@@ -13,6 +13,7 @@ decoder = {
         "Jura-FR": "39",
         "Territoire de Belfort": "90",
     },
+    # "altitude" / get from the form
     "meteoParam": {
         "Jura": "jura",
         "Préalpes": "preAlpes",
@@ -24,6 +25,11 @@ decoder = {
         "Urban": "urban",
         "Suburban": "suburban",
     },
+    # empreinte / get from the form
+    # typologie / get from the form
+    # année de constr / get from the form
+    # catégorie d'ouvrage / get from the form
+    # hauteur / get from the form
     "generator": {
         "Mazout": "genTypOil",
         "Gas naturel": "genTypGas",
@@ -35,7 +41,7 @@ decoder = {
         "Électrique direct": "genTypElecDirect",
         "Chauffage à distance": "genTypCAD",
     },
-    # "generatorYear": params["Année d'installation ou de remplacement du chauffage"],
+    # "generatorYear" / get from the form
     "emettors": {
         "Radiateurs": "emRadWall",
         "Radiateurs devant fenêtres": "emRadWin",
@@ -49,9 +55,8 @@ decoder = {
         "autre (+2°C)": 2,
     },
     "tubeInsulH": {
-        "Non isolées": "notInsulated",
-        "Partiellement isolées": "partiallyInsulated",
-        "Complètement isolées": "fullyInsulated",
+        "Non": 0,
+        "Oui": 1,
     },
     "tubeInsulW": {
         "Non isolées": "notInsulated",
@@ -72,7 +77,7 @@ decoder = {
         "Meilleurs appareils": "best",
         "Appareils neufs courants": "new",
         "Anciens appareils (env. 5 ans)": "old5",
-        "Très anciens appareils (> 10 ans)": "old10",
+        "Très anciens appareils (>10 ans)": "old10",
     },
     "ventMeca": {
         "Aucune": "none",
