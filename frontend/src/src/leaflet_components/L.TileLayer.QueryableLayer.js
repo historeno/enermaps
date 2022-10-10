@@ -51,7 +51,7 @@ const BaseMethods = {
 
     for (const feature of content.features) {
       const properties = feature.properties;
-      const variables = JSON.parse(properties.variables);
+      // const variables = JSON.parse(properties.variables);
 
       if (properties.fields !== undefined) {
         const fields = JSON.parse(properties.fields);
