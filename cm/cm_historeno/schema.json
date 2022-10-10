@@ -3,7 +3,6 @@
   "properties": {
     "Pays": {
       "type": "string",
-      "default": "Suisse",
       "enum": [
         "France",
         "Suisse"
@@ -12,7 +11,6 @@
     },
     "Region": {
       "type": "string",
-      "default": "Valais",
       "enum": [
         "Valais",
         "Vaud",
@@ -31,7 +29,6 @@
     "Altitude": {
       "type": "number",
       "minimum": 0,
-      "default": 0,
       "required": true
     },
     "Météo": {
@@ -53,22 +50,15 @@
       ],
       "required": true
     },
-    "Empreinte au sol": {
-      "type": "string",
-      "default": "[[0,0],[0,10],[10,10],[10,0]]",
-      "required": true
-    },
     "Typologie": {
       "type": "number",
       "minimum": 1,
       "maximum": 2,
-      "default": 2,
       "required": true
     },
     "Années de construction": {
       "type": "number",
       "minimum": 1900,
-      "default": 1900,
       "required": true
     },
     "Catégorie d'ouvrage": {
@@ -76,12 +66,6 @@
       "minimum": 1,
       "maximum": 12,
       "default": 1,
-      "required": true
-    },
-    "Hauteur du bâtiment": {
-      "type": "number",
-      "minimum": 1,
-      "default": 5,
       "required": true
     },
     "Type de chauffage": {
@@ -119,8 +103,8 @@
     "Régulation du chauffage": {
       "type": "string",
       "enum":  [
-        "Sondes de temp. par pièce ou vannes thermostatiques sur radiateurs (+0°C)",
-        "Sonde de température dans une pièce de référence (par ex séjour)  (+1°C)",
+        "Par pièce (+0°C)",
+        "Par pièce de référence (+1°C)",
         "autre (+2°C)"
       ],
       "required": true
@@ -151,24 +135,13 @@
       ],
       "required": true
     },
-    "Surface de capteurs solaires thermiques automatique": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
     "Nombre de logements": {
       "type": "number",
-      "default": 0,
-      "minimum" : 0,
+      "minimum" : 1,
       "required": true
     },
     "Efficacité des appareils électriques": {
       "type": "string",
-      "default": "Très anciens appareils (>10 ans)",
       "enum": [
         "Meilleurs appareils",
         "Appareils neufs courants",
@@ -179,7 +152,6 @@
     },
     "Présence d'une ventilation mécanique": {
       "type": "string",
-      "default": "Aucune",
       "enum": [
         "Aucune",
         "Double flux",
@@ -189,7 +161,6 @@
     },
     "Présence d'ascenseur(s)": {
       "type": "string",
-      "default": "Non",
       "enum": [
         "Non",
         "Oui"
@@ -198,38 +169,14 @@
     },
     "Présence d'une instalaltion solaire PV": {
       "type": "string",
-      "default": "Non",
       "enum": [
         "Non",
         "Oui"
       ],
-      "required": true
-    },
-    "Surface PV automatique": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Surface PV": {
-      "type": "number",
-      "default": 0,
-      "minimum" : 0,
-      "required": true
-    },
-    "Orientation PV": {
-      "type": "number",
-      "default": 0,
-      "minimum" : 0,
-      "maximum" : 360,
       "required": true
     },
     "Présence de batteries de stockage": {
       "type": "string",
-      "default": "Non",
       "enum": [
         "Non",
         "Oui"
@@ -238,36 +185,13 @@
     },
     "Note de protection du patrimoine": {
       "type": "number",
-      "default": 1,
       "minimum" : 1,
       "maximum" : 12,
       "required": true
     },
-    "Possibilité d'utiliser un chauffage au bois": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Possibilité de mettre des sondes géothermiques": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Possibilité de mettre du solaire en toiture": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
+    "Capacité d'investissement": {
+      "type": "number",
+      "minimum" : 0,
       "required": true
     }
   }

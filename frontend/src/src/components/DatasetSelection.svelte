@@ -298,7 +298,7 @@
 
 <div id="datasets_selection" bind:this={rootElement} on:click|stopPropagation
      on:dblclick|stopPropagation on:wheel|stopPropagation>
-  <h3>Datasets</h3>
+  <h3>Données disponible</h3>
 
   {#if !$datasetsStore}
     Loading datasets...
