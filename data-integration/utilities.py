@@ -47,7 +47,7 @@ def post_data(
         "metadata": [
             {
                 "Group": "Bâtiment",
-                "Title": "Patrimoine bâti",
+                "Title": "Bâtiments existants",
                 "parameters": {
                     "end_at": "2015-12-31 23:00",
                     "fields": [],
@@ -55,7 +55,7 @@ def post_data(
                     "is_raster": False,
                     "start_at": "2021-06-30 12:00:00",
                     "is_tiled": False,
-                    "variables": ["SRE"],  # mandatory
+                    "variables": ["Bâtiments existants"],  # mandatory
                     "time_periods": [],  # mandatory
                     "temporal_granularity": "hour",
                 },

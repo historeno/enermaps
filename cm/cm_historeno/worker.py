@@ -88,6 +88,9 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
                 params["Possibilité de mettre du solaire en toiture"]
             ),
         }
+        # TODO : test to be removed
+        with open("paramaters_as_file", mode="w") as file:
+            file.write(str(parameters))
         url_endpoint = "https://historeno.heig-vd.ch/tool/calcPTF.php"
         try:
             resp = requests.post(url_endpoint, data=parameters)
@@ -95,6 +98,9 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             # logging.info(f"URL: {resp.url}")
             # logging.info(f"CONTENT: {resp.content}")
             # pprint(f"CONTENT: {resp.content}")
+            # TODO : test to be removed
+            with open("response_as_file", mode="w") as file:
+                file.write(resp.text)
             return resp
         except ConnectionError as error:
             logging.error("Error during the post of the file.")

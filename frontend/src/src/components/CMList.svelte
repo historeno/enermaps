@@ -206,7 +206,7 @@
   <div id="calculation_modules_content">
     <div id="cm_list_header">
       <div id="close_button_cm_list" on:click={closeCMPanel}><img src='{BASE_URL}images/clear-icon.png' alt='close'></div>
-      <div id="header"><h2>Outils d'analyse : </h2></div>
+      <div id="header"><h2>Outils d'aide à la décision :</h2></div>
 
       {#if !areaSelected}
         <div class="warning">No area selected</div>
