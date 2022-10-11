@@ -130,7 +130,7 @@ const BaseMethods = {
         ];
         let counter=0;
         let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf';
-        const to_test = [
+        const toTest = [
           'Typologie',
           'Années ' +
           'de ' +
@@ -140,11 +140,12 @@ const BaseMethods = {
           'bâtiment',
           'Nombre de logements',
           'Note de protection du patrimoine',
-        ]
+        ];
         for (const key of keys) {
           // update the form
-          if (to_test.includes(key)) {
-            document.querySelector('[id="'+id+counter+'"]').value = Number(allFields[key]);
+          if (toTest.includes(key)) {
+            document.querySelector('[id="' +
+                ''+id+counter+'"]').value = Number(allFields[key]);
           } else {
             document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           }
@@ -154,7 +155,6 @@ const BaseMethods = {
           advancedModeURL += matcher[key];
           advancedModeURL += '=';
           advancedModeURL += allFields[key];
-          console.log("BREAK");
           // create consult mode info
           const value = allFields[key];
           if ((value !== null) && shownKeys.includes(key)) {
