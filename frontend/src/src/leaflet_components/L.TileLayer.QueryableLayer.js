@@ -117,8 +117,9 @@ const BaseMethods = {
           advancedModeURL += '=';
           advancedModeURL += allFields[key];
         }
-        // postUrl.set("");
-        console.log(advancedModeURL);
+        // add value directly from the backend
+        advancedModeURL += '&polygon=';
+        advancedModeURL += allFields['Empreinte au sol'];
         postUrl.set(advancedModeURL);
       }
 
