@@ -4,7 +4,7 @@ import {
   isCMPaneActiveStore,
   allFormData,
   matcher,
-  postUrl
+  postUrl,
 } from '../stores.js';
 
 
@@ -103,7 +103,7 @@ const BaseMethods = {
           'Capacité d\'investissement',
         ];
         let counter=0;
-        let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf'
+        let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf';
         for (const key of keys) {
           console.log(key, matcher[key]);
           if (key === 'Typologie' || key === 'Années de construction' || key === 'Hauteur du bâtiment' || key === 'Nombre de logements' || key === 'Note de protection du patrimoine') {
@@ -112,9 +112,9 @@ const BaseMethods = {
             document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           }
           counter += 1;
-          advancedModeURL += "&" ;
+          advancedModeURL += '&';
           advancedModeURL += matcher[key];
-          advancedModeURL += "=";
+          advancedModeURL += '=';
           advancedModeURL += allFields[key];
         }
         // postUrl.set("");
