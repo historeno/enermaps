@@ -3,7 +3,6 @@
   "properties": {
     "Pays": {
       "type": "string",
-      "default": "France",
       "enum": [
         "France",
         "Suisse"
@@ -52,27 +51,11 @@
       ],
       "required": true
     },
-    "Empreinte au sol": {
-      "type": "string",
-      "default": "[[0,0],[0,10],[10,10],[10,0]]",
-      "enum": [
-        "[[0,0],[0,10],[10,10],[10,0]]"
-      ],
-      "required": true
-    },
-    "Mitoyenneté": {
-      "type": "string",
-      "default": "[0,0,0.5,0]",
-      "enum": [
-        "[0,0,0.5,0]"
-      ],
-      "required": true
-    },
     "Typologie": {
       "type": "number",
       "minimum": 1,
-      "maximum": 20,
-      "default": 1,
+      "maximum": 2,
+      "default": 2,
       "required": true
     },
     "Années de construction": {
@@ -90,8 +73,8 @@
     },
     "Hauteur du bâtiment": {
       "type": "number",
-      "minimum": 5,
-      "default": 5,
+      "minimum": 0,
+      "default": 10,
       "required": true
     },
     "Type de chauffage": {
@@ -129,8 +112,8 @@
     "Régulation du chauffage": {
       "type": "string",
       "enum":  [
-        "Sondes de temp. par pièce ou vannes thermostatiques sur radiateurs (+0°C)",
-        "Sonde de température dans une pièce de référence (par ex séjour)  (+1°C)",
+        "Par pièce (+0°C)",
+        "Par pièce de référence (+1°C)",
         "autre (+2°C)"
       ],
       "required": true
@@ -138,9 +121,8 @@
     "Isolation des conduites de chauffage": {
       "type": "string",
       "enum": [
-        "Non isolées",
-        "Partiellement isolées",
-        "Complètement isolées"
+        "Non",
+        "Oui"
       ],
       "required": true
     },
@@ -162,33 +144,14 @@
       ],
       "required": true
     },
-    "Surface de capteurs solaires thermiques automatique": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Surface de capteurs solaires thermiques": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
     "Nombre de logements": {
       "type": "number",
-      "default": 0,
-      "minimum" : 0,
+      "minimum" : 1,
+      "default": 1,
       "required": true
     },
     "Efficacité des appareils électriques": {
       "type": "string",
-      "default": "Meilleurs appareils",
       "enum": [
         "Meilleurs appareils",
         "Appareils neufs courants",
@@ -199,7 +162,6 @@
     },
     "Présence d'une ventilation mécanique": {
       "type": "string",
-      "default": "Aucune",
       "enum": [
         "Aucune",
         "Double flux",
@@ -207,50 +169,24 @@
       ],
       "required": true
     },
-    "Présence d'ascenseur(s)": {
+    "Présence d'ascenseur": {
       "type": "string",
-      "default": "Non",
       "enum": [
         "Non",
-        "Simple flux",
-        "Double flux"
+        "Oui"
       ],
       "required": true
     },
     "Présence d'une instalaltion solaire PV": {
       "type": "string",
-      "default": "Non",
       "enum": [
         "Non",
         "Oui"
       ],
-      "required": true
-    },
-    "Surface PV automatique": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Surface PV": {
-      "type": "number",
-      "default": 0,
-      "minimum" : 0,
-      "required": true
-    },
-    "Orientation PV": {
-      "type": "number",
-      "default": 0,
-      "minimum" : 0,
-      "maximum" : 360,
       "required": true
     },
     "Présence de batteries de stockage": {
       "type": "string",
-      "default": "Non",
       "enum": [
         "Non",
         "Oui"
@@ -259,36 +195,15 @@
     },
     "Note de protection du patrimoine": {
       "type": "number",
-      "default": 1,
       "minimum" : 1,
-      "maximum" : 12,
+      "maximum" : 4,
+      "default" : 1,
       "required": true
     },
-    "Possibilité d'utiliser un chauffage au bois": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Possibilité de mettre des sondes géothermiques": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
-      "required": true
-    },
-    "Possibilité de mettre du solaire en toiture": {
-      "type": "string",
-      "default": "Non",
-      "enum": [
-        "Non",
-        "Oui"
-      ],
+    "Capacité d'investissement": {
+      "type": "number",
+      "minimum" : 0,
+      "default" : 0,
       "required": true
     }
   }

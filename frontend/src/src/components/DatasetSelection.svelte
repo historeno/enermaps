@@ -298,12 +298,12 @@
 
 <div id="datasets_selection" bind:this={rootElement} on:click|stopPropagation
      on:dblclick|stopPropagation on:wheel|stopPropagation>
-  <h3>Datasets</h3>
+  <h3>Données disponible</h3>
 
   {#if !$datasetsStore}
     Loading datasets...
   {:else}
-    <input bind:value={filter} class="search" placeholder="Search dataset...">
+    <input bind:value={filter} class="search" placeholder="Entrez un mot clé...">
 
     {#if $datasetTopicsStore.length > 0}
       <div class="topics">

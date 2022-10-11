@@ -35,7 +35,6 @@ decoder = {
         "Électrique direct": "genTypElecDirect",
         "Chauffage à distance": "genTypCAD",
     },
-    # "generatorYear": params["Année d'installation ou de remplacement du chauffage"],
     "emettors": {
         "Radiateurs": "emRadWall",
         "Radiateurs devant fenêtres": "emRadWin",
@@ -49,9 +48,8 @@ decoder = {
         "autre (+2°C)": 2,
     },
     "tubeInsulH": {
-        "Non isolées": "notInsulated",
-        "Partiellement isolées": "partiallyInsulated",
-        "Complètement isolées": "fullyInsulated",
+        "Non": 0,
+        "Oui": 1,
     },
     "tubeInsulW": {
         "Non isolées": "notInsulated",
@@ -66,13 +64,12 @@ decoder = {
         "Non": 0,
         "Oui": 1,
     },
-    # "solarThermalArea": 10,
     "nbAppart": 0,
     "devEff": {
         "Meilleurs appareils": "best",
         "Appareils neufs courants": "new",
         "Anciens appareils (env. 5 ans)": "old5",
-        "Très anciens appareils (> 10 ans)": "old10",
+        "Très anciens appareils (>10 ans)": "old10",
     },
     "ventMeca": {
         "Aucune": "none",
@@ -97,7 +94,6 @@ decoder = {
         "Non": 0,
         "Oui": 1,
     },
-    # "protectionGrade": 0,
     "heatingWood": {
         "Non": 0,
         "Oui": 1,

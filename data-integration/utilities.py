@@ -1,5 +1,6 @@
 import json
 from os.path import abspath, dirname, isfile, join
+import random
 import time
 
 import geopandas as gpd
@@ -47,7 +48,7 @@ def post_data(
         "metadata": [
             {
                 "Group": "Bâtiment",
-                "Title": "Bâtiments protégés",
+                "Title": "Bâtiments existants",
                 "parameters": {
                     "end_at": "2015-12-31 23:00",
                     "fields": [],
@@ -55,7 +56,7 @@ def post_data(
                     "is_raster": False,
                     "start_at": "2021-06-30 12:00:00",
                     "is_tiled": False,
-                    "variables": ["SRE"],  # mandatory
+                    "variables": ["Bâtiments existants"],  # mandatory
                     "time_periods": [],  # mandatory
                     "temporal_granularity": "hour",
                 },
@@ -101,37 +102,38 @@ def post_data(
             "Demande": str(sre) + " kWh",
             "Pays": "France",
             "Region": "Jura-FR",
-            "Altitude": 1000,
+            "Altitude": 837,
             "Météo": "Jura",
             "Context": "Urban",
-            "Empreinte au sol": "[[0,0],[0,10],[10,10],[10,0]]",
+            "Empreinte au sol": "[[6.6366674,46.5174068],[6.6367499,46.5173885],"
+            "[6.6367136,46.5173010],[6.6368834,46.5172600],"
+            "[6.6369874,46.5174985],[6.6367287,46.5175586],"
+            "[6.6366674,46.5174068]]",
             "Mitoyenneté": "[0,0,0.5,0]",
-            "Typologie": 3,
-            "Années de construction": 1950,
-            "Catégorie d'ouvrage": 4,
-            "Hauteur du bâtiment": 6,
-            "Type de chauffage": "Pellets",
-            "Année d'installation du chauffage": 1950,
+            "Typologie": random.randint(1, 2),
+            "Années de construction": random.randint(1950, 1980),
+            "Catégorie d'ouvrage": random.randint(1, 12),
+            "Hauteur du bâtiment": random.randint(3, 12),
+            "Type de chauffage": "Mazout",
+            "Année d'installation du chauffage": random.randint(1950, 2000),
             "Type d'émetteurs": "Murs chauffants",
             "Régulation du chauffage": "autre (+2°C)",
-            "Isolation des conduites de chauffage": "Non isolées",
+            "Isolation des conduites de chauffage": "Non",
             "Isolation des conduites d'ECS": "Non isolées",
-            "Présence d'une installation solaire thermique": "Oui",
+            "Présence d'une installation solaire thermique": random.choice(
+                ["Oui", "Non"]
+            ),
             "Surface de capteurs solaires thermiques automatique": "Oui",
             "Surface de capteurs solaires thermiques": "Oui",
-            "Nombre de logements": 10,
+            "Nombre de logements": random.randint(1, 4),
             "Efficacité des appareils électriques": "Meilleurs appareils",
-            "Présence d'une ventilation mécanique": "Double flux",
-            "Présence d'ascenseur(s)": "Simple flux",
-            "Présence d'une instalaltion solaire PV": "Oui",
+            "Présence d'une ventilation mécanique": "Aucune",
+            "Présence d'ascenseur": random.choice(["Oui", "Non"]),
+            "Présence d'une instalaltion solaire PV": "Non",
             "Surface PV automatique": "Oui",
-            "Surface PV": "5",
-            "Orientation PV": "70",
-            "Présence de batteries de stockage": "Oui",
-            "Note de protection du patrimoine": 10,
-            "Possibilité d'utiliser un chauffage au bois": "Oui",
-            "Possibilité de mettre des sondes géothermiques": "Oui",
-            "Possibilité de mettre du solaire en toiture": "Oui",
+            "Présence de batteries de stockage": "Non",
+            "Note de protection du patrimoine": random.randint(1, 5),
+            "Capacité d'investissement": 0,
         }
         for sre in range(rows)
     ]
@@ -140,7 +142,7 @@ def post_data(
         "index": [index for index in range(rows)],
         "ds_id": [ds_id for _ in range(rows)],
         "fid": [f"FR_{fid}" for fid in range(rows)],
-        "variable": ["SRE" for _ in range(rows)],
+        "variable": ["Bâtiments existants" for _ in range(rows)],
         "value": [value for value in range(rows)],
         "unit": ["m2" for _ in range(rows)],
         "start_at": ["2022-06-30 12:00:00" for _ in range(rows)],

@@ -61,7 +61,7 @@
     background-color: #eff4fa;
     width: 35vw;
     min-width: 280px;
-    max-width: 400px;
+    max-width: 500px;
     max-height: calc(100vh - 100px);
     overflow-y: scroll;
   }
@@ -194,6 +194,7 @@
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     padding: .5rem 1rem;
+    width: inherit;
   }
 
 
@@ -206,7 +207,7 @@
   <div id="calculation_modules_content">
     <div id="cm_list_header">
       <div id="close_button_cm_list" on:click={closeCMPanel}><img src='{BASE_URL}images/clear-icon.png' alt='close'></div>
-      <div id="header"><h2>Outils d'analyse : </h2></div>
+      <div id="header"><h2>Outils d'aide à la décision :</h2></div>
 
       {#if !areaSelected}
         <div class="warning">No area selected</div>

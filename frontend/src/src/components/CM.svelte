@@ -3,7 +3,7 @@
   import {createTask} from '../tasks.js';
   import {createLayerSimple, getLayer} from '../layers.js';
   import CMTask from './CMTask.svelte';
-  import {areaSelectionLayerStore, selectedLayerStore, tasksStore, datasetsStore} from '../stores.js';
+  import {areaSelectionLayerStore, selectedLayerStore, tasksStore, datasetsStore, postUrl} from '../stores.js';
   import {getDataset} from '../datasets.js';
   import 'brutusin-json-forms';
 
@@ -194,6 +194,27 @@
 
     await createLayerSimple(dataset.ds_id, variable, timePeriod);
   }
+
+  async function advanceRequest() {
+    // let postUrl = 'https://historeno.heig-vd.ch/tool/index.php?';
+    // postUrl += 'mode=ptf&country=CH&canton=VS&altitude=1000';
+    // postUrl += '&meteoParam=jura&context=rural';
+    // postUrl += '&polygon=[[6.6366674,46.5174068],';
+    // postUrl += '[6.6367499,46.5173885],[6.6367136,46.5173010],';
+    // postUrl += '[6.6368834,46.5172600],[6.6369874,46.5174985],';
+    // postUrl += '[6.6367287,46.5175586],[6.6366674,46.5174068]]';
+    // postUrl += '&typo=2&height=15&generator=genTypOil';
+    // postUrl += '&emettors=emRadWall&regulation=0&tubeInsulH=notInsulated';
+    // postUrl += '&typo=2&height=15&generator=genTypOil';
+    // postUrl += '&emettors=emRadWall&regulation=0&tubeInsulH=notInsulated';
+    // postUrl += '&tubeInsulW=notInsulated&solarThermal=0';
+    // postUrl += '&solarThermalAreaAuto=0&nbAppart=0&devEff=best';
+    // postUrl += '&ventMeca=none&elevator=0&solarPV=0&pvAreaAuto=0';
+    // postUrl += '&pvArea=5.0&pvOri=7.0&pvBattery=0&heatingWood=0';
+    // postUrl += '&heatingProbes=0&solarRoof=0';
+    window.open($postUrl, '_blank');
+    console.log($postUrl);
+  }
 </script>
 
 
@@ -358,6 +379,9 @@
       {#each [...tasks].reverse() as task (task.id)}
         {#if (task.cm.name === cm.name) && !task.hidden}
           <CMTask task={task} />
+          <button type="button" on:click={advanceRequest}>
+              Calcul avancé
+          </button>
         {/if}
       {/each}
     </div>
