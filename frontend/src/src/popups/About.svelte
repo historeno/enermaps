@@ -39,9 +39,19 @@ Associer la rénovation énergétique aux stratégies de planification
   les différentes parties-prenantes (propriétaires privés et collectivités
   publiques notamment) dans la réduction de l’empreinte énergétique et
   climatique du parc bâti et notamment celui ancien et à
-  valeur patrimoniale</p>
+  valeur patrimoniale.</p>
 
 <p>
+<strong>Open source</strong>
+Historeno utilise le socle applicatif Opensource <a href="https://enermaps.eu/">EnerMaps</a> dont le code source est accessible via <a href="https://www.github.com/enermaps">www.github.com/enermaps</a>.
+</p>
+
+<p>
+<strong>Disclaimer</strong>
+L'outil Historeno produit un rapport simplifié et propose des scénarios de rénovation, il ne saurait remplacer un audit énergétique ou une étude approfondie.</p>
+
+<p>
+<strong>Partenaires</strong>
   Le projet historeno est soutenu par le programme européen
   de coopération transfrontalière Interreg France-Suisse 2014-2020
   et a bénéficié à ce titre d’un soutien financier du Fonds européen
