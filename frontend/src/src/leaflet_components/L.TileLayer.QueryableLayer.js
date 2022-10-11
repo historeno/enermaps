@@ -101,9 +101,12 @@ const BaseMethods = {
         ];
         let counter=0;
         for (const key of keys) {
-          console.log(key);
-          console.log(allFields[key]);
-          document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
+          if (key === 'Typologie' || key === 'Années de construction' || key === 'Hauteur du bâtiment' || key === 'Nombre de logements' || key === 'Note de protection du patrimoine') {
+            document.querySelector('[id="'+id+counter+'"]').value = Number(allFields[key]);
+            console.log(Number(allFields[key]));
+          } else {
+            document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
+          }
           counter += 1;
         }
       }
