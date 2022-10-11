@@ -59,10 +59,17 @@ const BaseMethods = {
         for (const [key, value] of Object.entries(fields)) {
           if (allFields[key] === undefined) {
             allFields[key] = value;
-          }
-        }
+//            console.log("value",value);
+//            console.log("af",allFields);
+//            console.log("ft",fieldNames);
+
+        console.log("in");
         for (const key of fieldNames) {
         const value = allFields[key];
+        console.log("value",value);
+        console.log("fn",fieldNames);
+        console.log("af",allFields);
+        console.log("out");
 
         if ((value !== null) && (key == 'Pays')) {
           popupContent += '<tr id="pdata">';
@@ -78,9 +85,16 @@ const BaseMethods = {
           popupContent += td2.outerHTML;
           popupContent += td2.outerHTML;
           popupContent += '</tr>';
+          console.log("value",value);
+
+                    }
+        }
+
         }
       }
       }
+
+
 
 
       // recherche le 1er élément du formulaire CM
@@ -129,14 +143,35 @@ const BaseMethods = {
           console.log(allFields[key]);
           document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           counter += 1;
+          console.log("value",value);
+
+          /*for (const key of fieldNames) {
+            const value = allFields[key];
+            console.log("value",value);
+
+            if ((value !== null) && (key == 'Pays')) {
+            popupContent += '<tr id="pdata">';
+
+            const td1 = document.createElement('td');
+            td1.className = 'name';
+            td1.innerText = key + ' :';
+            popupContent += td1.outerHTML;
+
+            const td2 = document.createElement('td');
+            td2.className = 'value';
+            td2.innerText = value;
+            popupContent += td2.outerHTML;
+            popupContent += td2.outerHTML;
+            popupContent += '</tr>';
+                }
+          }*/
         }
       }
 
       allFormData.set(allFields);
 
 
-
-      /*for (const key of fieldNames) {
+/*      for (const key of fieldNames) {
         const value = allFields[key];
 
         if ((value !== null) && (key == 'Pays')) {
@@ -157,9 +192,19 @@ const BaseMethods = {
       }*/
     }
 
-    const consult = allFields['Pays'];
-    console.log(consult);
-    consultdata.set(consult);
+
+//    console.log(popupInformation);
+//    const consult = allFields;
+//    console.log(consult);
+//    consultdata.set(consult);
+//    console.log(popupContent);
+//    console.log(fieldNames);
+//    console.log(JSON.stringify(popupInformation));
+//    console.log(JSON.stringify(popupContent));
+//    console.log(popupContent);
+//    console.log(JSON.stringify(popupContent));
+
+
 
 
 

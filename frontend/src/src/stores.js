@@ -16,7 +16,9 @@ export const isCMPaneActiveStore = writable(false);
 export const popupInformation = writable('Pas de données');
 
 export const popupInformationtitle = writable('Infos générales');
+
 export const allFormData = writable(null);
+
 export const consultdata = writable('Pas de données');
 
 export const allFields = writable(null);
