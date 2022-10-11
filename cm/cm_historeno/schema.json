@@ -54,11 +54,13 @@
       "type": "number",
       "minimum": 1,
       "maximum": 2,
+      "default": 2,
       "required": true
     },
     "Années de construction": {
       "type": "number",
       "minimum": 1900,
+      "default": 1900,
       "required": true
     },
     "Catégorie d'ouvrage": {
@@ -71,6 +73,7 @@
     "Hauteur du bâtiment": {
       "type": "number",
       "minimum": 0,
+      "default": 10,
       "required": true
     },
     "Type de chauffage": {
@@ -143,6 +146,7 @@
     "Nombre de logements": {
       "type": "number",
       "minimum" : 1,
+      "default": 1,
       "required": true
     },
     "Efficacité des appareils électriques": {
@@ -192,11 +196,13 @@
       "type": "number",
       "minimum" : 1,
       "maximum" : 12,
+      "default" : 1,
       "required": true
     },
     "Capacité d'investissement": {
       "type": "number",
       "minimum" : 0,
+      "default" : 0,
       "required": true
     }
   }

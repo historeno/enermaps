@@ -69,8 +69,6 @@ const BaseMethods = {
       if (elem) { // s'il existe
         // enlève le dernier chr correspondant à l'indice du chmp dans le form
         const id = elem.id.substring(0, elem.id.length-1);
-        // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
-
         const keys = [
           'Pays',
           'Region',
@@ -103,7 +101,6 @@ const BaseMethods = {
         for (const key of keys) {
           if (key === 'Typologie' || key === 'Années de construction' || key === 'Hauteur du bâtiment' || key === 'Nombre de logements' || key === 'Note de protection du patrimoine') {
             document.querySelector('[id="'+id+counter+'"]').value = Number(allFields[key]);
-            console.log(Number(allFields[key]));
           } else {
             document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           }

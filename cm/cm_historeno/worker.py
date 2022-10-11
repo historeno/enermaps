@@ -25,10 +25,9 @@ wiki = "http://www.historeno.eu/"
 def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     def post_parameters():
         """Post on calculator to create task."""
-        # with open("parms.txt", mode="w") as p:
-        #     p.write(str(params))
-        # with open("selection.txt", mode="w") as p:
-        #     p.write(str(selection))
+        from datetime import datetime
+        with open(f"parms_{datetime.now()}.txt", mode="w") as file:
+            file.write(str(params))
         parameters = {
             "country": decoder.get("country").get(params["Pays"]),
             "canton": decoder.get("canton").get(params["Region"]),
@@ -75,20 +74,10 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             "protectionGrade": params["Note de protection du patrimoine"],
             "renoMaxCost": params["Capacité d'investissement"],
         }
-        # with open("parameters.txt", mode="w") as file:
-        #     file.write(str(parameters))
         url_endpoint = "https://historeno.heig-vd.ch/tool/calcPTF.php"
         try:
             resp = requests.post(url_endpoint, data=parameters)
             logging.info(f"RESULTS: {resp.status_code}")
-            # with open("resp.txt", mode="w") as file:
-            #     file.write(resp.text)
-            # logging.info(f"URL: {resp.url}")
-            # logging.info(f"CONTENT: {resp.content}")
-            # pprint(f"CONTENT: {resp.content}")
-            # TODO : test to be removed
-            with open("resp.txt", mode="w") as file:
-                file.write(resp.text)
             return resp
         except ConnectionError as error:
             logging.error("Error during the post of the file.")
