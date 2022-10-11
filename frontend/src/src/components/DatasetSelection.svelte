@@ -303,7 +303,7 @@
   {#if !$datasetsStore}
     Loading datasets...
   {:else}
-    <input bind:value={filter} class="search" placeholder="Search dataset...">
+    <input bind:value={filter} class="search" placeholder="Entrez un mot clé...">
 
     {#if $datasetTopicsStore.length > 0}
       <div class="topics">
