@@ -61,7 +61,7 @@
     background-color: #eff4fa;
     width: 35vw;
     min-width: 280px;
-    max-width: 400px;
+    max-width: 500px;
     max-height: calc(100vh - 100px);
     overflow-y: scroll;
   }

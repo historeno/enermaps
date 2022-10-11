@@ -1,4 +1,11 @@
-import {popupInformation, popupInformationtitle, isCMPaneActiveStore, allFormData} from '../stores.js';
+import {
+  popupInformation,
+  popupInformationtitle,
+  isCMPaneActiveStore,
+  allFormData,
+  matcher,
+  postUrl,
+} from '../stores.js';
 
 
 export const popupContent = '';
@@ -69,19 +76,16 @@ const BaseMethods = {
       if (elem) { // s'il existe
         // enlève le dernier chr correspondant à l'indice du chmp dans le form
         const id = elem.id.substring(0, elem.id.length-1);
-        // remplit le champ Altitude (indice 2) avec la valeur de la variable SRE
-
         const keys = [
           'Pays',
           'Region',
           'Altitude',
           'Météo',
           'Context',
-          'Empreinte au sol',
           'Typologie',
           'Années de construction',
           'Catégorie d\'ouvrage',
-          'Hauteur du bâtiment:',
+          'Hauteur du bâtiment',
           'Type de chauffage',
           'Année d\'installation du chauffage',
           'Type d\'émetteurs',
@@ -89,28 +93,34 @@ const BaseMethods = {
           'Isolation des conduites de chauffage',
           'Isolation des conduites d\'ECS',
           'Présence d\'une installation solaire thermique',
-          'Surface de capteurs solaires thermiques automatique',
           'Nombre de logements',
           'Efficacité des appareils électriques',
           'Présence d\'une ventilation mécanique',
-          'Présence d\'ascenseur(s)',
+          'Présence d\'ascenseur',
           'Présence d\'une instalaltion solaire PV',
-          'Surface PV automatique',
-          'Surface PV',
-          'Orientation PV',
           'Présence de batteries de stockage',
           'Note de protection du patrimoine',
-          'Possibilité d\'utiliser un chauffage au bois',
-          'Possibilité de mettre des sondes géothermiques',
-          'Possibilité de mettre du solaire en toiture',
+          'Capacité d\'investissement',
         ];
         let counter=0;
+        let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf';
         for (const key of keys) {
-          console.log(key);
-          console.log(allFields[key]);
-          document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
+          console.log(key, matcher[key]);
+          if (key === 'Typologie' || key === 'Années de construction' || key === 'Hauteur du bâtiment' || key === 'Nombre de logements' || key === 'Note de protection du patrimoine') {
+            document.querySelector('[id="'+id+counter+'"]').value = Number(allFields[key]);
+          } else {
+            document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
+          }
           counter += 1;
+          advancedModeURL += '&';
+          advancedModeURL += matcher[key];
+          advancedModeURL += '=';
+          advancedModeURL += allFields[key];
         }
+        // add value directly from the backend
+        advancedModeURL += '&polygon=';
+        advancedModeURL += allFields['Empreinte au sol'];
+        postUrl.set(advancedModeURL);
       }
 
       allFormData.set(allFields);

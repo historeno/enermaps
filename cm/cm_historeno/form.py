@@ -13,7 +13,6 @@ decoder = {
         "Jura-FR": "39",
         "Territoire de Belfort": "90",
     },
-    # "altitude" / get from the form
     "meteoParam": {
         "Jura": "jura",
         "Préalpes": "preAlpes",
@@ -25,11 +24,6 @@ decoder = {
         "Urban": "urban",
         "Suburban": "suburban",
     },
-    # empreinte / get from the form
-    # typologie / get from the form
-    # année de constr / get from the form
-    # catégorie d'ouvrage / get from the form
-    # hauteur / get from the form
     "generator": {
         "Mazout": "genTypOil",
         "Gas naturel": "genTypGas",
@@ -41,7 +35,6 @@ decoder = {
         "Électrique direct": "genTypElecDirect",
         "Chauffage à distance": "genTypCAD",
     },
-    # "generatorYear" / get from the form
     "emettors": {
         "Radiateurs": "emRadWall",
         "Radiateurs devant fenêtres": "emRadWin",
@@ -71,7 +64,6 @@ decoder = {
         "Non": 0,
         "Oui": 1,
     },
-    # "solarThermalArea": 10,
     "nbAppart": 0,
     "devEff": {
         "Meilleurs appareils": "best",
@@ -102,7 +94,6 @@ decoder = {
         "Non": 0,
         "Oui": 1,
     },
-    # "protectionGrade": 0,
     "heatingWood": {
         "Non": 0,
         "Oui": 1,

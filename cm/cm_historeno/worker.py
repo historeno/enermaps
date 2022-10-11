@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import logging
+from datetime import datetime
 
 import requests
 import xmltodict
@@ -25,15 +26,16 @@ wiki = "http://www.historeno.eu/"
 def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     def post_parameters():
         """Post on calculator to create task."""
+        with open(f"parms_{datetime.now()}.txt", mode="w") as file:
+            file.write(str(params))
         parameters = {
             "country": decoder.get("country").get(params["Pays"]),
             "canton": decoder.get("canton").get(params["Region"]),
-            "altitude": params["Altitude"],
+            "altitude": params["Altitude"],  # not found
             "meteoParam": decoder.get("meteoParam").get(params["Météo"]),
             "context": decoder.get("context").get(params["Context"]),
             "polygon": "[[0,0],[0,10],[10,10],[10,0]]",
-            # "adjoining": "[0,0,0.5,0]",
-            "typo": params["Typologie"],
+            "typo": params["Typologie"],  # not found
             "year": params["Années de construction"],
             "category": params["Catégorie d'ouvrage"],
             "height": params["Hauteur du bâtiment"],
@@ -52,10 +54,7 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             "solarThermal": decoder.get("solarThermal").get(
                 params["Présence d'une installation solaire thermique"]
             ),
-            "solarThermalAreaAuto": decoder.get("solarThermalAreaAuto").get(
-                params["Surface de capteurs solaires thermiques automatique"]
-            ),
-            # "solarThermalArea": params["Surface de capteurs solaires thermiques"],
+            "solarThermalAreaAuto": "Oui",
             "nbAppart": params["Nombre de logements"],
             "devEff": decoder.get("devEff").get(
                 params["Efficacité des appareils électriques"]
@@ -63,43 +62,22 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             "ventMeca": decoder.get("ventMeca").get(
                 params["Présence d'une ventilation mécanique"]
             ),
-            "elevator": decoder.get("elevator").get(params["Présence d'ascenseur(s)"]),
+            "elevator": decoder.get("elevator").get(params["Présence d'ascenseur"]),
             "solarPV": decoder.get("solarPV").get(
                 params["Présence d'une instalaltion solaire PV"]
             ),
-            "pvAreaAuto": decoder.get("pvAreaAuto").get(
-                params["Surface PV automatique"]
-            ),
-            "pvArea": params["Surface PV"],
-            "pvOri": params["Orientation PV"],
+            "pvAreaAuto": "Oui",
             "pvBattery": decoder.get("pvBattery").get(
                 params["Présence de batteries de stockage"]
             ),
             # "renoLevel": params["Niveau de rénovation souhaité pour le scénario automatique"],
             "protectionGrade": params["Note de protection du patrimoine"],
-            "heatingWood": decoder.get("heatingWood").get(
-                params["Possibilité d'utiliser un chauffage au bois"]
-            ),
-            "heatingProbes": decoder.get("heatingProbes").get(
-                params["Possibilité de mettre des sondes géothermiques"]
-            ),
-            "solarRoof": decoder.get("solarRoof").get(
-                params["Possibilité de mettre du solaire en toiture"]
-            ),
+            "renoMaxCost": params["Capacité d'investissement"],
         }
-        # TODO : test to be removed
-        with open("paramaters_as_file", mode="w") as file:
-            file.write(str(parameters))
         url_endpoint = "https://historeno.heig-vd.ch/tool/calcPTF.php"
         try:
             resp = requests.post(url_endpoint, data=parameters)
             logging.info(f"RESULTS: {resp.status_code}")
-            # logging.info(f"URL: {resp.url}")
-            # logging.info(f"CONTENT: {resp.content}")
-            # pprint(f"CONTENT: {resp.content}")
-            # TODO : test to be removed
-            with open("response_as_file", mode="w") as file:
-                file.write(resp.text)
             return resp
         except ConnectionError as error:
             logging.error("Error during the post of the file.")
@@ -110,9 +88,11 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     ret["graphs"] = []
     ret["geofiles"] = {}
     parser = xmltodict.parse(res.content)
+    with open(f"res_{datetime.now()}.txt", mode="w") as file:
+        file.write(str(res.content))
     values = parser["project"]
     ret["values"] = {
-        "Coût totaux [CHF]": values["bldOutput"]["Cost"],
+        "Coût totaux [CHF]": values["bldOutput"]["EnergyCost"],
         "Besoin de chauffage  [kWh]": values["bldOutput"]["Qh"],
         "Pertes par ventilation  [kWh]": values["bldOutput"]["Qv"],
         "Energie primaire non renouvelable totale [kWh]": values["bldOutput"]["NRE"],
