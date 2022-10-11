@@ -77,11 +77,10 @@ const BaseMethods = {
           'Altitude',
           'Météo',
           'Context',
-          'Empreinte au sol',
           'Typologie',
           'Années de construction',
           'Catégorie d\'ouvrage',
-          'Hauteur du bâtiment:',
+          'Hauteur du bâtiment',
           'Type de chauffage',
           'Année d\'installation du chauffage',
           'Type d\'émetteurs',
@@ -89,20 +88,16 @@ const BaseMethods = {
           'Isolation des conduites de chauffage',
           'Isolation des conduites d\'ECS',
           'Présence d\'une installation solaire thermique',
-          'Surface de capteurs solaires thermiques automatique',
+          // 'Surface de capteurs solaires thermiques automatique', // oui par défaut
           'Nombre de logements',
           'Efficacité des appareils électriques',
           'Présence d\'une ventilation mécanique',
-          'Présence d\'ascenseur(s)',
+          'Présence d\'ascenseur',
           'Présence d\'une instalaltion solaire PV',
-          'Surface PV automatique',
-          'Surface PV',
-          'Orientation PV',
+          // 'Surface PV automatique', // oui par défaut
           'Présence de batteries de stockage',
           'Note de protection du patrimoine',
-          'Possibilité d\'utiliser un chauffage au bois',
-          'Possibilité de mettre des sondes géothermiques',
-          'Possibilité de mettre du solaire en toiture',
+          'Capacité d\'investissement',
         ];
         let counter=0;
         for (const key of keys) {

@@ -68,6 +68,11 @@
       "default": 1,
       "required": true
     },
+    "Hauteur du bâtiment": {
+      "type": "number",
+      "minimum": 0,
+      "required": true
+    },
     "Type de chauffage": {
       "type": "string",
       "enum":  [
@@ -159,7 +164,7 @@
       ],
       "required": true
     },
-    "Présence d'ascenseur(s)": {
+    "Présence d'ascenseur": {
       "type": "string",
       "enum": [
         "Non",
