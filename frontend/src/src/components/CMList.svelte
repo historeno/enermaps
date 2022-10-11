@@ -194,6 +194,7 @@
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     padding: .5rem 1rem;
+    width: inherit;
   }
 
 
