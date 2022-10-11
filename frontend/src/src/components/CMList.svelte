@@ -2,7 +2,7 @@
   import {onMount} from 'svelte';
   import {BASE_URL} from '../settings.js';
   import {getCMs} from '../client.js';
-  import {areaSelectionLayerStore, selectedLayerStore, isCMPaneActiveStore, popupInformation, popupInformationtitle} from '../stores.js';
+  import {areaSelectionLayerStore, selectedLayerStore, isCMPaneActiveStore, popupInformation, popupInformationtitle, allFormData, consultdata, allFields} from '../stores.js';
   import CM from './CM.svelte';
   // import AreaSelection from './AreaSelection.svelte';
 
@@ -239,11 +239,11 @@
                             <table>
                                 {@html $popupInformation}
                             </table>
+                                {$consultdata}
                             <button class="btn btn-success" onclick=" window.open(src='images/pdf/st_hip_watermark.pdf','_blank')">consulter le pdf</button>
                         </div>
                     </div>
             </div>
-
         </div>
       {/if}
     </div>

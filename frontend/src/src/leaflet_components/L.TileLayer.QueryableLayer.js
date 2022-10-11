@@ -1,9 +1,9 @@
-import {popupInformation, popupInformationtitle, isCMPaneActiveStore, allFormData} from '../stores.js';
+import {popupInformation, popupInformationtitle, isCMPaneActiveStore, allFormData, consultdata} from '../stores.js';
 
 
 export const popupContent = '';
 export const popupContenttitle = '';
-
+export const consult = '';
 
 const BaseMethods = {
   onError: function(err) {
@@ -61,6 +61,25 @@ const BaseMethods = {
             allFields[key] = value;
           }
         }
+        for (const key of fieldNames) {
+        const value = allFields[key];
+
+        if ((value !== null) && (key == 'Pays')) {
+          popupContent += '<tr id="pdata">';
+
+          const td1 = document.createElement('td');
+          td1.className = 'name';
+          td1.innerText = key + ' :';
+          popupContent += td1.outerHTML;
+
+          const td2 = document.createElement('td');
+          td2.className = 'value';
+          td2.innerText = value;
+          popupContent += td2.outerHTML;
+          popupContent += td2.outerHTML;
+          popupContent += '</tr>';
+        }
+      }
       }
 
 
@@ -114,7 +133,10 @@ const BaseMethods = {
       }
 
       allFormData.set(allFields);
-      for (const key of fieldNames) {
+
+
+
+      /*for (const key of fieldNames) {
         const value = allFields[key];
 
         if ((value !== null) && (key == 'Pays')) {
@@ -122,7 +144,7 @@ const BaseMethods = {
 
           const td1 = document.createElement('td');
           td1.className = 'name';
-          td1.innerText = key + ' :/';
+          td1.innerText = key + ' :';
           popupContent += td1.outerHTML;
 
           const td2 = document.createElement('td');
@@ -132,8 +154,16 @@ const BaseMethods = {
           popupContent += td2.outerHTML;
           popupContent += '</tr>';
         }
-      }
+      }*/
     }
+
+    const consult = allFields['Pays'];
+    console.log(consult);
+    consultdata.set(consult);
+
+
+
+
 
     if (popupContent.length != 0) {
       L.popup({
