@@ -76,7 +76,7 @@
 
   .modal-header {
     padding: 0px 60px;
-    background-color: #eff4fa;
+    background-color: #151946;
     color: #27275b;
     cursor: default;
   }
@@ -96,7 +96,7 @@
   <div class="modal-content">
     <div class="close">&times;</div>
     <div class="modal-header">
-      <h2>{ title }</h2>
+      <h2><img src='images/logo-historeno.svg' alt='Historeno'> { title }</h2>
     </div>
     <div class="modal-body">
       <slot></slot>
