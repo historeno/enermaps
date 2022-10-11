@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import logging
+from datetime import datetime
 
 import requests
 import xmltodict
@@ -25,7 +26,6 @@ wiki = "http://www.historeno.eu/"
 def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     def post_parameters():
         """Post on calculator to create task."""
-        from datetime import datetime
         with open(f"parms_{datetime.now()}.txt", mode="w") as file:
             file.write(str(params))
         parameters = {
