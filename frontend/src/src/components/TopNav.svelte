@@ -139,7 +139,7 @@
 
 <div id="topnav">
   <div class="top">
-    <div id='logo'> <img src='images/logo-historeno.svg' alt='EnerMaps'> </div>
+    <div id='logo'> <img src='images/logo-historeno.svg' alt='Historeno'> </div>
     <!--<div id='title'>Historeno</div>-->
   </div>
 
@@ -152,7 +152,7 @@
 
   <slot id='slot'></slot>
 
-  <Dialog title="Historeno" bind:this={aboutDialog}>
+  <Dialog title="" bind:this={aboutDialog}>
     <About />
   </Dialog>
 
