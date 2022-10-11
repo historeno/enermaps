@@ -31,7 +31,7 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
         parameters = {
             "country": decoder.get("country").get(params["Pays"]),
             "canton": decoder.get("canton").get(params["Region"]),
-            # "altitude": params["Altitude"],  # not found
+            "altitude": params["Altitude"],  # not found
             "meteoParam": decoder.get("meteoParam").get(params["Météo"]),
             "context": decoder.get("context").get(params["Context"]),
             "polygon": "[[0,0],[0,10],[10,10],[10,0]]",
@@ -88,9 +88,11 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     ret["graphs"] = []
     ret["geofiles"] = {}
     parser = xmltodict.parse(res.content)
+    with open(f"res_{datetime.now()}.txt", mode="w") as file:
+        file.write(str(res.content))
     values = parser["project"]
     ret["values"] = {
-        "Coût totaux [CHF]": values["bldOutput"]["Cost"],
+        "Coût totaux [CHF]": values["bldOutput"]["EnergyCost"],
         "Besoin de chauffage  [kWh]": values["bldOutput"]["Qh"],
         "Pertes par ventilation  [kWh]": values["bldOutput"]["Qv"],
         "Energie primaire non renouvelable totale [kWh]": values["bldOutput"]["NRE"],

@@ -1,4 +1,11 @@
-import {popupInformation, popupInformationtitle, isCMPaneActiveStore, allFormData} from '../stores.js';
+import {
+  popupInformation,
+  popupInformationtitle,
+  isCMPaneActiveStore,
+  allFormData,
+  matcher,
+  postUrl
+} from '../stores.js';
 
 
 export const popupContent = '';
@@ -86,26 +93,33 @@ const BaseMethods = {
           'Isolation des conduites de chauffage',
           'Isolation des conduites d\'ECS',
           'Présence d\'une installation solaire thermique',
-          // 'Surface de capteurs solaires thermiques automatique', // oui par défaut
           'Nombre de logements',
           'Efficacité des appareils électriques',
           'Présence d\'une ventilation mécanique',
           'Présence d\'ascenseur',
           'Présence d\'une instalaltion solaire PV',
-          // 'Surface PV automatique', // oui par défaut
           'Présence de batteries de stockage',
           'Note de protection du patrimoine',
           'Capacité d\'investissement',
         ];
         let counter=0;
+        let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf'
         for (const key of keys) {
+          console.log(key, matcher[key]);
           if (key === 'Typologie' || key === 'Années de construction' || key === 'Hauteur du bâtiment' || key === 'Nombre de logements' || key === 'Note de protection du patrimoine') {
             document.querySelector('[id="'+id+counter+'"]').value = Number(allFields[key]);
           } else {
             document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           }
           counter += 1;
+          advancedModeURL += "&" ;
+          advancedModeURL += matcher[key];
+          advancedModeURL += "=";
+          advancedModeURL += allFields[key];
         }
+        // postUrl.set("");
+        console.log(advancedModeURL);
+        postUrl.set(advancedModeURL);
       }
 
       allFormData.set(allFields);
