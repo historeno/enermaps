@@ -130,9 +130,16 @@ const BaseMethods = {
         ];
         let counter=0;
         let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf';
+        const to_test = [
+          'Typologie',
+          'Années de construction',
+          'Hauteur du bâtiment',
+          'Nombre de logements',
+          'Note de protection du patrimoine',
+        ]
         for (const key of keys) {
           // update the form
-          if (key === 'Typologie' || key === 'Années de construction' || key === 'Hauteur du bâtiment' || key === 'Nombre de logements' || key === 'Note de protection du patrimoine') {
+          if (to_test.includes(key)) {
             document.querySelector('[id="'+id+counter+'"]').value = Number(allFields[key]);
           } else {
             document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
