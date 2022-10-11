@@ -49,7 +49,7 @@ const BaseMethods = {
     let popupContent = '';
     let popupContenttitle = '';
     const allFields = {};
-    const fieldNames = Object.keys(allFields).sort();
+    // const fieldNames = Object.keys(allFields).sort();
     allFormData.set(allFields);
 
     // popupContenttitle += '<h1>' + title + '</h1>';
@@ -132,8 +132,12 @@ const BaseMethods = {
         let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf';
         const to_test = [
           'Typologie',
-          'Années de construction',
-          'Hauteur du bâtiment',
+          'Années ' +
+          'de ' +
+          'construction',
+          'Hauteur' +
+          ' du ' +
+          'bâtiment',
           'Nombre de logements',
           'Note de protection du patrimoine',
         ]
