@@ -49,7 +49,7 @@ const BaseMethods = {
     let popupContent = '';
     let popupContenttitle = '';
     const allFields = {};
-    const fieldNames = Object.keys(allFields).sort();
+    // const fieldNames = Object.keys(allFields).sort();
     allFormData.set(allFields);
 
     // popupContenttitle += '<h1>' + title + '</h1>';
@@ -102,47 +102,103 @@ const BaseMethods = {
           'Note de protection du patrimoine',
           'Capacité d\'investissement',
         ];
+        const shownKeys = [
+          // 'Pays',
+          // 'Region',
+          // 'Altitude',
+          // 'Météo',
+          // 'Context',
+          'Typologie',
+          'Années de construction',
+          'Catégorie d\'ouvrage',
+          // 'Hauteur du bâtiment',
+          'Type de chauffage',
+          // 'Année d\'installation du chauffage',
+          // 'Type d\'émetteurs',
+          // 'Régulation du chauffage',
+          // 'Isolation des conduites de chauffage',
+          // 'Isolation des conduites d\'ECS',
+          // 'Présence d\'une installation solaire thermique',
+          'Nombre de logements',
+          // 'Efficacité des appareils électriques',
+          // 'Présence d\'une ventilation mécanique',
+          // 'Présence d\'ascenseur',
+          // 'Présence d\'une instalaltion solaire PV',
+          // 'Présence de batteries de stockage',
+          'Note de protection du patrimoine',
+          // 'Capacité d\'investissement',
+        ];
         let counter=0;
         let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf';
+        const toTest = [
+          'Typologie',
+          'Années ' +
+          'de ' +
+          'construction',
+          'Hauteur' +
+          ' du ' +
+          'bâtiment',
+          'Nombre de logements',
+          'Note de protection du patrimoine',
+        ];
         for (const key of keys) {
-          console.log(key, matcher[key]);
-          if (key === 'Typologie' || key === 'Années de construction' || key === 'Hauteur du bâtiment' || key === 'Nombre de logements' || key === 'Note de protection du patrimoine') {
-            document.querySelector('[id="'+id+counter+'"]').value = Number(allFields[key]);
+          // update the form
+          if (toTest.includes(key)) {
+            document.querySelector('[id="' +
+                ''+id+counter+'"]').value = Number(allFields[key]);
           } else {
             document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
           }
           counter += 1;
+          // create the url
           advancedModeURL += '&';
           advancedModeURL += matcher[key];
           advancedModeURL += '=';
           advancedModeURL += allFields[key];
+          // create consult mode info
+          const value = allFields[key];
+          if ((value !== null) && shownKeys.includes(key)) {
+            popupContent += '<tr id="pdata">';
+
+            const td1 = document.createElement('td');
+            td1.className = 'name';
+            td1.innerText = key + ' :';
+            popupContent += td1.outerHTML;
+
+            const td2 = document.createElement('td');
+            td2.className = 'value';
+            td2.innerText = value;
+            popupContent += td2.outerHTML;
+            // popupContent += td2.outerHTML;
+            popupContent += '</tr>';
+          }
         }
-        // add value directly from the backend
+        // create the url : add value directly from the backend
         advancedModeURL += '&polygon=';
         advancedModeURL += allFields['Empreinte au sol'];
         postUrl.set(advancedModeURL);
       }
 
       allFormData.set(allFields);
-      for (const key of fieldNames) {
-        const value = allFields[key];
-
-        if ((value !== null) && (key == 'Pays')) {
-          popupContent += '<tr id="pdata">';
-
-          const td1 = document.createElement('td');
-          td1.className = 'name';
-          td1.innerText = key + ' :/';
-          popupContent += td1.outerHTML;
-
-          const td2 = document.createElement('td');
-          td2.className = 'value';
-          td2.innerText = value;
-          popupContent += td2.outerHTML;
-          popupContent += td2.outerHTML;
-          popupContent += '</tr>';
-        }
-      }
+      // for (const key of fieldNames) {
+      //   const value = allFields[key];
+      //
+      //   if ((value !== null) && (key == 'Pays')) {
+      //     popupContent += '<tr id="pdata">';
+      //
+      //     const td1 = document.createElement('td');
+      //     td1.className = 'name';
+      //     td1.innerText = key + ' :/';
+      //     popupContent += td1.outerHTML;
+      //
+      //     const td2 = document.createElement('td');
+      //     td2.className = 'value';
+      //     td2.innerText = value;
+      //     popupContent += td2.outerHTML;
+      //     popupContent += td2.outerHTML;
+      //     popupContent += '</tr>';
+      //   }
+      // }
     }
 
     if (popupContent.length != 0) {
