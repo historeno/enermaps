@@ -96,7 +96,9 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
         "Classe énergie primaire": values["bldOutput"]["classEp"],
         "Classe émissions gaz à effet de serre": values["bldOutput"]["classCO2"],
         "Besoin en chauffage [kWh/m²a]": round(float(values["bldOutput"]["Qh"]), 2),
-        "Besoin en eau chaude sanitaire (ECS) [kWh/m²a]": round(float(values["bldOutput"]["Qw"]), 2),
+        "Besoin en eau chaude sanitaire (ECS) [kWh/m²a]": round(
+            float(values["bldOutput"]["Qw"]), 2
+        ),
         # "Coût totaux [CHF/Euro]": round(values["bldOutput"]["EnergyCost"], 2),
         # "Pertes par ventilation  [kWh]": round(values["bldOutput"]["Qv"], 2),
         # "Energie primaire non renouvelable totale [kWh]": round(values["bldOutput"]["NRE"], 2),
