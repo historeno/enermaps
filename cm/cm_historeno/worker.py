@@ -88,14 +88,18 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     ret["graphs"] = []
     ret["geofiles"] = {}
     parser = xmltodict.parse(res.content)
-    with open(f"res_{datetime.now()}.txt", mode="w") as file:
-        file.write(str(res.content))
+    # with open(f"res_{datetime.now()}.txt", mode="w") as file:
+    #     file.write(str(res.content))
     values = parser["project"]
     ret["values"] = {
-        "Coût totaux [CHF]": values["bldOutput"]["EnergyCost"],
-        "Besoin de chauffage  [kWh]": values["bldOutput"]["Qh"],
-        "Pertes par ventilation  [kWh]": values["bldOutput"]["Qv"],
-        "Energie primaire non renouvelable totale [kWh]": values["bldOutput"]["NRE"],
+        "Classe de l'enveloppe": values["bldOutput"]["classEnv"],
+        "Classe énergie primaire": values["bldOutput"]["classEp"],
+        "Classe émissions gaz à effet de serre": values["bldOutput"]["classCO2"],
+        "Besoin en chauffage [kWh/m²a]": round(float(values["bldOutput"]["Qh"]), 2),
+        "Besoin en eau chaude sanitaire (ECS) [kWh/m²a]": round(float(values["bldOutput"]["Qw"]), 2),
+        # "Coût totaux [CHF/Euro]": round(values["bldOutput"]["EnergyCost"], 2),
+        # "Pertes par ventilation  [kWh]": round(values["bldOutput"]["Qv"], 2),
+        # "Energie primaire non renouvelable totale [kWh]": round(values["bldOutput"]["NRE"], 2),
     }
     ret["warnings"] = {}
 
