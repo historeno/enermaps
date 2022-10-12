@@ -67,7 +67,12 @@ class CMOutput(Schema):
     values = fields.Dict(
         keys=fields.Str(),
         values=Union(
-            [fields.Number(allow_none=True), fields.Nested(Value)], allow_none=True
+            [
+                fields.String(allow_none=True),
+                fields.Number(allow_none=True),
+                fields.Nested(Value),
+            ],
+            allow_none=True,
         ),
         required=True,
     )
