@@ -173,7 +173,7 @@ const BaseMethods = {
             popupContent += '</tr>';
           }
         }
-        // create the url : add value directly from the backend
+        // create the url : value added directly from the backend
         advancedModeURL += '&polygon=';
         advancedModeURL += allFields['Empreinte au sol'];
         postUrl.set(advancedModeURL);
