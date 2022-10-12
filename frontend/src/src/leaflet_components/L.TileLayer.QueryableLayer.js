@@ -157,7 +157,7 @@ const BaseMethods = {
           advancedModeURL += keyMatcher[key];
           advancedModeURL += '=';
           // translation for post request to calculator
-          if (keyOfValueMatcher.includes(value)){
+          if (keyOfValueMatcher.includes(value)) {
             advancedModeURL += valueMatcher[value];
           } else {
             advancedModeURL += value;
