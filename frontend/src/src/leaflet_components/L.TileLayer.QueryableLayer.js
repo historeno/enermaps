@@ -3,8 +3,9 @@ import {
   popupInformationtitle,
   isCMPaneActiveStore,
   allFormData,
-  matcher,
-  postUrl,
+  keyMatcher,
+  valueMatcher,
+  postUrl, keyOfValueMatcher,
 } from '../stores.js';
 
 
@@ -142,21 +143,26 @@ const BaseMethods = {
           'Note de protection du patrimoine',
         ];
         for (const key of keys) {
+          const value = allFields[key];
           // update the form
           if (toTest.includes(key)) {
             document.querySelector('[id="' +
-                ''+id+counter+'"]').value = Number(allFields[key]);
+                ''+id+counter+'"]').value = Number(value);
           } else {
-            document.querySelector('[id="'+id+counter+'"]').value = allFields[key];
+            document.querySelector('[id="'+id+counter+'"]').value = value;
           }
           counter += 1;
           // create the url
           advancedModeURL += '&';
-          advancedModeURL += matcher[key];
+          advancedModeURL += keyMatcher[key];
           advancedModeURL += '=';
-          advancedModeURL += allFields[key];
+          // translation for post request to calculator
+          if (keyOfValueMatcher.includes(value)) {
+            advancedModeURL += valueMatcher[value];
+          } else {
+            advancedModeURL += value;
+          }
           // create consult mode info
-          const value = allFields[key];
           if ((value !== null) && shownKeys.includes(key)) {
             popupContent += '<tr id="pdata">';
 
