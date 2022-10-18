@@ -5,14 +5,14 @@ services:
     build:
       context: ./frontend
     ports:
-      - "127.0.0.1:7000:80"
+      - "0.0.0.0:7000:80"
     restart: always
     depends_on:
       - "api"
     volumes:
       - caddy-data:/data
       - caddy-config:/config
-      - /docker/enermaps/stats/caddy-logs:/var/log
+      - ./stats/caddy-logs:/var/log
     env_file:
       .env
 
@@ -84,8 +84,8 @@ services:
     stop_signal: SIGINT
     volumes:
       - db-data:/var/lib/postgresql/data
-      - /docker/enermaps/stats/pg-logs:/var/lib/postgresql/data/pg_log
-      - /docker/enermaps/:/db-backup
+      - ./stats/pg-logs:/var/lib/postgresql/data/pg_log
+      - ./:/db-backup
     env_file:
       .env-db
 
@@ -99,24 +99,21 @@ services:
       - .postgrest
 
 #  should be launched apart
-  data-integration:
-    build:
-      context: ./data-integration
-    volumes:
-      - data:/data-integration/data
-    env_file:
-      .env-db
-    depends_on:
-      - db
-      - postgrest
+#  data-integration:
+#    build:
+#      context: ./data-integration
+#    volumes:
+#      - data:/data-integration/data
+#    env_file:
+#      .env-db
 
-        #  db-nginx:
-        #    build:
-        #      context: ./db-nginx
-        #    ports:
-        #      - "0.0.0.0:80:80"
-        #    volumes:
-        #      - data:/usr/share/nginx/html/raster
+  db-nginx:
+    build:
+      context: ./db-nginx
+    ports:
+      - "0.0.0.0:80:80"
+    volumes:
+      - data:/usr/share/nginx/html/raster
 
 volumes:
   wms_cache:
@@ -129,3 +126,4 @@ volumes:
   flower-data:
   db-data:
   data:
+
