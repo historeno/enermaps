@@ -129,6 +129,7 @@ const BaseMethods = {
           'Note de protection du patrimoine',
           // 'Capacité d\'investissement',
         ];
+        console.log(shownKeys);
         let counter=0;
         let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf';
         const toTest = [
@@ -184,6 +185,7 @@ const BaseMethods = {
         advancedModeURL += allFields['Empreinte au sol'];
         postUrl.set(advancedModeURL);
       }
+      console.log(shownKeys);
 
       allFormData.set(allFields);
       // for (const key of fieldNames) {
@@ -206,7 +208,7 @@ const BaseMethods = {
       //   }
       // }
     }
-
+console.log(shownKeys);
     if (popupContent.length != 0) {
       L.popup({
         minWidth: 400,
