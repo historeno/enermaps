@@ -113,14 +113,13 @@ services:
       - .env
       - .postgrest
 
-#  should be launched apart
-#  data-integration:
-#    build:
-#      context: ./data-integration
-#    volumes:
-#      - data:/data-integration/data
-#    env_file:
-#      .env-db
+  data-integration:
+    build:
+      context: ./data-integration
+    volumes:
+      - data:/data-integration/data
+    env_file:
+      .env-db
 
   db-nginx:
     build:
