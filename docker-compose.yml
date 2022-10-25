@@ -121,13 +121,13 @@ services:
     env_file:
       .env-db
 
-  db-nginx:
-    build:
-      context: ./db-nginx
-    ports:
-      - "0.0.0.0:80:80"
-    volumes:
-      - data:/usr/share/nginx/html/raster
+#  db-nginx:
+#    build:
+#      context: ./db-nginx
+#    ports:
+#      - "0.0.0.0:80:80"
+#    volumes:
+#      - data:/usr/share/nginx/html/raster
 
 volumes:
   wms_cache:
