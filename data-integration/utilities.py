@@ -7,6 +7,7 @@ import geopandas as gpd
 import pandas as pd
 import shapely
 import sqlalchemy
+from legends import LEGENDS_UUID
 
 from settings import DB_URL
 
@@ -150,9 +151,11 @@ def post_data(
         "dt": [None for _ in range(rows)],
         "z": [None for _ in range(rows)],
         "israster": [False for _ in range(rows)],
+        "vis_id": [LEGENDS_UUID for _ in range(rows)]
     }
     data_data = pd.DataFrame(data=d)
     data_data["fields"] = data_data["fields"].apply(json.dumps)
+
     data_data.to_sql(
         "data",
         engine_,
