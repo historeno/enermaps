@@ -267,3 +267,5 @@ tags
 myenv/
 
 dbbackups/
+
+*.env-db
