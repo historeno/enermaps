@@ -15,10 +15,19 @@ DB_DB=databasename
 
 ## Commands
 
-* build of the plateform
+* build of the plateform (on Linux)
 ```bash
-docker-compose up --build
+docker-compose up --build 
 ```
+* load layer (on Linux)
+```bash
+docker-compose exec api /bin/bash -c 'flask update-dataset 1'
+```
+* load layer (on Windows)
+```bash
+docker-compose exec api /bin/bash -c "flask update-dataset 1"
+```
+
 
 # CM Historeno
 ## Service name
