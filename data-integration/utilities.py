@@ -57,7 +57,7 @@ def post_data(
                     "is_raster": False,
                     "start_at": "2021-06-30 12:00:00",
                     "is_tiled": False,
-                    "variables": ["Bâtiments existants"],  # mandatory
+                    "variables": ["Niveau de protection"],  # mandatory
                     "time_periods": [],  # mandatory
                     "temporal_granularity": "hour",
                 },
@@ -143,9 +143,9 @@ def post_data(
         "index": [index for index in range(rows)],
         "ds_id": [ds_id for _ in range(rows)],
         "fid": [f"FR_{fid}" for fid in range(rows)],
-        "variable": ["Bâtiments existants" for _ in range(rows)],
-        "value": [value for value in range(rows)],
-        "unit": ["m2" for _ in range(rows)],
+        "variable": ["Niveau de protection" for _ in range(rows)],  # variable name
+        "value": [building["Note de protection du patrimoine"] for building in fields],  # variable value
+        "unit": ["[-]" for _ in range(rows)],  # variable unit
         "start_at": ["2022-06-30 12:00:00" for _ in range(rows)],
         "fields": fields,
         "dt": [None for _ in range(rows)],
