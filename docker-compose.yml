@@ -113,22 +113,21 @@ services:
       - .env
       - .postgrest
 
-#  should be launched apart
-#  data-integration:
-#    build:
-#      context: ./data-integration
-#    volumes:
-#      - data:/data-integration/data
-#    env_file:
-#      .env-db
-
-  db-nginx:
+  data-integration:
     build:
-      context: ./db-nginx
-    ports:
-      - "0.0.0.0:80:80"
+      context: ./data-integration
     volumes:
-      - data:/usr/share/nginx/html/raster
+      - data:/data-integration/data
+    env_file:
+      .env-db
+
+#  db-nginx:
+#    build:
+#      context: ./db-nginx
+#    ports:
+#      - "0.0.0.0:80:80"
+#    volumes:
+#      - data:/usr/share/nginx/html/raster
 
 volumes:
   wms_cache:
