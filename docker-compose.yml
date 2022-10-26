@@ -120,6 +120,8 @@ services:
       - data:/data-integration/data
     env_file:
       .env-db
+    depends_on:
+      - "db"
 
 #  db-nginx:
 #    build:
