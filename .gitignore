@@ -265,3 +265,7 @@ tags
 .idea/
 
 myenv/
+
+dbbackups/
+
+*.env-db

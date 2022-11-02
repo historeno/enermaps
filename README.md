@@ -1,17 +1,33 @@
 # Launch Historeno platform
 
-## Cpmmand 
+## Setting up
 
-* build of the plateform
-```bash
-docker-compose up --build
+- install docker and docker-compose
+- create .env-db file based on .env-db-template
+```
+#placeholder for the env file
+DB_HOST=host
+DB_PORT=1234
+DB_USER=user
+DB_PASSWORD=password
+DB_DB=databasename
 ```
 
-* download of the datasets
+## Commands
+
+* build of the plateform (on Linux)
 ```bash
-docker-compose --file docker-compose-db.yml up -d data-integration
+docker-compose up --build 
+```
+* load layer (on Linux)
+```bash
 docker-compose exec api /bin/bash -c 'flask update-dataset 1'
 ```
+* load layer (on Windows)
+```bash
+docker-compose exec api /bin/bash -c "flask update-dataset 1"
+```
+
 
 # CM Historeno
 ## Service name
