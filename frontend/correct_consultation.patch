@@ -1,0 +1,125 @@
+diff --git a/frontend/src/src/leaflet_components/L.TileLayer.QueryableLayer.js b/frontend/src/src/leaflet_components/L.TileLayer.QueryableLayer.js
+index 5648eb8..12d0c51 100644
+--- a/frontend/src/src/leaflet_components/L.TileLayer.QueryableLayer.js
++++ b/frontend/src/src/leaflet_components/L.TileLayer.QueryableLayer.js
+@@ -70,14 +70,7 @@ const BaseMethods = {
+           }
+         }
+       }
+-
+-
+-      // recherche le 1er élément du formulaire CM
+-      const elem = document.querySelector('[id*="BrutusinForms#"]');
+-      if (elem) { // s'il existe
+-        // enlève le dernier chr correspondant à l'indice du chmp dans le form
+-        const id = elem.id.substring(0, elem.id.length-1);
+-        const keys = [
++    const keys = [
+           'Pays',
+           'Region',
+           'Altitude',
+@@ -103,33 +96,12 @@ const BaseMethods = {
+           'Note de protection du patrimoine',
+           'Capacité d\'investissement',
+         ];
+-        const shownKeys = [
+-          // 'Pays',
+-          // 'Region',
+-          // 'Altitude',
+-          // 'Météo',
+-          // 'Context',
+-          'Typologie',
+-          'Années de construction',
+-          'Catégorie d\'ouvrage',
+-          // 'Hauteur du bâtiment',
+-          'Type de chauffage',
+-          // 'Année d\'installation du chauffage',
+-          // 'Type d\'émetteurs',
+-          // 'Régulation du chauffage',
+-          // 'Isolation des conduites de chauffage',
+-          // 'Isolation des conduites d\'ECS',
+-          // 'Présence d\'une installation solaire thermique',
+-          'Nombre de logements',
+-          // 'Efficacité des appareils électriques',
+-          // 'Présence d\'une ventilation mécanique',
+-          // 'Présence d\'ascenseur',
+-          // 'Présence d\'une instalaltion solaire PV',
+-          // 'Présence de batteries de stockage',
+-          'Note de protection du patrimoine',
+-          // 'Capacité d\'investissement',
+-        ];
+-        console.log(shownKeys);
++
++      // recherche le 1er élément du formulaire CM
++      const elem = document.querySelector('[id*="BrutusinForms#"]');
++      if (elem) { // s'il existe
++        // enlève le dernier chr correspondant à l'indice du chmp dans le form
++        const id = elem.id.substring(0, elem.id.length-1);
+         let counter=0;
+         let advancedModeURL = 'https://historeno.heig-vd.ch/tool/index.php?mode=ptf';
+         const toTest = [
+@@ -163,6 +135,42 @@ const BaseMethods = {
+           } else {
+             advancedModeURL += value;
+           }
++        }
++        // create the url : value added directly from the backend
++        advancedModeURL += '&polygon=';
++        advancedModeURL += allFields['Empreinte au sol'];
++        postUrl.set(advancedModeURL);
++      }
++
++      const shownKeys = [
++          // 'Pays',
++          // 'Region',
++          // 'Altitude',
++          // 'Météo',
++          // 'Context',
++          'Typologie',
++          'Années de construction',
++          'Catégorie d\'ouvrage',
++          // 'Hauteur du bâtiment',
++          'Type de chauffage',
++          // 'Année d\'installation du chauffage',
++          // 'Type d\'émetteurs',
++          // 'Régulation du chauffage',
++          // 'Isolation des conduites de chauffage',
++          // 'Isolation des conduites d\'ECS',
++          // 'Présence d\'une installation solaire thermique',
++          'Nombre de logements',
++          // 'Efficacité des appareils électriques',
++          // 'Présence d\'une ventilation mécanique',
++          // 'Présence d\'ascenseur',
++          // 'Présence d\'une instalaltion solaire PV',
++          // 'Présence de batteries de stockage',
++          'Note de protection du patrimoine',
++          // 'Capacité d\'investissement',
++        ];
++        console.log(shownKeys);
++        for (const key of keys) {
++          const value = allFields[key];
+           // create consult mode info
+           if ((value !== null) && shownKeys.includes(key)) {
+             popupContent += '<tr id="pdata">';
+@@ -180,12 +188,6 @@ const BaseMethods = {
+             popupContent += '</tr>';
+           }
+         }
+-        // create the url : value added directly from the backend
+-        advancedModeURL += '&polygon=';
+-        advancedModeURL += allFields['Empreinte au sol'];
+-        postUrl.set(advancedModeURL);
+-      }
+-      console.log(shownKeys);
+ 
+       allFormData.set(allFields);
+       // for (const key of fieldNames) {
+@@ -208,7 +210,7 @@ const BaseMethods = {
+       //   }
+       // }
+     }
+-console.log(shownKeys);
++
+     if (popupContent.length != 0) {
+       L.popup({
+         minWidth: 400,
