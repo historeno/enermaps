@@ -6,6 +6,9 @@
   import {areaSelectionLayerStore, selectedLayerStore, tasksStore, datasetsStore, postUrl} from '../stores.js';
   import {getDataset} from '../datasets.js';
   import 'brutusin-json-forms';
+  import Dialog from './Dialog.svelte';
+
+  import About from '../popups/Analyse.svelte';
 
 
   const BrutusinForms = brutusin['json-forms'];
@@ -22,6 +25,7 @@
   let layersLinkDatasetId = null;
   let layersDetails = null;
   let layersDetailsDisplayed = false;
+  let aboutDialog = null;
   const showCmInfo = false;
   const isHistorenoCmDisabled = false;
 
@@ -29,6 +33,14 @@
   onMount(() => {
     form = BrutusinForms.create(cm.schema);
     form.render(formElement);
+
+    const aboutButton = document.getElementById('btn_about');
+
+    aboutButton.onclick = function() {
+      aboutDialog.show();
+    };
+        aboutDialog.show();
+
   });
 
 
@@ -307,6 +319,12 @@
     margin-bottom: 0;
     padding-left: 20px;
   }
+    button, button:hover {
+    font-family: inherit;
+    border: 0;
+    padding: 0;
+    background-color: inherit;
+  }
 </style>
 
 
@@ -372,6 +390,7 @@
         Pour plus d'information concernant le projet,
         voir <a href="{cm.wiki}" target="_blank">la page web du projet</a>
       </i>
+      <button id="btn_about" class="link">infos analyse</button>
     </div>
 
     <div class="cm_params" bind:this={formElement} />
@@ -386,4 +405,8 @@
       {/each}
     </div>
   </div>
+
+    <Dialog title="" bind:this={aboutDialog}>
+    <About />
+  </Dialog>
 </div>
