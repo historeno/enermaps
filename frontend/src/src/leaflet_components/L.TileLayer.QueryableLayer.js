@@ -72,58 +72,58 @@ const BaseMethods = {
       }
 
       const keys = [
-          'Pays',
-          'Region',
-          'Altitude',
-          'Météo',
-          'Context',
-          'Typologie',
-          'Années de construction',
-          'Catégorie d\'ouvrage',
-          'Hauteur du bâtiment',
-          'Type de chauffage',
-          'Année d\'installation du chauffage',
-          'Type d\'émetteurs',
-          'Régulation du chauffage',
-          'Isolation des conduites de chauffage',
-          'Isolation des conduites d\'ECS',
-          'Présence d\'une installation solaire thermique',
-          'Nombre de logements',
-          'Efficacité des appareils électriques',
-          'Présence d\'une ventilation mécanique',
-          'Présence d\'ascenseur',
-          'Présence d\'une instalaltion solaire PV',
-          'Présence de batteries de stockage',
-          'Note de protection du patrimoine',
-          'Capacité d\'investissement',
-        ];
+        'Pays',
+        'Region',
+        'Altitude',
+        'Météo',
+        'Context',
+        'Typologie',
+        'Années de construction',
+        'Catégorie d\'ouvrage',
+        'Hauteur du bâtiment',
+        'Type de chauffage',
+        'Année d\'installation du chauffage',
+        'Type d\'émetteurs',
+        'Régulation du chauffage',
+        'Isolation des conduites de chauffage',
+        'Isolation des conduites d\'ECS',
+        'Présence d\'une installation solaire thermique',
+        'Nombre de logements',
+        'Efficacité des appareils électriques',
+        'Présence d\'une ventilation mécanique',
+        'Présence d\'ascenseur',
+        'Présence d\'une instalaltion solaire PV',
+        'Présence de batteries de stockage',
+        'Note de protection du patrimoine',
+        'Capacité d\'investissement',
+      ];
 
-	  const shownKeys = [
-          // 'Pays',
-          // 'Region',
-          // 'Altitude',
-          // 'Météo',
-          // 'Context',
-          'Typologie',
-          'Années de construction',
-          'Catégorie d\'ouvrage',
-          // 'Hauteur du bâtiment',
-          'Type de chauffage',
-          // 'Année d\'installation du chauffage',
-          // 'Type d\'émetteurs',
-          // 'Régulation du chauffage',
-          // 'Isolation des conduites de chauffage',
-          // 'Isolation des conduites d\'ECS',
-          // 'Présence d\'une installation solaire thermique',
-          'Nombre de logements',
-          // 'Efficacité des appareils électriques',
-          // 'Présence d\'une ventilation mécanique',
-          // 'Présence d\'ascenseur',
-          // 'Présence d\'une instalaltion solaire PV',
-          // 'Présence de batteries de stockage',
-          'Note de protection du patrimoine',
-          // 'Capacité d\'investissement',
-        ];
+      const shownKeys = [
+        // 'Pays',
+        // 'Region',
+        // 'Altitude',
+        // 'Météo',
+        // 'Context',
+        'Typologie',
+        'Années de construction',
+        'Catégorie d\'ouvrage',
+        // 'Hauteur du bâtiment',
+        'Type de chauffage',
+        // 'Année d\'installation du chauffage',
+        // 'Type d\'émetteurs',
+        // 'Régulation du chauffage',
+        // 'Isolation des conduites de chauffage',
+        // 'Isolation des conduites d\'ECS',
+        // 'Présence d\'une installation solaire thermique',
+        'Nombre de logements',
+        // 'Efficacité des appareils électriques',
+        // 'Présence d\'une ventilation mécanique',
+        // 'Présence d\'ascenseur',
+        // 'Présence d\'une instalaltion solaire PV',
+        // 'Présence de batteries de stockage',
+        'Note de protection du patrimoine',
+        // 'Capacité d\'investissement',
+      ];
 
       // recherche le 1er élément du formulaire CM
       const elem = document.querySelector('[id*="BrutusinForms#"]');
@@ -192,24 +192,23 @@ const BaseMethods = {
 
       console.log(shownKeys);
       for (const key of keys) {
-          const value = allFields[key];
-          // create consult mode info
-          if ((value !== null) && shownKeys.includes(key)) {
-            popupContent += '<tr id="pdata">';
+        const value = allFields[key];
+        // create consult mode info
+        if ((value !== null) && shownKeys.includes(key)) {
+          popupContent += '<tr id="pdata">';
+          const td1 = document.createElement('td');
+          td1.className = 'name';
+          td1.innerText = key + ' :';
+          popupContent += td1.outerHTML;
 
-            const td1 = document.createElement('td');
-            td1.className = 'name';
-            td1.innerText = key + ' :';
-            popupContent += td1.outerHTML;
-
-            const td2 = document.createElement('td');
-            td2.className = 'value';
-            td2.innerText = value;
-            popupContent += td2.outerHTML;
-            // popupContent += td2.outerHTML;
-            popupContent += '</tr>';
-          }
+          const td2 = document.createElement('td');
+          td2.className = 'value';
+          td2.innerText = value;
+          popupContent += td2.outerHTML;
+          // popupContent += td2.outerHTML;
+          popupContent += '</tr>';
         }
+      }
 
       allFormData.set(allFields);
       // for (const key of fieldNames) {
