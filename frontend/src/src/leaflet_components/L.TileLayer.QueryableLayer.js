@@ -188,8 +188,6 @@ const BaseMethods = {
         postUrl.set(advancedModeURL);
       }
 
-
-
       console.log(shownKeys);
       for (const key of keys) {
         const value = allFields[key];
