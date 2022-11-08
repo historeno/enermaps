@@ -70,7 +70,8 @@ const BaseMethods = {
           }
         }
       }
-    const keys = [
+
+      const keys = [
           'Pays',
           'Region',
           'Altitude',
@@ -95,6 +96,33 @@ const BaseMethods = {
           'Présence de batteries de stockage',
           'Note de protection du patrimoine',
           'Capacité d\'investissement',
+        ];
+
+	  const shownKeys = [
+          // 'Pays',
+          // 'Region',
+          // 'Altitude',
+          // 'Météo',
+          // 'Context',
+          'Typologie',
+          'Années de construction',
+          'Catégorie d\'ouvrage',
+          // 'Hauteur du bâtiment',
+          'Type de chauffage',
+          // 'Année d\'installation du chauffage',
+          // 'Type d\'émetteurs',
+          // 'Régulation du chauffage',
+          // 'Isolation des conduites de chauffage',
+          // 'Isolation des conduites d\'ECS',
+          // 'Présence d\'une installation solaire thermique',
+          'Nombre de logements',
+          // 'Efficacité des appareils électriques',
+          // 'Présence d\'une ventilation mécanique',
+          // 'Présence d\'ascenseur',
+          // 'Présence d\'une instalaltion solaire PV',
+          // 'Présence de batteries de stockage',
+          'Note de protection du patrimoine',
+          // 'Capacité d\'investissement',
         ];
 
       // recherche le 1er élément du formulaire CM
@@ -160,34 +188,10 @@ const BaseMethods = {
         postUrl.set(advancedModeURL);
       }
 
-	  const shownKeys = [
-          // 'Pays',
-          // 'Region',
-          // 'Altitude',
-          // 'Météo',
-          // 'Context',
-          'Typologie',
-          'Années de construction',
-          'Catégorie d\'ouvrage',
-          // 'Hauteur du bâtiment',
-          'Type de chauffage',
-          // 'Année d\'installation du chauffage',
-          // 'Type d\'émetteurs',
-          // 'Régulation du chauffage',
-          // 'Isolation des conduites de chauffage',
-          // 'Isolation des conduites d\'ECS',
-          // 'Présence d\'une installation solaire thermique',
-          'Nombre de logements',
-          // 'Efficacité des appareils électriques',
-          // 'Présence d\'une ventilation mécanique',
-          // 'Présence d\'ascenseur',
-          // 'Présence d\'une instalaltion solaire PV',
-          // 'Présence de batteries de stockage',
-          'Note de protection du patrimoine',
-          // 'Capacité d\'investissement',
-        ];
-        console.log(shownKeys);
-        for (const key of keys) {
+
+
+      console.log(shownKeys);
+      for (const key of keys) {
           const value = allFields[key];
           // create consult mode info
           if ((value !== null) && shownKeys.includes(key)) {
