@@ -16,7 +16,7 @@
     const aboutButton = document.getElementById('btn_about');
 
     aboutButton.onclick = function() {
-      aboutDialog.show();
+      aboutDialog.sow();
     };
 
     aboutDialog.show();

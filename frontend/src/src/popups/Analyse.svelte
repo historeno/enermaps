@@ -26,10 +26,6 @@
   }
 </style>
 
-
-<p>
-Typologie / Protections patrimoniales
-</p>
 <p>
 <strong>typologie architecturale</strong>
 1, 2, 3 , 4
