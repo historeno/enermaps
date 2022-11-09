@@ -43,6 +43,16 @@
 
   });
 
+    function metadataPopup () {
+    const popup = document.getElementById('btn_metadata');
+
+    popup.onclick = function() {
+      popup.show();
+    };
+
+    //aboutDialog.show();
+  };
+
 
   $: {
     tasks = $tasksStore;
@@ -388,9 +398,9 @@
     <div class="cm_wiki">
       <i>
         Pour plus d'information concernant le projet,
-        voir <a href="{cm.wiki}" target="_blank">la page web du projet</a>
+        les donnnees a reseigner
       </i>
-      <button id="btn_about" class="link">infos analyse</button>
+      <button id="btn_metadata" type="boutton" on:click={metadataPopup} >cliquez ici.</button>
     </div>
 
     <div class="cm_params" bind:this={formElement} />
