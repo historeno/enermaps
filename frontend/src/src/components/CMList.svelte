@@ -233,7 +233,7 @@
       {:else if activeTabTest === 'consultation'}
         <div class="popupInformation">
             <div class="wrap-collabsible">
-                <input id="collapsible" class="toggle" type="checkbox">
+                <input id="collapsible" class="toggle" type="checkbox" checked>
                 <label for="collapsible" class="lbl-toggle">{@html $popupInformationtitle}</label>
                     <div class="collapsible-content">
                         <div class="content-inner">
