@@ -37,11 +37,27 @@
       case 'line':
         insertLineChart(name, dataset);
         break;
+      case 'pie':
+        insertPieChart(name, dataset);
+        break;
       default:
     }
   }
 
   function insertBarChart(name, dataset) {
+    const values = dataset.values;
+    const xLabels = [];
+    const data = [];
+    for (const value of values) {
+      xLabels.push(value[0]);
+      data.push(value[1]);
+    }
+    barDatasets['labels'] = xLabels;
+    barDatasets['datasets'] = [];
+    barDatasets['datasets'].push({label: name, data: data, tension: 0.1});
+  }
+
+  function insertPieChart(name, dataset) {
     const values = dataset.values;
     const xLabels = [];
     const data = [];

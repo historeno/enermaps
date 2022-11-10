@@ -86,13 +86,11 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     res = post_parameters()
     ret = dict()
     ret["graphs"] = [
-        {
-            "title": {"type": "bar", "values": [(f"val {i}", i) for i in range(10)]},
-        },
+
         {
             "title2": {
-                "type": "xy",
-                "values": [(f"val {i*2}", i * 2) for i in range(10)],
+                "type": "pie",
+                "values": [(f"vol {i}", i) for i in (0,10,2,30)]
             },
         },
     ]
