@@ -53,7 +53,7 @@
     const values = dataset.values;
     const xLabels = [];
     const data = [];
-    const backgrondColor = ['rgba(255, 99, 132, 0.2)'];
+    // const backgrondColor = ['rgba(255, 99, 132, 0.2)'];
     for (const value of values) {
       xLabels.push(value[0]);
       data.push(value[1]);
