@@ -269,3 +269,8 @@ myenv/
 dbbackups/
 
 *.env-db
+
+
+data-integration/data
+*.sqlite
+*.csv

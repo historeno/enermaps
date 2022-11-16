@@ -91,18 +91,18 @@ services:
     healthcheck:
       test: pg_isready -U postgres
 
-  dbbackups:
-    build:
-      context: ./db-backup
-        # image: kartoza/pg-backup:9.6
-    volumes:
-    - ./dbbackups:/backups
-    env_file:
-      .env-db
-    restart: on-failure
-    depends_on:
-      db:
-        condition: service_healthy
+  # dbbackups:
+  #   build:
+  #     context: ./db-backup
+  #       # image: kartoza/pg-backup:9.6
+  #   volumes:
+  #   - ./dbbackups:/backups
+  #   env_file:
+  #     .env-db
+  #   restart: on-failure
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
 
   postgrest:
     build:
