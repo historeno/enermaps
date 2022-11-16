@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import logging
-from datetime import datetime
 
 import requests
 import xmltodict
