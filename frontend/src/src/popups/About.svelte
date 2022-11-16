@@ -4,9 +4,9 @@
   /*  margin-top: 8px;*/
   /*}*/
 
-  .nolist li {
-    margin-top: 6px;
-  }
+  /*.nolist li {*/
+  /*  margin-top: 6px;*/
+  /*}*/
 
   /*.supported-browser {*/
   /*  width: 41px;*/
