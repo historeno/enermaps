@@ -26,8 +26,6 @@ wiki = "http://www.historeno.eu/"
 def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     def post_parameters():
         """Post on calculator to create task."""
-        with open(f"parms_{datetime.now()}.txt", mode="w") as file:
-            file.write(str(params))
         parameters = {
             "country": decoder.get("country").get(params["Pays"]),
             "canton": decoder.get("canton").get(params["Region"]),
@@ -86,30 +84,12 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     res = post_parameters()
     ret = dict()
     ret["graphs"] = [
-
         {
-            "title1": {
-                "type": "bar",
-                "values": [
-                    (f"test {i}", i)
-                    for i in (1,2,1)
-                ]
-            },
-            "title2": {
-                "type": "bar",
-                "values": [
-                    (f"dataset name {i}", i)
-                    for i in (1, 2, 1)
-                ]
-            },
-            "title3": {
-                "type": "bar",
-                "values": [
-                    (f"dataset name {i}", i)
-                    for i in (1, 2, 1)
-                ]
-            },
-        },
+            "title 2": {
+                "type": "arthur",
+                "values": [[f"label {i}", i**2] for i in range(10)],
+            }
+        }
     ]
     ret["geofiles"] = {}
     parser = xmltodict.parse(res.content)
