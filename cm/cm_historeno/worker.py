@@ -87,7 +87,7 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
         {
             "title 2": {
                 "type": "arthur",
-                "values": [[f"label {i}", i**2] for i in range(10)],
+                "values": [[f"label {i}", i ** 2] for i in range(10)],
             }
         }
     ]
