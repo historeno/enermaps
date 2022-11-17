@@ -30,7 +30,6 @@ RUN pip3 install -r requirements.txt
 COPY *.py /data-integration/
 # COPY *.csv /data-integration/
 COPY data/ /data-integration/data/
-COPY inputs/ /data-integration/inputs/
 
 # Make pipelines executable
 RUN chmod u+x *.py
