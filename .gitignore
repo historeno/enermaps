@@ -273,4 +273,3 @@ dbbackups/
 
 data-integration/data
 *.sqlite
-*.csv
