@@ -42,4 +42,4 @@ RUN chmod u+x *.py
 # CMD ["python3", "getHotMaps_raster.py"]
 
 # should be a cront job in the production phase
-CMD ["python3", "data.py"]
+CMD ["python3", "integrate.py"]
