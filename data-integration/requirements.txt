@@ -16,3 +16,4 @@ clint==0.5.1
 shapely==1.7.1 
 geopandas==0.9.0
 numpy==1.22.4
+rtree==1.0.1
