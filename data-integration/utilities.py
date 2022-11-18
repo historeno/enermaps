@@ -21,7 +21,7 @@ def get_engine() -> sqlalchemy.engine.Engine:
     if "None" in DB_URL:
         raise ValueError(f"The database url is not correct : {DB_URL}")
     # DB_URL = "postgresql://postgres:postgres@localhost:5432/dataset"
-    time.sleep(10)
+    time.sleep(15)
     engine = sqlalchemy.create_engine(url=DB_URL)
     print(f"DATA BASE URL : {DB_URL}")
     try:

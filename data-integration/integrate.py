@@ -1,7 +1,7 @@
 import fake_data
 from legends import post_legend
 from utilities import get_engine
-import regbl_data 
+from regbl_data import set_spatial_table 
 
 # create engine
 engine = get_engine()
@@ -14,4 +14,4 @@ geo_dataframe = fake_data.read_data()
 fake_data.post_data(data=geo_dataframe, engine_=engine)
 
 # regbl
-regbl_data.main()
+# geo_dataframe = set_spatial_table()
