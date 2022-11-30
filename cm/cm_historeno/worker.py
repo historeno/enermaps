@@ -81,20 +81,23 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             raise ConnectionError(error)
 
     res = post_parameters()
+    parser = xmltodict.parse(res.content)
+    # with open(f"res_{datetime.now()}.txt", mode="w") as file:
+    #     file.write(str(res.content))
+    values = parser["project"]
     ret = dict()
     ret["graphs"] = [
         {
             "title 2": {
                 "type": "arthur",
                 "values": [[f"label {i}", i ** 2] for i in range(10)],
+                "values": [["Besoin en chauffage [kWh/m²a]", round(float(values["bldOutput"]["Qh"]), 2)],
+                           ["Besoin en eau chaude sanitaire (ECS) [kWh/m²a]",
+                            round(float(values["bldOutput"]["Qw"]), 2)]]
             }
         }
     ]
     ret["geofiles"] = {}
-    parser = xmltodict.parse(res.content)
-    # with open(f"res_{datetime.now()}.txt", mode="w") as file:
-    #     file.write(str(res.content))
-    values = parser["project"]
     ret["values"] = {
         "Classe de l'enveloppe": values["bldOutput"]["classEnv"],
         "Classe énergie primaire": values["bldOutput"]["classEp"],
