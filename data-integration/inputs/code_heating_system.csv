@@ -1,0 +1,21 @@
+﻿code regbl;définition;type de chauffage
+7500;Aucune;Mazout
+7501;Air;PAC air-eau
+7510;Géothermie (générique);PAC sol-eau
+7511;Sonde géothermique;PAC sol-eau
+7512;Serpentin géothermique;PAC sol-eau
+7513;Eau (nappe phréatique, eaux superficielles, eaux résiduelles);PAC sol-eau
+7520;Gaz;Gas naturel
+7530;Mazout;Mazout
+7540;Bois (générique);Mazout
+7541;Bois (bûches);Bûches
+7542;Bois (granulés - pellets);Pellets
+7543;Bois (bois déchiqueté, copeaux);Copeaux
+7550;Rejets thermiques (dans le bâtiment);Mazout
+7560;Electricité;Electrique direct
+7570;Soleil (thermique);Chauffage à distance
+7580;Chaleur produite à distance (générique);Chauffage à distance
+7581;Chaleur produite à distance (haute température);Chauffage à distance
+7582;Chaleur produite à distance (basse température);Chauffage à distance
+7598;Indéterminé;Mazout
+7599;Autre;Mazout

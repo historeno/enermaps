@@ -19,7 +19,7 @@ WORKDIR data-integration
 RUN pip3 install -r requirements.txt
 
 COPY *.py /data-integration/
-COPY data/ /data-integration/data/
+COPY data/fake_data/ /data-integration/data/fake_data/
 COPY inputs/ /data-integration/inputs/
 
 # Make pipelines executable

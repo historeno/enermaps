@@ -1,0 +1,27 @@
+﻿code regbl;Définition;catégorie sia;nombre de logement
+1110;Maison individuelle;2;1
+1121;Maison à deux logements;1;2
+1122;Immeuble à trois logements ou plus;1;3
+1130;Habitat communautaire;1;2
+1211;Hôtel;1;4
+1212;Autre bâtiment d'hébergement de tourisme;1;1
+1220;Immeuble de bureaux;3;1
+1230;Bâtiment commercial;5;1
+1231;Restaurants et bars dans des bâtiments sans usage résidentiel;6;1
+1241;Bâtiment des transports et des communications sans garage;9;1
+1242;Garage;10;1
+1251;Bâtiment industriel;9;1
+1252;Réservoir, silo et entrepôt;10;1
+1261;Bâtiment à usage culturel ou récréatif;3;1
+1262;Musée et bibliothèque;3;1
+1263;Bâtiment pour l'enseignement et la recherche;4;1
+1264;Hôpital et établissement de santé;8;1
+1265;Salle de sport;11;1
+1271;Bâtiment d'exploitation agricole;9;1
+1272;Édifice cultuel et religieux;7;1
+1273;Monument historique ou classé;0;1
+1274;Autre bâtiment non classé ailleur;0;1
+1275;Autres bâtiments pour l'hébergement collectif;1;
+1276;Bâtiments pour la garde d'animaux;10;1
+1277;Bâtiments pour les cultures végétales;10;1
+1278;Autres bâtiments d'exploitation agricole;9;1
