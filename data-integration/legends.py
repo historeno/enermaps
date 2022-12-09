@@ -4,7 +4,8 @@ import uuid
 import pandas as pd
 import sqlalchemy
 
-LEGENDS_UUID = (uuid.uuid4(),)
+# LEGENDS_UUID = (uuid.uuid4(),)
+LEGENDS_UUID = ('0096e5a5-3929-4589-bbaf-01199231a71f')
 LEGENDS = {
     "Protection level": {
         "vis_id": LEGENDS_UUID,

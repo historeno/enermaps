@@ -4,6 +4,7 @@ from os import makedirs
 CURRENT_DIR = dirname(abspath(__file__))
 
 DATA_DIR = join(CURRENT_DIR, "data")
+CH_DATA_DIR = join(DATA_DIR, "ch_data")
 FAKE_DATA_DIR = join(DATA_DIR, "fake_data")
 REGBL_DATA_DIR = join(DATA_DIR, "regbl_data")
 FOOTPRINT_DATA_DIR = join(DATA_DIR, "footprint_data")
