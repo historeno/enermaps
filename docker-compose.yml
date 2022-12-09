@@ -113,15 +113,15 @@ services:
       - .env
       - .postgrest
 
-  data-integration:
-    build:
-      context: ./data-integration
-    volumes:
-      - data:/data-integration/data
-    env_file:
-      .env-db
-    depends_on:
-      - "db"
+  # data-integration:
+  #   build:
+  #     context: ./data-integration
+  #   volumes:
+  #     - data:/data-integration/data
+  #   env_file:
+  #     .env-db
+  #   depends_on:
+  #     - "db"
 
 #  db-nginx:
 #    build:

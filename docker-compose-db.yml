@@ -9,7 +9,7 @@ services:
       - data:/data-integration/data
     env_file:
       .env-db
-
+      
 volumes:
   db-data:
   data:
