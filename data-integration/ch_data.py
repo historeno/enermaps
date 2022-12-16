@@ -1,3 +1,7 @@
+"""
+Module that
+"""
+
 import geopandas as gpd
 from paths import FOOTPRINT_DATA_DIR, INPUTS_DIR
 from os.path import join
@@ -136,7 +140,7 @@ def get_heating_systen(regbl_hot_water_source1):
 
 
 def get_heating_systen_construction_year():
-    return random.randint(1950, 2000)
+    return 2000
 
 
 def get_heating_emission_system():
@@ -208,33 +212,33 @@ all_data["fid"] = all_data["canton"] + all_data["egid"].astype(str)
 all_data["fields"] = all_data.progress_apply(
     lambda row: {
         "Pays": "Suisse",
-        "Region": get_region(canton=row["canton"]),
-        "Altitude": get_altitude(),
-        "Météo": get_meteo(),
-        "Context": get_context(),
-        "Empreinte au sol": get_footprint(geometry=row["geometry"]),
-        "Mitoyenneté": get_mitoyennete(geometry=row["geometry"]),
-        "Typologie": get_typology(),
+        "Region": get_region(canton=row["canton"]), # TODO : NEEDED
+        "Altitude": get_altitude(), # TODO : matching with DEM, NEEDED
+        # "Météo": get_meteo(), # Pas nécessaire 
+        "Context": get_context(), # TODO : PERMIMETRE, default : suburban
+        "Empreinte au sol": get_footprint(geometry=row["geometry"]), # TODO : MANDATORY
+        "Mitoyenneté": get_mitoyennete(geometry=row["geometry"]), # TODO : 2ND 
+        "Typologie": get_typology(), # TODO : NOT DEFAULT VALUE, modifcation of the form (name - year)
         "Années de construction": get_construction_year(construction_year=row["construction_year"]),
         "Catégorie d'ouvrage": get_category(category=row["class"]),
         "Hauteur du bâtiment": get_heigth(regbl_levels=row["regbl_levels"]),
         "Type de chauffage": get_heating_systen(regbl_hot_water_source1=row["regbl_hot_water_source1"]),
         "Année d'installation du chauffage": get_heating_systen_construction_year(),
-        "Type d'émetteurs": get_heating_emission_system(),
+        "Type d'émetteurs": get_heating_emission_system(), 
         "Régulation du chauffage": get_heating_emission_regulation_system(),
         "Isolation des conduites de chauffage": get_heating_pipes_insulated(),
         "Isolation des conduites d'ECS": get_dhw_pipes_insulated(),
         "Présence d'une installation solaire thermique": get_solar_thermal(regbl_heat_generator1=row["regbl_heat_generator1"]),
         "Surface de capteurs solaires thermiques automatique": "Oui",
         "Surface de capteurs solaires thermiques": "0",
-        "Nombre de logements": get_n_flat(category=row["class"]),
+        "Nombre de logements": get_n_flat(category=row["class"]), # TODO : SRE/100 from 1122 code
         "Efficacité des appareils électriques": get_eletric_device_efficiency(),
         "Présence d'une ventilation mécanique": get_mecanic_ventilation(),
         "Présence d'ascenseur": get_elevator(),
         "Présence d'une instalaltion solaire PV": get_pv(),
         "Surface PV automatique": "Oui",
         "Présence de batteries de stockage": get_electricity_battery(),
-        "Note de protection du patrimoine": get_protection_level(),
+        "Note de protection du patrimoine": get_protection_level(), # TODO: leave the value empty
         "Capacité d'investissement": 0,
     },
     axis=1,

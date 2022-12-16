@@ -148,3 +148,4 @@ def post_data(
         index=False,
         **kwargs,
     )
+    print("FAKE DATA POST")

@@ -1,3 +1,7 @@
+"""
+Module that scraps the open-data, changes table structures.
+"""
+
 from os.path import join, isdir, exists, isfile, basename 
 from os import listdir, makedirs, remove
 from paths import FOOTPRINT_DATA_DIR, CANTON_FOOTPRINT_CSV_DIR, ALL_CANTON_FOOTPRINT_DIR

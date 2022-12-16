@@ -1,6 +1,6 @@
 from paths import INPUTS_DIR, DATA_DIR
 from os.path import join
-from os.path import isfile
+from os.path import isfile, exists
 from os import makedirs
 import pandas as pd
 from IPython import embed
@@ -23,3 +23,14 @@ for url in tqdm(list(dataframe[0])):
         with open(file, 'wb') as f:
             response.raw.decode_content = True
             shutil.copyfileobj(response.raw, f) 
+    # if exists(file):
+        
+        # import rioxarray as rxr
+        # import xarray as xr
+
+        # dataarray = rxr.open_rasterio(file)
+        # dataarray = xr.open_rasterio(file)
+
+        # df = dataarray[0].to_pandas()
+        # embed()
+        # exit()
