@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import logging
-from datetime import datetime
 
 import requests
 import xmltodict
@@ -26,8 +25,6 @@ wiki = "http://www.historeno.eu/"
 def Module_Historeno(self, selection: dict, rasters: list, params: dict):
     def post_parameters():
         """Post on calculator to create task."""
-        with open(f"parms_{datetime.now()}.txt", mode="w") as file:
-            file.write(str(params))
         parameters = {
             "country": decoder.get("country").get(params["Pays"]),
             "canton": decoder.get("canton").get(params["Region"]),
@@ -84,21 +81,36 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
             raise ConnectionError(error)
 
     res = post_parameters()
-    ret = dict()
-    ret["graphs"] = []
-    ret["geofiles"] = {}
     parser = xmltodict.parse(res.content)
     # with open(f"res_{datetime.now()}.txt", mode="w") as file:
     #     file.write(str(res.content))
     values = parser["project"]
+    ret = dict()
+    ret["graphs"] = [
+        {
+            "title 2": {
+                "type": "arthur",
+                "values": [[f"label {i}", i ** 2] for i in range(10)],
+                "values": [["Besoin en chauffage [kWh/m²a]", round(float(values["bldOutput"]["Qh"]), 2)],
+                           ["Besoin en eau chaude sanitaire (ECS) [kWh/m²a]",
+                            round(float(values["bldOutput"]["Qw"]), 2)]]
+            },
+
+        }
+    ]
+    ret["geofiles"] = {}
     ret["values"] = {
         "Classe de l'enveloppe": values["bldOutput"]["classEnv"],
         "Classe énergie primaire": values["bldOutput"]["classEp"],
         "Classe émissions gaz à effet de serre": values["bldOutput"]["classCO2"],
         "Besoin en chauffage [kWh/m²a]": round(float(values["bldOutput"]["Qh"]), 2),
-        "Besoin en eau chaude sanitaire (ECS) [kWh/m²a]": round(
-            float(values["bldOutput"]["Qw"]), 2
-        ),
+        "Besoin en eau chaude sanitaire (ECS) [kWh/m²a]": round(float(values["bldOutput"]["Qw"]), 2),
+        "Pertes par transmission à travers les toitures [kWh]": round(float(values["bldOutput"]["Qt"]["roof"]), 2),
+        "Pertes par transmission à travers les façades [kWh]": round(float(values["bldOutput"]["Qt"]["wall"]), 2),
+        "Pertes par transmission à travers les fenêtres [kWh]": round(float(values["bldOutput"]["Qt"]["window"]), 2),
+        "Pertes par transmission à travers les planchers [kWh]": round(float(values["bldOutput"]["Qt"]["floor"]), 2),
+
+
         # "Coût totaux [CHF/Euro]": round(values["bldOutput"]["EnergyCost"], 2),
         # "Pertes par ventilation  [kWh]": round(values["bldOutput"]["Qv"], 2),
         # "Energie primaire non renouvelable totale [kWh]": round(values["bldOutput"]["NRE"], 2),

@@ -7,13 +7,17 @@
   const lineDatasets = {};
   let xyDatasets = [];
   const barDatasets = {};
+  const pieDatasets = {};
+
 
   let xyCanvas;
   let lineCanvas;
   let barCanvas;
+  let pieCanvas;
 
   let xyChart;
   let lineChart;
+  let pieChart;
 
   function processDatasets() {
     for (const [datasetName, dataset] of Object.entries(datasets)) {
@@ -37,6 +41,10 @@
       case 'line':
         insertLineChart(name, dataset);
         break;
+      case 'pie':
+        insertPieChart(name, dataset);
+        break;
+
       default:
     }
   }
@@ -45,6 +53,7 @@
     const values = dataset.values;
     const xLabels = [];
     const data = [];
+    // const backgrondColor = ['rgba(255, 99, 132, 0.2)'];
     for (const value of values) {
       xLabels.push(value[0]);
       data.push(value[1]);
@@ -52,6 +61,20 @@
     barDatasets['labels'] = xLabels;
     barDatasets['datasets'] = [];
     barDatasets['datasets'].push({label: name, data: data, tension: 0.1});
+  }
+
+  function insertPieChart(name, dataset) {
+    const values = dataset.values;
+    const xLabels = [];
+    const data = [];
+    for (const value of values) {
+      xLabels.push(value[0]);
+      data.push(value[1]);
+    }
+    pieDatasets['labels'] = xLabels;
+    pieDatasets['datasets'] = [];
+    pieDatasets['datasets'].push({label: name, data: data});
+    pieDatasets['datasets'].push({backgroundColor: ['rgb(255, 99, 132)','rgb(54, 162, 235)']})
   }
 
   function insertLineChart(name, dataset) {
@@ -97,6 +120,14 @@
     } else {
       lineCanvas.hidden = true;
     }
+    if (Object.keys(pieDatasets).length) {
+      pieChart = new Chart(pieCanvas, {
+        type: 'pie',
+        data: pieDatasets,
+      });
+    } else {
+      pieCanvas.hidden = true;
+    }
     if (Object.keys(barDatasets).length) {
       lineChart = new Chart(barCanvas, {
         type: 'bar',
@@ -122,4 +153,5 @@
   <canvas class="graph" bind:this={xyCanvas} />
   <canvas class="graph" bind:this={barCanvas} />
   <canvas class="graph" bind:this={lineCanvas} />
+  <canvas class="graph" bind:this={pieCanvas} />
 </div>

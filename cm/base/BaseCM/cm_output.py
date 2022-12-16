@@ -36,6 +36,16 @@ class LineGraph(Schema):
         include = {"type": fields.Constant("line", required=True)}
 
 
+class PieChart(Schema):
+    """Class that defines the pie chart value schema."""
+
+    values = fields.List(fields.Tuple([fields.Str(), fields.Number()]), required=True)
+    unit = fields.String(required=False)
+
+    class Meta:
+        include = {"type": fields.Constant("pie", required=True)}
+
+
 class BarGraph(Schema):
     """Class that defines the bar graph value schema."""
 
@@ -54,9 +64,11 @@ class CMOutput(Schema):
             keys=fields.Str(),
             values=Union(
                 [
-                    fields.Nested(BarGraph()),
+                    # fields.Nested(BarGraph()),
                     fields.Nested(LineGraph()),
                     fields.Nested(XYGraph()),
+                    fields.Nested(PieChart()),
+                    fields.Nested(BarGraph()),
                 ]
             ),
             required=True,
