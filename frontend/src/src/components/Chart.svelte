@@ -74,6 +74,7 @@
     pieDatasets['labels'] = xLabels;
     pieDatasets['datasets'] = [];
     pieDatasets['datasets'].push({label: name, data: data});
+    pieDatasets['datasets'].push({backgroundColor: ['rgb(255, 99, 132)','rgb(54, 162, 235)']})
   }
 
   function insertLineChart(name, dataset) {

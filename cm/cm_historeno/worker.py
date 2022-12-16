@@ -94,7 +94,8 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
                 "values": [["Besoin en chauffage [kWh/m²a]", round(float(values["bldOutput"]["Qh"]), 2)],
                            ["Besoin en eau chaude sanitaire (ECS) [kWh/m²a]",
                             round(float(values["bldOutput"]["Qw"]), 2)]]
-            }
+            },
+
         }
     ]
     ret["geofiles"] = {}
@@ -103,9 +104,13 @@ def Module_Historeno(self, selection: dict, rasters: list, params: dict):
         "Classe énergie primaire": values["bldOutput"]["classEp"],
         "Classe émissions gaz à effet de serre": values["bldOutput"]["classCO2"],
         "Besoin en chauffage [kWh/m²a]": round(float(values["bldOutput"]["Qh"]), 2),
-        "Besoin en eau chaude sanitaire (ECS) [kWh/m²a]": round(
-            float(values["bldOutput"]["Qw"]), 2
-        ),
+        "Besoin en eau chaude sanitaire (ECS) [kWh/m²a]": round(float(values["bldOutput"]["Qw"]), 2),
+        "Pertes par transmission à travers les toitures [kWh]": round(float(values["bldOutput"]["Qt"]["roof"]), 2),
+        "Pertes par transmission à travers les façades [kWh]": round(float(values["bldOutput"]["Qt"]["wall"]), 2),
+        "Pertes par transmission à travers les fenêtres [kWh]": round(float(values["bldOutput"]["Qt"]["window"]), 2),
+        "Pertes par transmission à travers les planchers [kWh]": round(float(values["bldOutput"]["Qt"]["floor"]), 2),
+
+
         # "Coût totaux [CHF/Euro]": round(values["bldOutput"]["EnergyCost"], 2),
         # "Pertes par ventilation  [kWh]": round(values["bldOutput"]["Qv"], 2),
         # "Energie primaire non renouvelable totale [kWh]": round(values["bldOutput"]["NRE"], 2),
