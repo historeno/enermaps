@@ -271,8 +271,7 @@ dbbackups/
 *.env-db
 
 
-data-integration/footprint_data/
-data-integration/input/
+data-integration/data/
 *.gdb
 *.sqlite
 .cpg
