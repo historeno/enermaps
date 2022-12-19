@@ -1,5 +1,5 @@
 """
-Module that
+Module that create the files to be integrated.
 """
 
 import math
