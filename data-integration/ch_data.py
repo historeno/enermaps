@@ -2,20 +2,21 @@
 Module that
 """
 
-import geopandas as gpd
-from paths import FOOTPRINT_DATA_DIR, INPUTS_DIR
-from os.path import join
-from IPython import embed
-import time
+import math
 import random
-from legends import LEGENDS_UUID
-import pandas as pd
+import time
+from os.path import join
 
+import geopandas as gpd
+import pandas as pd
 import requests
 import xmltodict
-import math
-
+from IPython import embed
 from tqdm import tqdm
+
+from legends import LEGENDS_UUID
+from paths import FOOTPRINT_DATA_DIR, INPUTS_DIR
+
 tqdm.pandas()
 
 tic = time.perf_counter()
@@ -57,26 +58,31 @@ spatial["ds_id"] = ds_id
 spatial["fid"] = spatial["canton"] + spatial["egid"].astype(str)
 spatial.drop(["canton", "egid"], axis=1, inplace=True)
 # TODO : missing empty field
-spatial.to_pickle("spatial.pkl") 
 
+save_file = join(INPUTS_DIR, "spatial.pkl")
+spatial.to_pickle(save_file)
 
+save_file = join(INPUTS_DIR, "spatial.shp")
+spatial.to_file(save_file)  
 
 # DATA
 # translate function
 def get_region(canton: str):
-    return "Jura-FR"
+    return canton
 
 
 def get_altitude():
-    return 837
+    # TODO : get data from the DEM
+    return 1700
 
 
-def get_meteo():
-    return "Jura"
+# def get_meteo():
+#     return "Jura"
 
 
 def get_context():
-    return "Urban"
+    # TODO : analyse the surrounding buildings
+    return "suburban"
 
 
 def get_footprint(geometry):
@@ -100,6 +106,7 @@ def get_mitoyennete(geometry):
 
 
 def get_typology():
+    # TODO : NOT DEFAULT VALUE, modifcation of the form (name - year)
     url = "https://historeno.heig-vd.ch/tool/typo/typologies.xml"
     response = requests.get(url)
     dict_data = xmltodict.parse(response.content)
@@ -120,8 +127,9 @@ def get_category(category):
     file = join(INPUTS_DIR, "code_category.csv")
     data = pd.read_csv(file, sep=";")
     # embed()
-    index =  data.loc[data["code regbl"] == int(category), "catégorie sia"].index[0]
+    index = data.loc[data["code regbl"] == int(category), "catégorie sia"].index[0]
     return data.loc[data["code regbl"] == int(category), "catégorie sia"][index]
+
 
 def get_heigth(regbl_levels):
     if not math.isnan(regbl_levels):
@@ -129,14 +137,19 @@ def get_heigth(regbl_levels):
     else:
         return 3 * 2.9
 
+
 def get_heating_systen(regbl_hot_water_source1):
     file = join(INPUTS_DIR, "code_heating_system.csv")
     data = pd.read_csv(file, sep=";")
     if regbl_hot_water_source1 is None:
         return "Mazout"
     else:
-        index = data.loc[data["code regbl"] == int(regbl_hot_water_source1), "type de chauffage"].index[0]
-        return data.loc[data["code regbl"] == int(regbl_hot_water_source1), "type de chauffage"][index]
+        index = data.loc[
+            data["code regbl"] == int(regbl_hot_water_source1), "type de chauffage"
+        ].index[0]
+        return data.loc[
+            data["code regbl"] == int(regbl_hot_water_source1), "type de chauffage"
+        ][index]
 
 
 def get_heating_systen_construction_year():
@@ -168,17 +181,19 @@ def get_solar_thermal(regbl_heat_generator1):
         return "Non"
 
 
-def get_n_flat(category):
+def get_n_flat(category, sre):
+    if isinstance(sre, float):
+        return sre / 100
     file = join(INPUTS_DIR, "code_category.csv")
     data = pd.read_csv(file, sep=";")
-    # embed()
     index = data.loc[data["code regbl"] == int(category), "nombre de logement"].index[0]
-    number_of_flats = data.loc[data["code regbl"] == int(category), "nombre de logement"][index]
+    number_of_flats = data.loc[
+        data["code regbl"] == int(category), "nombre de logement"
+    ][index]
     if isinstance(number_of_flats, int) or isinstance(number_of_flats, float):
         return int(number_of_flats)
     else:
         return 1
-    # return data.loc[data["code regbl"] == int(category), "nombre de logement"][0]
 
 
 def get_eletric_device_efficiency():
@@ -202,69 +217,81 @@ def get_electricity_battery():
 
 
 def get_protection_level():
+    # TODO: leave the value empty
     return random.randint(1, 5)
 
 
 # processing
 all_data["ds_id"] = ds_id
 all_data["fid"] = all_data["canton"] + all_data["egid"].astype(str)
-# all_data["fields"] = all_data.apply(
 all_data["fields"] = all_data.progress_apply(
     lambda row: {
         "Pays": "Suisse",
-        "Region": get_region(canton=row["canton"]), # TODO : NEEDED
-        "Altitude": get_altitude(), # TODO : matching with DEM, NEEDED
-        # "Météo": get_meteo(), # Pas nécessaire 
-        "Context": get_context(), # TODO : PERMIMETRE, default : suburban
-        "Empreinte au sol": get_footprint(geometry=row["geometry"]), # TODO : MANDATORY
-        "Mitoyenneté": get_mitoyennete(geometry=row["geometry"]), # TODO : 2ND 
-        "Typologie": get_typology(), # TODO : NOT DEFAULT VALUE, modifcation of the form (name - year)
-        "Années de construction": get_construction_year(construction_year=row["construction_year"]),
+        "Region": get_region(canton=row["canton"]),  # TODO : NEEDED
+        "Altitude": get_altitude(),
+        # "Météo": get_meteo(), # NOT NEEDED
+        "Context": get_context(),
+        "Empreinte au sol": get_footprint(geometry=row["geometry"]),
+        "Mitoyenneté": get_mitoyennete(geometry=row["geometry"]),  # TODO : 2ND PRIORITY
+        "Typologie": get_typology(),
+        "Années de construction": get_construction_year(
+            construction_year=row["construction_year"]
+        ),
         "Catégorie d'ouvrage": get_category(category=row["class"]),
         "Hauteur du bâtiment": get_heigth(regbl_levels=row["regbl_levels"]),
-        "Type de chauffage": get_heating_systen(regbl_hot_water_source1=row["regbl_hot_water_source1"]),
+        "Type de chauffage": get_heating_systen(
+            regbl_hot_water_source1=row["regbl_hot_water_source1"]
+        ),
         "Année d'installation du chauffage": get_heating_systen_construction_year(),
-        "Type d'émetteurs": get_heating_emission_system(), 
+        "Type d'émetteurs": get_heating_emission_system(),
         "Régulation du chauffage": get_heating_emission_regulation_system(),
         "Isolation des conduites de chauffage": get_heating_pipes_insulated(),
         "Isolation des conduites d'ECS": get_dhw_pipes_insulated(),
-        "Présence d'une installation solaire thermique": get_solar_thermal(regbl_heat_generator1=row["regbl_heat_generator1"]),
+        "Présence d'une installation solaire thermique": get_solar_thermal(
+            regbl_heat_generator1=row["regbl_heat_generator1"]
+        ),
         "Surface de capteurs solaires thermiques automatique": "Oui",
         "Surface de capteurs solaires thermiques": "0",
-        "Nombre de logements": get_n_flat(category=row["class"]), # TODO : SRE/100 from 1122 code
+        "Nombre de logements": get_n_flat(category=row["class"], sre=row["regbl_sre"]),
         "Efficacité des appareils électriques": get_eletric_device_efficiency(),
         "Présence d'une ventilation mécanique": get_mecanic_ventilation(),
         "Présence d'ascenseur": get_elevator(),
         "Présence d'une instalaltion solaire PV": get_pv(),
         "Surface PV automatique": "Oui",
         "Présence de batteries de stockage": get_electricity_battery(),
-        "Note de protection du patrimoine": get_protection_level(), # TODO: leave the value empty
+        "Note de protection du patrimoine": get_protection_level(),
         "Capacité d'investissement": 0,
     },
     axis=1,
 )
 all_data["variable"] = "Niveau de protection"  # variable name
-all_data["value"] = 99999999999  # variable value
+all_data["value"] = 0  # variable value
 all_data["unit"] = "[-]"  # variable unit
 all_data["start_at"] = "2022-06-30 12:00:00"
 all_data["dt"] = None
 all_data["z"] = None
 all_data["israster"] = False
 all_data["vis_id"] = LEGENDS_UUID[0]
-sub_data = all_data[[
-    "ds_id", 
-    "fid", 
-    "fields", 
-    "variable", 
-    "value", 
-    "unit", 
-    "start_at", 
-    "dt", 
-    "z", 
-    "israster", 
-    "vis_id"
-]]
-sub_data.to_pickle("sub_data.pkl") 
+sub_data = all_data[
+    [
+        "ds_id",
+        "fid",
+        "fields",
+        "variable",
+        "value",
+        "unit",
+        "start_at",
+        "dt",
+        "z",
+        "israster",
+        "vis_id",
+    ]
+]
+save_file = join(INPUTS_DIR, "sub_data.pkl")
+spatial.to_pickle(save_file)
+
+save_file = join(INPUTS_DIR, "sub_data.csv")
+spatial.to_csv(save_file)  
 
 # blocker
 toc = time.perf_counter()
