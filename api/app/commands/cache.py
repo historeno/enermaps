@@ -330,6 +330,7 @@ def process_layer(
             ignore_intersecting=ignore_intersecting,
             target_area=target_area,
             pretty_print=pretty_print,
+            row_limit=999 
         )
 
         if data is None:
