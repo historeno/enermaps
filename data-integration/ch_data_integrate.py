@@ -1,18 +1,17 @@
-from paths import CH_DATA_DIR, DATA_DIR
-import pandas as pd
-import geopandas as gpd
-from os.path import join, isfile, dirname, abspath, isdir
-from os import listdir
-# from IPython import embed
-import sqlalchemy
 import json
+from os import listdir
+from os.path import isdir, join
+
+import geopandas as gpd
+import pandas as pd
+import sqlalchemy
 from tqdm import tqdm
+
+from paths import CH_DATA_DIR, DATA_DIR
 
 NROWS = None
 
-# CURRENT_DIR = dirname(abspath(__file__))
-# DATA_DIR = join(CURRENT_DIR, "data")
-# CH_DATA_DIR = join(DATA_DIR, "ch_data")
+
 def post_data(
     engine_: sqlalchemy.engine.Engine,
     **kwargs,
@@ -23,8 +22,6 @@ def post_data(
         raise ValueError(msg)
     # sub_data = pd.read_csv(file, nrows=NROWS, index_col=0)
     sub_data = pd.read_csv(file, nrows=10000, index_col=0)
-    # if ids is not None:
-    #     sub_data = sub_data[sub_data["fid"].isin(ids)]
     sub_data.to_sql(
         "data",
         engine_,
@@ -32,9 +29,6 @@ def post_data(
         index=False,
         **kwargs,
     )
-    # sql = text('SELECT * FROM public.data LIMI 10')
-    # res = engine_.execute(sql)
-    # print(res)
     print("post_data done")
     return list(set(sub_data["fid"]))
 
@@ -48,47 +42,35 @@ def post_spatial(
     if not isdir(CH_DATA_DIR):
         msg = f"{listdir(CH_DATA_DIR)}"
         raise ValueError(msg)
-    # spatial = gpd.read_file(file, rows=NROWS) 
-    spatial = gpd.read_file(file) 
+    # spatial = gpd.read_file(file, rows=NROWS)
+    spatial = gpd.read_file(file)
     spatial.to_crs(epsg=3035, inplace=True)
-    spatial.drop_duplicates(subset=['fid'], inplace=True)
-    if ids is not None:
-        spatial = spatial[ spatial["fid"].isin(ids)]
-    # from IPython import embed; embed(); exit()
-    n = 1000  #chunk row size
-    list_df = [spatial[i:i+n] for i in range(0, spatial.shape[0],n)]
+    spatial.drop_duplicates(subset=["fid"], inplace=True)
+    spatial = spatial[spatial["fid"].isin(ids)]
+    n = 1000  # chunk row size
+    list_df = [spatial[i : i + n] for i in range(0, spatial.shape[0], n)]
     for dataframe_spatial in tqdm(list_df):
         dataframe_spatial.to_postgis(
-        "spatial",
-        engine_,
-        if_exists="append",
-        index=False,
-        chunksize=1000,
-        **kwargs,
-    )
-    # spatial.to_postgis(
-    #     "spatial",
-    #     engine_,
-    #     if_exists="append",
-    #     index=False,
-    #     chunksize=1000,
-    #     **kwargs,
-    # )
-    # sql = text('SELECT * FROM public.spatial LIMI 10')
-    # res = engine_.execute(sql)
-    # print(res)
+            "spatial",
+            engine_,
+            if_exists="append",
+            index=False,
+            chunksize=1000,
+            **kwargs,
+        )
     print("post_spatial done")
     return list(spatial.fid)
 
 
-def post_datasets(    
+def post_datasets(
     engine_: sqlalchemy.engine.Engine,
-    **kwargs,):
+    **kwargs,
+):
 
     ds_id = 1
 
     # DATASETS TABLE
-    d = {
+    data = {
         "ds_id": [ds_id],
         "metadata": [
             {
@@ -108,7 +90,7 @@ def post_datasets(
             }
         ],
     }
-    datasets = pd.DataFrame(data=d)
+    datasets = pd.DataFrame(data=data)
     datasets["metadata"] = datasets["metadata"].apply(json.dumps)
     datasets.to_sql(
         "datasets",
@@ -117,28 +99,4 @@ def post_datasets(
         index=False,
         **kwargs,
     )
-    # sql = text('SELECT * FROM public.datasets LIMI 10')
-    # res = engine_.execute(sql)
-    # print(res)
     print("post_datasets done")
-
-# if __name__ == "__main__" :
-
-#     file = join(CH_DATA_DIR, "sub_data.csv")
-#     if not isdir(CH_DATA_DIR):
-#         msg = f"{listdir(DATA_DIR)}"
-#         raise ValueError(msg)
-#     sub_data = pd.read_csv(file, nrows=NROWS, index_col=0)
-
-#     NROWS = 5000
-#     file = join(CH_DATA_DIR, "spatial.shp")
-#     if not isdir(CH_DATA_DIR):
-#         msg = f"{listdir(CH_DATA_DIR)}"
-#         raise ValueError(msg)
-#     spatial = gpd.read_file(file, rows=NROWS) 
-#     spatial.to_crs(epsg=3035, inplace=True)
-#     spatial.drop_duplicates(subset=['fid'], inplace=True)
-
-#     from IPython import embed; embed(); exit()
-#     fids = list(spatial.fid)
-#     sub_data.loc[ sub_data["fid"] == fids]
