@@ -272,5 +272,10 @@ dbbackups/
 
 
 data-integration/footprint_data/
+data-integration/input/
 *.gdb
 *.sqlite
+.cpg
+.dbf
+.prj
+.shp
