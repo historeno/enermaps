@@ -15,7 +15,7 @@ from IPython import embed
 from tqdm import tqdm
 
 from legends import LEGENDS_UUID
-from paths import CH_DATA_DIR, FOOTPRINT_DATA_DIR, INPUTS_DIR
+from paths import CH_FOOTPRINT_DATA_DIR, CH_FINAL_RESULTS_DATA_DIR
 
 tqdm.pandas()
 
@@ -28,7 +28,7 @@ if isfile(error_file):
 
 tic = time.perf_counter()
 
-geopackage = join(FOOTPRINT_DATA_DIR, "merged_data_v2.gpkg")
+geopackage = join(CH_FOOTPRINT_DATA_DIR, "merged_data_v2.gpkg")
 
 columns = [
     "egid",
@@ -65,10 +65,10 @@ spatial["fid"] = spatial["canton"] + spatial["egid"].astype(str)
 spatial.drop_duplicates(subset=['fid'], inplace=True)
 spatial.drop(["canton", "egid"], axis=1, inplace=True)
 
-save_file = join(CH_DATA_DIR, "spatial.pkl")
+save_file = join(CH_FINAL_RESULTS_DATA_DIR, "spatial.pkl")
 spatial.to_pickle(save_file)
 
-save_file = join(CH_DATA_DIR, "spatial.shp")
+save_file = join(CH_FINAL_RESULTS_DATA_DIR, "spatial.shp")
 spatial.to_file(save_file)
 
 # DATA
@@ -300,10 +300,10 @@ sub_data = all_data[
         "vis_id",
     ]
 ]
-save_file = join(CH_DATA_DIR, "sub_data.pkl")
+save_file = join(CH_FINAL_RESULTS_DATA_DIR, "sub_data.pkl")
 spatial.to_pickle(save_file)
 
-save_file = join(CH_DATA_DIR, "sub_data.csv")
+save_file = join(CH_FINAL_RESULTS_DATA_DIR, "sub_data.csv")
 spatial.to_csv(save_file)
 
 # blocker
