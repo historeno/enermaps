@@ -15,14 +15,14 @@ from IPython import embed
 from tqdm import tqdm
 
 from legends import LEGENDS_UUID
-from paths import CH_FOOTPRINT_DATA_DIR, CH_FINAL_RESULTS_DATA_DIR
+from paths import CH_FOOTPRINT_DATA_DIR, CH_FINAL_RESULTS_DATA_DIR, CH_REGBL_INPUTS_DIR
 
 tqdm.pandas()
 
 error_file = "get_footprint_error.txt"
 if isfile(error_file):
 	remove(error_file)
-error_file = "get_footprint_error.txt"
+error_file = "get_mitoyennete_error.txt"
 if isfile(error_file):
 	remove(error_file)
 
@@ -107,7 +107,7 @@ def get_footprint(geometry):
 def get_mitoyennete(geometry):
     geometries = list(geometry.geoms)
     if len(geometries) != 1:
-    	with open("get_footprint_error.txt", "a") as file:
+    	with open("get_mitoyennete_error.txt", "a") as file:
     		file.write("\n")
     		file.write(f"geometries")
     polygon = geometries[0]
@@ -135,7 +135,7 @@ def get_construction_year(construction_year):
 
 
 def get_category(category, s):
-    file = join(INPUTS_DIR, "code_category.csv")
+    file = join(CH_REGBL_INPUTS_DIR, "code_category.csv")
     data = pd.read_csv(file, sep=";")
     try:
     	index = data.loc[data["code regbl"] == int(category), "catégorie sia"].index[0]
@@ -152,7 +152,7 @@ def get_heigth(regbl_levels):
 
 
 def get_heating_systen(regbl_hot_water_source1):
-    file = join(INPUTS_DIR, "code_heating_system.csv")
+    file = join(CH_REGBL_INPUTS_DIR, "code_heating_system.csv")
     data = pd.read_csv(file, sep=";")
     if regbl_hot_water_source1 is None:
         return "Mazout"
@@ -197,7 +197,7 @@ def get_solar_thermal(regbl_heat_generator1):
 def get_n_flat(category, sre):
     if isinstance(sre, float):
         return sre / 100
-    file = join(INPUTS_DIR, "code_category.csv")
+    file = join(CH_REGBL_INPUTS_DIR, "code_category.csv")
     data = pd.read_csv(file, sep=";")
     index = data.loc[data["code regbl"] == int(category), "nombre de logement"].index[0]
     number_of_flats = data.loc[
