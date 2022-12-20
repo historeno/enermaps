@@ -15,7 +15,7 @@ from IPython import embed
 from tqdm import tqdm
 
 from legends import LEGENDS_UUID
-from paths import FOOTPRINT_DATA_DIR, INPUTS_DIR
+from paths import CH_DATA_DIR, FOOTPRINT_DATA_DIR, INPUTS_DIR
 
 tqdm.pandas()
 
@@ -49,24 +49,21 @@ columns = [
 all_data = gpd.read_file(geopackage, rows=10)
 
 
-# DATASETS
-
 # SPATIAL
 ds_id = 1
 spatial = all_data[["geometry", "egid", "canton"]].copy()
 spatial["ds_id"] = ds_id
 spatial["fid"] = spatial["canton"] + spatial["egid"].astype(str)
 spatial.drop(["canton", "egid"], axis=1, inplace=True)
-# TODO : missing empty field
+# TODO : missing empty field to be more explicit
 
-save_file = join(INPUTS_DIR, "spatial.pkl")
+save_file = join(CH_DATA_DIR, "spatial.pkl")
 spatial.to_pickle(save_file)
 
-save_file = join(INPUTS_DIR, "spatial.shp")
-spatial.to_file(save_file)  
+save_file = join(CH_DATA_DIR, "spatial.shp")
+spatial.to_file(save_file)
 
 # DATA
-# translate function
 def get_region(canton: str):
     return canton
 
@@ -76,6 +73,7 @@ def get_altitude():
     return 1700
 
 
+# TODO : create a script based on spatial join
 # def get_meteo():
 #     return "Jura"
 
@@ -217,17 +215,17 @@ def get_electricity_battery():
 
 
 def get_protection_level():
-    # TODO: leave the value empty
+    # TODO: add data from cantonal GIS web
+    # application, empty in the front end for the moment
     return random.randint(1, 5)
 
 
-# processing
 all_data["ds_id"] = ds_id
 all_data["fid"] = all_data["canton"] + all_data["egid"].astype(str)
 all_data["fields"] = all_data.progress_apply(
     lambda row: {
         "Pays": "Suisse",
-        "Region": get_region(canton=row["canton"]),  # TODO : NEEDED
+        "Region": get_region(canton=row["canton"]),  # TODO : 1ST PRIORITY
         "Altitude": get_altitude(),
         # "Météo": get_meteo(), # NOT NEEDED
         "Context": get_context(),
@@ -287,11 +285,11 @@ sub_data = all_data[
         "vis_id",
     ]
 ]
-save_file = join(INPUTS_DIR, "sub_data.pkl")
+save_file = join(CH_DATA_DIR, "sub_data.pkl")
 spatial.to_pickle(save_file)
 
-save_file = join(INPUTS_DIR, "sub_data.csv")
-spatial.to_csv(save_file)  
+save_file = join(CH_DATA_DIR, "sub_data.csv")
+spatial.to_csv(save_file)
 
 # blocker
 toc = time.perf_counter()
