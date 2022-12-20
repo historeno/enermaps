@@ -16,10 +16,10 @@ def post_data(
     engine_: sqlalchemy.engine.Engine,
     **kwargs,
 ):
-    file = join(CH_DATA_DIR, "sub_data.csv")
-    if not isdir(CH_DATA_DIR):
-        msg = f"{listdir(DATA_DIR)}"
-        raise ValueError(msg)
+    file = join(CH_FINAL_RESULTS_DATA_DIR, "sub_data.csv")
+    if not isdir(CH_FINAL_RESULTS_DATA_DIR):
+        msg = f"This directory does not exist : {CH_FINAL_RESULTS_DATA_DIR}"
+        raise NotADirectoryError(msg)
     # sub_data = pd.read_csv(file, nrows=NROWS, index_col=0)
     sub_data = pd.read_csv(file, nrows=10000, index_col=0)
     sub_data.to_sql(
@@ -38,10 +38,10 @@ def post_spatial(
     ids: list = None,
     **kwargs,
 ):
-    file = join(CH_DATA_DIR, "spatial.shp")
-    if not isdir(CH_DATA_DIR):
-        msg = f"{listdir(CH_DATA_DIR)}"
-        raise ValueError(msg)
+    file = join(CH_FINAL_RESULTS_DATA_DIR, "spatial.shp")
+    if not isdir(CH_FINAL_RESULTS_DATA_DIR):
+        msg = f"This directory does not exist : {CH_FINAL_RESULTS_DATA_DIR}"
+        raise NotADirectoryError(msg)
     # spatial = gpd.read_file(file, rows=NROWS)
     spatial = gpd.read_file(file)
     spatial.to_crs(epsg=3035, inplace=True)
