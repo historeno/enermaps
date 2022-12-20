@@ -5,8 +5,8 @@ Module that create the files to be integrated.
 import math
 import random
 import time
-from os.path import join
-
+from os.path import join, isfile
+from os import remove
 import geopandas as gpd
 import pandas as pd
 import requests
@@ -18,6 +18,13 @@ from legends import LEGENDS_UUID
 from paths import FOOTPRINT_DATA_DIR, INPUTS_DIR
 
 tqdm.pandas()
+
+error_file = "get_footprint_error.txt"
+if isfile(error_file):
+	remove(error_file)
+error_file = "get_footprint_error.txt"
+if isfile(error_file):
+	remove(error_file)
 
 tic = time.perf_counter()
 
@@ -46,8 +53,9 @@ columns = [
     "regbl_hot_water_source2",
     "geometry",
 ]
-all_data = gpd.read_file(geopackage, rows=10)
-
+all_data = gpd.read_file(geopackage, rows=None)
+all_data.drop_duplicates(["egid"], inplace=True)
+all_data.dropna(subset=["class"], inplace=True)
 
 # DATASETS
 
@@ -56,7 +64,8 @@ ds_id = 1
 spatial = all_data[["geometry", "egid", "canton"]].copy()
 spatial["ds_id"] = ds_id
 spatial["fid"] = spatial["canton"] + spatial["egid"].astype(str)
-spatial.drop(["canton", "egid"], axis=1, inplace=True)
+spatial.drop_duplicates(subset=['fid'], inplace=True)
+
 # TODO : missing empty field
 
 save_file = join(INPUTS_DIR, "spatial.pkl")
@@ -87,8 +96,11 @@ def get_context():
 
 def get_footprint(geometry):
     geometries = list(geometry.geoms)
-    if len(geometries) > 1:
-        raise NotImplemented
+    
+    if len(geometries) != 1:
+    	with open("get_footprint_error.txt", "a") as file:
+    		file.write("\n")
+    		file.write(f"geometries")
     polygon = geometries[0]
     x, y = polygon.exterior.coords.xy
     coordinates = [list(element) for element in list(zip(x, y))]
@@ -97,8 +109,10 @@ def get_footprint(geometry):
 
 def get_mitoyennete(geometry):
     geometries = list(geometry.geoms)
-    if len(geometries) >= 2:
-        raise NotImplemented
+    if len(geometries) != 1:
+    	with open("get_footprint_error.txt", "a") as file:
+    		file.write("\n")
+    		file.write(f"geometries")
     polygon = geometries[0]
     x, y = polygon.exterior.coords.xy
     mitoyennete = [0 for _ in list(zip(x, y))]
@@ -123,11 +137,13 @@ def get_construction_year(construction_year):
         return 1900
 
 
-def get_category(category):
+def get_category(category, s):
     file = join(INPUTS_DIR, "code_category.csv")
     data = pd.read_csv(file, sep=";")
-    # embed()
-    index = data.loc[data["code regbl"] == int(category), "catégorie sia"].index[0]
+    try:
+    	index = data.loc[data["code regbl"] == int(category), "catégorie sia"].index[0]
+    except:
+    	embed(header="get category")
     return data.loc[data["code regbl"] == int(category), "catégorie sia"][index]
 
 
@@ -237,7 +253,7 @@ all_data["fields"] = all_data.progress_apply(
         "Années de construction": get_construction_year(
             construction_year=row["construction_year"]
         ),
-        "Catégorie d'ouvrage": get_category(category=row["class"]),
+        "Catégorie d'ouvrage": get_category(category=row["class"], s=row["fid"]),
         "Hauteur du bâtiment": get_heigth(regbl_levels=row["regbl_levels"]),
         "Type de chauffage": get_heating_systen(
             regbl_hot_water_source1=row["regbl_hot_water_source1"]
@@ -296,4 +312,5 @@ spatial.to_csv(save_file)
 # blocker
 toc = time.perf_counter()
 header = f"Downloaded the tutorial in {toc - tic:0.4f} seconds"
-embed(header=header)
+# embed(header=header)
+print(header)
