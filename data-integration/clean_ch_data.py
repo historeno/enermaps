@@ -4,7 +4,7 @@ Module that scraps the open-data, changes table structures.
 
 from os.path import join, isdir, exists, isfile, basename 
 from os import listdir, makedirs, remove
-from paths import FOOTPRINT_DATA_DIR, CANTON_FOOTPRINT_CSV_DIR, ALL_CANTON_FOOTPRINT_DIR
+from paths import FOOTPRINT_DATA_DIR, CANTON_FOOTPRINT_CSV_DIR, ALL_CANTON_FOOTPRINT_DIR, CH_FOOTPRINT_DATA_DIR
 from tqdm import tqdm
 import fiona 
 import geopandas as gpd
@@ -28,11 +28,6 @@ def get_zipfile(
         file=zip_path,
         mode="wb",
     ) as file:
-        # total_length = int(response.headers.get("content-length"))
-        # for chunk in progress.bar(
-        #     response.iter_content(chunk_size=chunksize),
-        #     expected_size=(total_length / chunksize) + 1,
-        # ):
         for chunk in response.iter_content(chunk_size=chunksize):
             if chunk:
                 file.write(chunk)
@@ -42,8 +37,6 @@ def unzip(extraction_dir: str, zip_file: str, remove_orphans: bool = True) -> No
     if not exists(extraction_dir):
         with ZipFile(zip_file, mode="r") as file:
             file.extractall(extraction_dir)
-        # print("Extraction is done")
-    # print("Extraction is already done")
     if exists(zip_file) and remove_orphans:
         remove(zip_file)
 
@@ -54,7 +47,7 @@ def dowload_footprint_data(force_download: bool = False):
     Example : data/footprint_data/vs/*gdb/
     """
     for alias in VALID_CANTON_ALIAS:
-        save_path = join(FOOTPRINT_DATA_DIR, f"{alias}")
+        save_path = join(CH_FOOTPRINT_DATA_DIR, f"{alias}")
         makedirs(save_path, exist_ok=True)
         msg = f"Downloading GDB files : {alias.upper()}"
         print(msg)
@@ -86,8 +79,7 @@ def list_gdb_files() -> list:
     """List GDB files in data/footprint_data directory."""
     files = list()
     for canton in VALID_CANTON_ALIAS:
-        # for canton_footprint_dir in listdir(FOOTPRINT_DATA_DIR):
-        canton_dir = join(FOOTPRINT_DATA_DIR, canton)
+        canton_dir = join(CH_FOOTPRINT_DATA_DIR, canton)
         if not isdir(canton_dir):
             msg = f"This directory does not exist : {canton_dir}"
             raise DirectoryNotFound(msg)
@@ -150,17 +142,22 @@ if __name__ == "__main__":
             msg = f"This directory does not exist : {gdb_file}"
             raise DirectoryNotFound(msg)
         gpkg_filename = basename(gdb_file).replace(".gdb", ".gpkg")
-        filename = join(ALL_CANTON_FOOTPRINT_DIR, gpkg_filename)
+        filename = join(CH_FOOTPRINT_GPKG_DATA_DIR, gpkg_filename)
         if isfile(filename):
             continue
-        
+        else:
+            raise FileNotFoundError(filename)
         layers = fiona.listlayers(gdb_file)
         if "Floor" not in layers:
             continue
+        else:
+            raise ValueError
         features = [feature for feature in fiona.open(gdb_file, layer="Floor")]
         footprint_dataframe = gpd.GeoDataFrame.from_features(features)
         if footprint_dataframe is None:
             continue
+        else:
+            raise ValueError
         footprint_dataframe = clean_column_names(dataframe=footprint_dataframe)
         footprint_dataframe.geometry = extract_polygon(dataframe=footprint_dataframe)
         footprint_dataframe.set_crs(epsg=3035, inplace=True)        
