@@ -274,9 +274,12 @@ dbbackups/
 data-integration/data/
 *.gdb
 *.sqlite
+*.pkl
 .cpg
 .dbf
 .prj
 .shp
-data-integration/inputs/regbl/
-data-integration/inputs/regbl/*.csv
+
+all_regbl.csv
+data-integration/inputs/suisse/regbl/*/*.csv
+# data-integration/inputs/suisse/footprint/*/*.gdb
