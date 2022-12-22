@@ -1,4 +1,3 @@
-import fake_data
 from legends import post_legend
 from utilities import get_engine
 import ch_data_integrate 

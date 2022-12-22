@@ -53,7 +53,7 @@ columns = [
     "regbl_hot_water_source2",
     "geometry",
 ]
-all_data = gpd.read_file(geopackage, rows=None)
+all_data = gpd.read_file(geopackage, rows=10)
 all_data.drop_duplicates(["egid"], inplace=True)
 all_data.dropna(subset=["class"], inplace=True)
 
@@ -301,10 +301,10 @@ sub_data = all_data[
     ]
 ]
 save_file = join(CH_FINAL_RESULTS_DATA_DIR, "sub_data.pkl")
-spatial.to_pickle(save_file)
+all_data.to_pickle(save_file)
 
 save_file = join(CH_FINAL_RESULTS_DATA_DIR, "sub_data.csv")
-spatial.to_csv(save_file)
+all_data.to_csv(save_file)
 
 # blocker
 toc = time.perf_counter()

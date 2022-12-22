@@ -7,7 +7,7 @@ import pandas as pd
 import sqlalchemy
 from tqdm import tqdm
 
-from paths import CH_DATA_DIR, DATA_DIR
+from paths import CH_FINAL_RESULTS_DATA_DIR
 
 NROWS = None
 
