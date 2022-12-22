@@ -279,3 +279,4 @@ data-integration/data/
 .prj
 .shp
 data-integration/inputs/regbl/
+data-integration/inputs/regbl/*.csv
