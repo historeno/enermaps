@@ -279,6 +279,7 @@ data-integration/data/
 .dbf
 .prj
 .shp
+*.gpkg
 
 all_regbl.csv
 data-integration/inputs/suisse/regbl/*/*.csv
