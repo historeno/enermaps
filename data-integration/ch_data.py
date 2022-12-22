@@ -53,7 +53,7 @@ columns = [
     "regbl_hot_water_source2",
     "geometry",
 ]
-all_data = gpd.read_file(geopackage, rows=10)
+all_data = gpd.read_file(geopackage, rows=None)
 all_data.drop_duplicates(["egid"], inplace=True)
 all_data.dropna(subset=["class"], inplace=True)
 
