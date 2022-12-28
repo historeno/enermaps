@@ -118,14 +118,17 @@ def get_mitoyennete(geometry):
 
 def get_typology():
     # TODO : NOT DEFAULT VALUE, modifcation of the form (name - year)
-    url = "https://historeno.heig-vd.ch/tool/typo/typologies.xml"
-    response = requests.get(url)
-    dict_data = xmltodict.parse(response.content)
-    data = dict_data["typologies"]["typo"]
-    length = len(data)
-    _max = max(1, length)
-    return random.randint(0, _max)
-
+    # try:
+    #     url = "https://historeno.heig-vd.ch/tool/typo/typologies.xml"
+    #     response = requests.get(url)
+    #     dict_data = xmltodict.parse(response.content)
+    #     data = dict_data["typologies"]["typo"]
+    #     length = len(data)
+    #     _max = max(1, length)
+    #     return random.randint(1, _max)
+    # except:
+    #     return 1
+    return 1
 
 def get_construction_year(construction_year):
     if not math.isnan(construction_year):
@@ -232,7 +235,8 @@ def get_electricity_battery():
 def get_protection_level():
     # TODO: add data from cantonal GIS web
     # application, empty in the front end for the moment
-    return random.randint(1, 5)
+    # return random.randint(1, 5)
+    return 1 # high protection level by default   
 
 
 all_data["ds_id"] = ds_id
