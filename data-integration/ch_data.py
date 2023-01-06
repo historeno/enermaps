@@ -305,10 +305,10 @@ sub_data = all_data[
     ]
 ]
 save_file = join(CH_FINAL_RESULTS_DATA_DIR, "sub_data.pkl")
-all_data.to_pickle(save_file)
+sub_data.to_pickle(save_file)
 
 save_file = join(CH_FINAL_RESULTS_DATA_DIR, "sub_data.csv")
-all_data.to_csv(save_file)
+sub_data.to_csv(save_file)
 
 # blocker
 toc = time.perf_counter()
