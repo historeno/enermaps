@@ -11,5 +11,4 @@ services:
       .env-db
       
 volumes:
-  db-data:
   data:

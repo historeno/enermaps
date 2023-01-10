@@ -4,8 +4,7 @@ import uuid
 import pandas as pd
 import sqlalchemy
 
-# LEGENDS_UUID = (uuid.uuid4(),)
-LEGENDS_UUID = ('0096e5a5-3929-4589-bbaf-01199231a71f')
+LEGENDS_UUID = (uuid.uuid4(),)
 LEGENDS = {
     "Protection level": {
         "vis_id": LEGENDS_UUID,
@@ -74,10 +73,13 @@ def post_legend(
     legends: pd.DataFrame = legends_df,
     **kwargs,
 ) -> None:
-    legends.to_sql(
-        "visualization",
-        engine,
-        if_exists="append",
-        index=False,
-        **kwargs,
-    )
+    try:
+        legends.to_sql(
+            "visualization",
+            engine,
+            if_exists="append",
+            index=False,
+            **kwargs,
+        )
+    except:
+        print(LEGENDS)

@@ -2,11 +2,13 @@
 Module that create the files to be integrated.
 """
 
+import json
 import math
 import random
 import time
-from os.path import join, isfile
 from os import remove
+from os.path import isfile, join
+
 import geopandas as gpd
 import pandas as pd
 import requests
@@ -15,16 +17,17 @@ from IPython import embed
 from tqdm import tqdm
 
 from legends import LEGENDS_UUID
-from paths import CH_FOOTPRINT_DATA_DIR, CH_FINAL_RESULTS_DATA_DIR, CH_REGBL_INPUTS_DIR
+from paths import (CH_FINAL_RESULTS_DATA_DIR, CH_FOOTPRINT_DATA_DIR,
+                   CH_REGBL_INPUTS_DIR)
 
 tqdm.pandas()
 
 error_file = "get_footprint_error.txt"
 if isfile(error_file):
-	remove(error_file)
+    remove(error_file)
 error_file = "get_mitoyennete_error.txt"
 if isfile(error_file):
-	remove(error_file)
+    remove(error_file)
 
 tic = time.perf_counter()
 
@@ -62,7 +65,7 @@ ds_id = 1
 spatial = all_data[["geometry", "egid", "canton"]].copy()
 spatial["ds_id"] = ds_id
 spatial["fid"] = spatial["canton"] + spatial["egid"].astype(str)
-spatial.drop_duplicates(subset=['fid'], inplace=True)
+spatial.drop_duplicates(subset=["fid"], inplace=True)
 spatial.drop(["canton", "egid"], axis=1, inplace=True)
 
 save_file = join(CH_FINAL_RESULTS_DATA_DIR, "spatial.pkl")
@@ -93,11 +96,11 @@ def get_context():
 
 def get_footprint(geometry):
     geometries = list(geometry.geoms)
-    
+
     if len(geometries) != 1:
-    	with open("get_footprint_error.txt", "a") as file:
-    		file.write("\n")
-    		file.write(f"geometries")
+        with open("get_footprint_error.txt", "a") as file:
+            file.write("\n")
+            file.write(f"geometries")
     polygon = geometries[0]
     x, y = polygon.exterior.coords.xy
     coordinates = [list(element) for element in list(zip(x, y))]
@@ -107,9 +110,9 @@ def get_footprint(geometry):
 def get_mitoyennete(geometry):
     geometries = list(geometry.geoms)
     if len(geometries) != 1:
-    	with open("get_mitoyennete_error.txt", "a") as file:
-    		file.write("\n")
-    		file.write(f"geometries")
+        with open("get_mitoyennete_error.txt", "a") as file:
+            file.write("\n")
+            file.write(f"geometries")
     polygon = geometries[0]
     x, y = polygon.exterior.coords.xy
     mitoyennete = [0 for _ in list(zip(x, y))]
@@ -130,6 +133,7 @@ def get_typology():
     #     return 1
     return 1
 
+
 def get_construction_year(construction_year):
     if not math.isnan(construction_year):
         return int(construction_year)
@@ -141,9 +145,9 @@ def get_category(category, s):
     file = join(CH_REGBL_INPUTS_DIR, "code_category.csv")
     data = pd.read_csv(file, sep=";")
     try:
-    	index = data.loc[data["code regbl"] == int(category), "catégorie sia"].index[0]
+        index = data.loc[data["code regbl"] == int(category), "catégorie sia"].index[0]
     except:
-    	embed(header="get category")
+        embed(header="get category")
     return data.loc[data["code regbl"] == int(category), "catégorie sia"][index]
 
 
@@ -236,7 +240,7 @@ def get_protection_level():
     # TODO: add data from cantonal GIS web
     # application, empty in the front end for the moment
     # return random.randint(1, 5)
-    return 1 # high protection level by default   
+    return 1  # high protection level by default
 
 
 all_data["ds_id"] = ds_id

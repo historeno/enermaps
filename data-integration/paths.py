@@ -1,5 +1,5 @@
-from os.path import abspath, dirname, join
 from os import makedirs
+from os.path import abspath, dirname, join
 
 CURRENT_DIR = dirname(abspath(__file__))
 
