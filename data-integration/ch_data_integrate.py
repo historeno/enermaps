@@ -84,6 +84,9 @@ def post_data(
         nrows=2000, #TODO : limiter to be remove in the production mode
         usecols=usecols,
     )
+    sub_data["fields"] = sub_data["fields"].apply(
+        lambda row: row.replace("\'", "\""),
+    )
     sub_data["vis_id"] = LEGENDS_UUID[0]
     sub_data["ds_id"] = ds_id
 
@@ -114,6 +117,7 @@ def post_spatial(
     spatial.to_crs(epsg=3035, inplace=True)
     spatial.drop_duplicates(subset=["fid"], inplace=True)
     spatial = spatial[spatial["fid"].isin(ids)]
+    spatial["name"] = "suisse"
     n = 1000  # chunk row size
     list_df = [spatial[i : i + n] for i in range(0, spatial.shape[0], n)]
     for dataframe_spatial in tqdm(list_df):

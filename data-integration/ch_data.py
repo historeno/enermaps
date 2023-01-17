@@ -56,7 +56,7 @@ columns = [
     "regbl_hot_water_source2",
     "geometry",
 ]
-all_data = gpd.read_file(geopackage, rows=None)
+all_data = gpd.read_file(geopackage) # rows=10000)
 all_data.drop_duplicates(["egid"], inplace=True)
 all_data.dropna(subset=["class"], inplace=True)
 
@@ -67,10 +67,8 @@ spatial["ds_id"] = ds_id
 spatial["fid"] = spatial["canton"] + spatial["egid"].astype(str)
 spatial.drop_duplicates(subset=["fid"], inplace=True)
 spatial.drop(["canton", "egid"], axis=1, inplace=True)
-
 save_file = join(CH_FINAL_RESULTS_DATA_DIR, "spatial.pkl")
 spatial.to_pickle(save_file)
-
 save_file = join(CH_FINAL_RESULTS_DATA_DIR, "spatial.shp")
 spatial.to_file(save_file)
 
@@ -96,7 +94,6 @@ def get_context():
 
 def get_footprint(geometry):
     geometries = list(geometry.geoms)
-
     if len(geometries) != 1:
         with open("get_footprint_error.txt", "a") as file:
             file.write("\n")
@@ -202,8 +199,6 @@ def get_solar_thermal(regbl_heat_generator1):
 
 
 def get_n_flat(category, sre):
-    if isinstance(sre, float):
-        return sre / 100
     file = join(CH_REGBL_INPUTS_DIR, "code_category.csv")
     data = pd.read_csv(file, sep=";")
     index = data.loc[data["code regbl"] == int(category), "nombre de logement"].index[0]
@@ -211,7 +206,10 @@ def get_n_flat(category, sre):
         data["code regbl"] == int(category), "nombre de logement"
     ][index]
     if isinstance(number_of_flats, int) or isinstance(number_of_flats, float):
-        return int(number_of_flats)
+        print(number_of_flats)
+        return round(int(number_of_flats))
+    elif not  math.isnan(sre) and  isinstance(sre, float):
+        return round(sre / 100)
     else:
         return 1
 
@@ -242,11 +240,39 @@ def get_protection_level():
     # return random.randint(1, 5)
     return 1  # high protection level by default
 
-
-all_data["ds_id"] = ds_id
-all_data["fid"] = all_data["canton"] + all_data["egid"].astype(str)
-all_data["fields"] = all_data.progress_apply(
-    lambda row: {
+def get_fields(row):
+    matchers = {
+        "code_1": "Pays",
+        "code_2": "Region",
+        "code_": "Altitude",
+        # "Météo": get_meteo(), # NOT NEEDED
+        "code_3": "Context",
+        "code_4": "Empreinte au sol",
+        "code_5": "Mitoyenneté",
+        "code_6": "Typologie",
+        "code_7": "Années de construction",
+        "code_8": "Catégorie d'ouvrage",
+        "code_9": "Hauteur du bâtiment",
+        "code_10": "Type de chauffage",
+        "code_11": "Année d'installation du chauffage",
+        "code_12": "Type d'émetteurs",
+        "code_13": "Régulation du chauffage",
+        "code_14": "Isolation des conduites de chauffage",
+        "code_15": "Isolation des conduites d'ECS",
+        "code_16": "Présence d'une installation solaire thermique",
+        "code_17": "Surface de capteurs solaires thermiques automatique",
+        "code_18": "Surface de capteurs solaires thermiques",
+        "code_19": "Nombre de logements",
+        "code_20": "Efficacité des appareils électriques",
+        "code_21": "Présence d'une ventilation mécanique",
+        "code_22": "Présence d'ascenseur",
+        "code_23": "Présence d'une instalaltion solaire PV",
+        "code_24": "Surface PV automatique",
+        "code_25": "Présence de batteries de stockage",
+        "code_26": "Note de protection du patrimoine",
+        "code_27": "Capacité d'investissement",
+    }
+    result = {
         "Pays": "Suisse",
         "Region": get_region(canton=row["canton"]),  # TODO : 1ST PRIORITY
         "Altitude": get_altitude(),
@@ -282,7 +308,21 @@ all_data["fields"] = all_data.progress_apply(
         "Présence de batteries de stockage": get_electricity_battery(),
         "Note de protection du patrimoine": get_protection_level(),
         "Capacité d'investissement": 0,
-    },
+    }
+    isThereNone = any(value is None for value in result.values())
+    if isThereNone:
+        raise NotImplementedError
+    for matcher_key, matcher_value in matchers.items():
+        if result.get(matcher_value) is not None:
+            result[matcher_key] = result.pop(matcher_value)
+        else:
+            raise NotImplementedError
+    return result
+
+all_data["ds_id"] = ds_id
+all_data["fid"] = all_data["canton"] + all_data["egid"].astype(str)
+all_data["fields"] = all_data.progress_apply(
+    lambda row: get_fields(row=row),
     axis=1,
 )
 all_data["variable"] = "Niveau de protection"  # variable name
@@ -318,4 +358,3 @@ sub_data.to_csv(save_file)
 toc = time.perf_counter()
 header = f"Downloaded the tutorial in {toc - tic:0.4f} seconds"
 # embed(header=header)
-print(header)
