@@ -1,7 +1,8 @@
+import json
 import uuid
+
 import pandas as pd
 import sqlalchemy
-import json
 
 LEGENDS_UUID = (uuid.uuid4(),)
 LEGENDS = {
@@ -72,10 +73,13 @@ def post_legend(
     legends: pd.DataFrame = legends_df,
     **kwargs,
 ) -> None:
-    legends.to_sql(
-        "visualization",
-        engine,
-        if_exists="append",
-        index=False,
-        **kwargs,
-    )
+    try:
+        legends.to_sql(
+            "visualization",
+            engine,
+            if_exists="append",
+            index=False,
+            **kwargs,
+        )
+    except:
+        print(LEGENDS)

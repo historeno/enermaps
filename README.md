@@ -19,6 +19,10 @@ DB_DB=databasename
 ```bash
 docker-compose up --build 
 ```
+* integrate data in the database 
+```bash
+docker-compose --file docker-compose-db.yml up --build -d data-integration
+```
 * load layer (on Linux)
 ```bash
 docker-compose exec api /bin/bash -c 'flask update-dataset 1'

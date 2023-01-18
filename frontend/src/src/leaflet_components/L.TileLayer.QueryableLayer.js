@@ -59,11 +59,42 @@ const BaseMethods = {
 
     for (const feature of content.features) {
       const properties = feature.properties;
-      // const variables = JSON.parse(properties.variables);
-
       if (properties.fields !== undefined) {
-        const fields = JSON.parse(properties.fields);
-
+        const getNewkey = {
+          'code_1': 'Pays',
+          'code_2': 'Region',
+          'code_': 'Altitude',
+          'code_3': 'Context',
+          'code_4': 'Empreinte au sol',
+          'code_5': 'Mitoyenneté',
+          'code_6': 'Typologie',
+          'code_7': 'Années de construction',
+          'code_8': 'Catégorie d\'ouvrage',
+          'code_9': 'Hauteur du bâtiment',
+          'code_10': 'Type de chauffage',
+          'code_11': 'Année d\'installation du chauffage',
+          'code_12': 'Type d\'émetteurs',
+          'code_13': 'Régulation du chauffage',
+          'code_14': 'Isolation des conduites de chauffage',
+          'code_15': 'Isolation des conduites d\'ECS',
+          'code_16': 'Présence d\'une installation solaire thermique',
+          'code_17': 'Surface de capteurs solaires thermiques automatique',
+          'code_18': 'Surface de capteurs solaires thermiques',
+          'code_19': 'Nombre de logements',
+          'code_20': 'Efficacité des appareils électriques',
+          'code_21': 'Présence d\'une ventilation mécanique',
+          'code_22': 'Présence d\'ascenseur',
+          'code_23': 'Présence d\'une instalaltion solaire PV',
+          'code_24': 'Surface PV automatique',
+          'code_25': 'Présence de batteries de stockage',
+          'code_26': 'Note de protection du patrimoine',
+          'code_27': 'Capacité d\'investissement',
+        };
+        let fields = {}
+        for (const [key, value] of Object.entries(JSON.parse(properties.fields))) {           
+          const newKey = getNewkey[key];
+          fields[newKey] = value;
+        }
         for (const [key, value] of Object.entries(fields)) {
           if (allFields[key] === undefined) {
             allFields[key] = value;
