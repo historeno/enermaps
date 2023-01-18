@@ -89,11 +89,11 @@ const BaseMethods = {
           'code_25': 'Présence de batteries de stockage',
           'code_26': 'Note de protection du patrimoine',
           'code_27': 'Capacité d\'investissement',
-        }
+        };
         let fields = {}
         for (const [key, value] of Object.entries(JSON.parse(properties.fields))) {           
-          let new_key = getNewkey[key];
-          fields[new_key] = value;
+          const newKey = getNewkey[key];
+          fields[newKey] = value;
         }
         for (const [key, value] of Object.entries(fields)) {
           if (allFields[key] === undefined) {
