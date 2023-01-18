@@ -356,5 +356,5 @@ sub_data.to_csv(save_file)
 
 # blocker
 toc = time.perf_counter()
-header = f"Downloaded the tutorial in {toc - tic:0.4f} seconds"
-# embed(header=header)
+msg = f"Downloaded the tutorial in {toc - tic:0.4f} seconds"
+print(msg)

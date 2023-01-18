@@ -81,7 +81,7 @@ def post_data(
     sub_data = pd.read_csv(
         file,
         index_col=0,
-        nrows=2000, #TODO : limiter to be remove in the production mode
+        # nrows=2000, #TODO : limiter to be remove in the production mode
         usecols=usecols,
     )
     sub_data["fields"] = sub_data["fields"].apply(
